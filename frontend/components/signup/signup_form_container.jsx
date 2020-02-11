@@ -5,7 +5,7 @@ import SignupForm from './signup_form';
 const mstp = ({ errors }) => {
   return {
     errors: errors.session,
-    formType: "Sign up!"
+    formType: "Sign up"
   };
 };
 
