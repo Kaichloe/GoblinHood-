@@ -7,6 +7,29 @@ li {
 }
 
 .nav-sign-up {
-  background-color: rgb(33, 206, 153);
   color:black;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 40px;
+  min-width: 100px;
+  background-color:#77dd77;
+  font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: normal;
+    color: rgb(255, 255, 255);
+    margin: 0px;
+    text-decoration: unset;
+}
+.nav-border{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: space-between; */
 }

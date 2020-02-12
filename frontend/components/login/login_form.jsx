@@ -26,9 +26,10 @@ class LoginForm extends React.Component {
       <div>
         <h1 className="login_title">Welcome to Goblinhood</h1>
         <form onSubmit={this.handleSubmit}>
-          <label>Email Address
+          <label>
             <input
-              type="text"
+              required 
+              type="email"
               placeholder="Email Address"
               value={this.state.email}
               onChange={this.update("email")}
@@ -36,8 +37,9 @@ class LoginForm extends React.Component {
             />
           </label>
         <br />
-          <label>Password
+          <label>
             <input
+              required
               type="password"
               placeholder="Password(min. 10 characters)"
               value={this.state.password}
@@ -46,6 +48,13 @@ class LoginForm extends React.Component {
             />
             <button className="signup-button" type="submit">{this.props.formType}</button>
           </label>
+          <ul>
+            {this.props.errors.map((error, i) => (
+              <li key={`error+${i}`}>
+                {error}
+              </li>
+            ))}
+          </ul>
         </form>
       </div>
     )

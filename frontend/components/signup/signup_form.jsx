@@ -25,14 +25,17 @@ class SignupForm extends React.Component{
       [field]: e.currentTarget.value
     });
   }
+
   render(){
     return (
     <div className='signup-block'>
-      <h1 className="signup_title">Make Your Money Move</h1>
-      <h2 className="signup_subtitle">Robinhood lets you invest in companies you love, commission-free.</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label className='name'>First Name
+      <h1 className="signup-title">Make Your Money Move</h1>
+      <h2 className="signup-subtitle">Goblinhood lets you invest in companies you love, commission-free.</h2>
+        <form className="signup-border" onSubmit={this.handleSubmit}>
+          <div className="name-container">
+            <label className='name'>
             <input 
+              required
               type="text"
               value={this.state.first_name}
               placeholder="First Name"
@@ -41,19 +44,23 @@ class SignupForm extends React.Component{
             />
           </label>
         <br/>
-          <label className=''>Last Name
+          <label className='name'>
             <input
+              required
               type="text"
               placeholder="Last Name"
               value={this.state.lastName}
               onChange={this.update("last_name")}
               className="login-input"
             />
-          </label>
+          </label></div>
+          
         <br/>
-          <label>Email Address
+          <label className="signup-email">
             <input
-              type="text"
+              required
+              className="email-input"
+              type="email"
               placeholder="Email Address"
               value={this.state.email}
               onChange={this.update("email")}
@@ -61,8 +68,9 @@ class SignupForm extends React.Component{
             />
           </label>
         <br/>
-          <label>Password
+          <label>
             <input
+              required
               type="password"
               placeholder="Password(min. 6 characters)"
               value={this.state.password}
@@ -71,8 +79,9 @@ class SignupForm extends React.Component{
             />
           </label> 
         <br/>
-          <label>Buying Power
+          <label>
             <input
+              required 
               type="number"
               placeholder="Starting Amount"
               value={this.state.buying_power}
@@ -81,6 +90,13 @@ class SignupForm extends React.Component{
             />
           </label> 
           <button className="signup-button" type="submit">{this.props.formType}</button>
+            <ul>
+              {this.props.errors.map((error, i) => (
+                <li key={`error+${i}`}>
+                  {error}
+                </li>
+              ))}
+            </ul>
         </form>
     </div>
   )}
