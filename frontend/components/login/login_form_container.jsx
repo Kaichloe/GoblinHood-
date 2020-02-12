@@ -1,18 +1,18 @@
 import { connect } from 'react-redux';
-import { signup } from '../../actions/session_actions';
-import SignupForm from './signup_form';
+import { login } from '../../actions/session_actions';
+import LoginForm from './login_form';
 
 const mstp = ({ errors }) => {
   return {
-    errors: errors.session,
+    // errors: errors.session,
     formType: "Sign In"
   };
 };
 
 const mdtp = dispatch => {
   return {
-    processForm: (user) => dispatch(signup(user)),
+    processForm: (user) => dispatch(login(user)),
   };
 };
 
-export default connect(mstp, mdtp)(SignupForm)
+export default connect(mstp, mdtp)(LoginForm);

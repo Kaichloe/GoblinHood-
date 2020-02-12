@@ -4,7 +4,7 @@ import SignupForm from './signup_form';
 
 const mstp = ({ errors }) => {
   return {
-    errors: errors.session,
+    // errors: errors.session,
     formType: "Sign up"
   };
 };
@@ -15,4 +15,4 @@ const mdtp = dispatch => {
   };
 };
 
-export default connect(mstp, mdtp)(SignupForm)
+export default connect(mstp, mdtp)(SignupForm);
