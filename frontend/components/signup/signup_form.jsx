@@ -4,8 +4,8 @@ class SignupForm extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
       password: "",
       buying_power: ""
@@ -15,6 +15,7 @@ class SignupForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
+    debugger
     const user = Object.assign({}, this.state)
     this.props.processForm(user);
   }
@@ -29,13 +30,13 @@ class SignupForm extends React.Component{
     <div className='signup-block'>
       <h1 className="signup_title">Make Your Money Move</h1>
       <h2 className="signup_subtitle">Robinhood lets you invest in companies you love, commission-free.</h2>
-        <form className='name'>
+        <form onSubmit={this.handleSubmit}>
           <label className='name'>First Name
             <input 
               type="text"
-              value={this.state.firstName}
+              value={this.state.first_name}
               placeholder="First Name"
-              onChange={this.update("firstName")}
+              onChange={this.update("first_name")}
               className="login-input"
             />
           </label>
@@ -45,7 +46,7 @@ class SignupForm extends React.Component{
               type="text"
               placeholder="Last Name"
               value={this.state.lastName}
-              onChange={this.update("lastName")}
+              onChange={this.update("last_name")}
               className="login-input"
             />
           </label>
@@ -63,13 +64,23 @@ class SignupForm extends React.Component{
           <label>Password
             <input
               type="password"
-              placeholder="Password(min. 10 characters)"
+              placeholder="Password(min. 6 characters)"
               value={this.state.password}
               onChange={this.update("password")}
               className="login-password"
             />
-            <button className="signup-button" type="submit">{this.props.formType}</button>
-          </label>
+          </label> 
+        <br/>
+          <label>Buying Power
+            <input
+              type="number"
+              placeholder="Starting Amount"
+              value={this.state.buying_power}
+              onChange={this.update("buying_power")}
+              className="login-buying-power"
+            />
+          </label> 
+          <button className="signup-button" type="submit">{this.props.formType}</button>
         </form>
     </div>
   )}

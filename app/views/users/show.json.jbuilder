@@ -1,1 +1,0 @@
-json.extract! user, :first_name, :last_name, :buying_power, :portfolio_value 

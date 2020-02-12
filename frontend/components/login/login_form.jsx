@@ -25,7 +25,7 @@ class LoginForm extends React.Component {
     return (
       <div>
         <h1 className="login_title">Welcome to Goblinhood</h1>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label>Email Address
             <input
               type="text"
@@ -35,7 +35,7 @@ class LoginForm extends React.Component {
               className="login-email"
             />
           </label>
-          <br />
+        <br />
           <label>Password
             <input
               type="password"
