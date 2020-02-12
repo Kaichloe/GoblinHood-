@@ -1,0 +1,30 @@
+.splash-signup-border {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+    height: 50px;
+    min-width: 150px;
+    background-color: rgb(36, 42, 45);
+    overflow: hidden;
+    padding: 0px 16px;
+    border-radius: 8px;
+    border-color: rgb(36, 42, 45);
+}
+
+.splash-signup {
+  font-family: sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: normal;
+    color: rgb(255, 255, 255);
+    margin: 0px;
+    text-decoration: unset;
+}

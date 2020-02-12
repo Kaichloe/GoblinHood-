@@ -26,11 +26,11 @@ class SignupForm extends React.Component{
   }
   render(){
     return (
-    <div>
+    <div className='signup-block'>
       <h1 className="signup_title">Make Your Money Move</h1>
       <h2 className="signup_subtitle">Robinhood lets you invest in companies you love, commission-free.</h2>
-        <form>
-          <label>First Name
+        <form className='name'>
+          <label className='name'>First Name
             <input 
               type="text"
               value={this.state.firstName}
@@ -40,7 +40,7 @@ class SignupForm extends React.Component{
             />
           </label>
         <br/>
-          <label>Last Name
+          <label className=''>Last Name
             <input
               type="text"
               placeholder="Last Name"

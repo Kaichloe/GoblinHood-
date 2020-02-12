@@ -1,0 +1,12 @@
+ul {
+  list-style: none;
+}
+
+li {
+  display: inline;
+}
+
+.nav-sign-up {
+  background-color: rgb(33, 206, 153);
+  color:black;
+}

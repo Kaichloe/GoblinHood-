@@ -7,8 +7,8 @@ const Splash = ()=> {
     <div>
       <header>
         <h1>It's Time to Do Money</h1>
-        <h2>Robinhood, a pioneer of commission-free investing, gives you more ways to make your money work harder.</h2>
-        <Link className="splash_signup" to="/signup">Sign Up!</Link>
+        <h2>Goblinhood, a pioneer of commission-free investing, gives you more ways to make your money work harder.</h2>
+        <div className="splash-signup-border"><Link className="splash-signup" to="/signup">Sign Up!</Link></div>
       </header>
     </div>
   )

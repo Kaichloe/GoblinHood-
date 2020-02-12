@@ -11,8 +11,8 @@ import Nav from './splash/nav';
 const App = () => (
   <div>
     <header>
-      <Route exact path="/"component={Splash}/> 
       <Route exact path="/" component={Nav}/> 
+      <Route exact path="/"component={Splash}/> 
     </header>
     <Route exact path="/signup" component={SignUpFormContainer} />
     <Route exact path="/login" component={LoginFormContainer} />
