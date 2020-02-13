@@ -13,17 +13,36 @@ class SignupForm extends React.Component{
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit(e){
+  handleSubmit(e) {
     e.preventDefault();
-    debugger
     const user = Object.assign({}, this.state)
     this.props.processForm(user);
   }
 
+  // handleSubmit = async event => {
+  //   event.preventDefault();
+  //   const { email, password } = this.state;
+  //   const user = Object.assign({}, this.state)
+  //   const response = await sendRegisterRequest(email, password);
+  //   const responseJson = await response.json();
+
+  //   if (response.status !== 200) {
+  //     this.setState({ errors: responseJson.error });
+  //   } else {
+  //     this.props.processForm(user)
+  //   }
+  // }
+
   update(field) {
-    return e => this.setState({
-      [field]: e.currentTarget.value
-    });
+    if (field === "email") {
+      return e => this.setState({
+        [field]: e.currentTarget.value.toLowerCase()
+      })
+    } else {
+      return e => this.setState({
+        [field]: e.currentTarget.value
+      });
+    }
   }
 
   render(){
@@ -72,7 +91,7 @@ class SignupForm extends React.Component{
             <input
               required
               type="password"
-              placeholder="Password(min. 6 characters)"
+              placeholder="Password(min. 10 characters)"
               value={this.state.password}
               onChange={this.update("password")}
               className="login-password"
@@ -89,6 +108,7 @@ class SignupForm extends React.Component{
               className="login-buying-power"
             />
           </label> 
+          <br/>
           <button className="signup-button" type="submit">{this.props.formType}</button>
             <ul>
               {this.props.errors.map((error, i) => (

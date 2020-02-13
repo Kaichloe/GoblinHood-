@@ -13,7 +13,7 @@ class Company < ApplicationRecord
 
   validates :company_name, :ticker_symbol, presence: true
   
-  has_many :transaction
+  #has_many :transaction
 
   has_many :watchlist
 
@@ -22,3 +22,4 @@ class Company < ApplicationRecord
     source: :user
 
 end
+

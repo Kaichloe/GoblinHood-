@@ -1,6 +1,13 @@
 
-
-.splash-signup-border {
+.splash-signup {
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: normal;
+    color: rgb(255, 255, 255);
+    margin: 0px;
+    text-decoration: unset;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -13,21 +20,16 @@
     background-color: rgb(36, 42, 45);
 }
 
-.splash-signup {
-  font-family: sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 18px;
-    letter-spacing: normal;
-    color: rgb(255, 255, 255);
-    margin: 0px;
-    text-decoration: unset;
+.splash-signup:hover{
+  cursor: pointer;
+  background-color: teal;
 }
 
 .splash-title{
   display: flex;
   justify-content: center;
   background-color: lightgreen;
+  size: 100px;
 }
 
 .splash-subtitle {

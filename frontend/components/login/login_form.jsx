@@ -17,9 +17,15 @@ class LoginForm extends React.Component {
   }
 
   update(field) {
-    return e => this.setState({
-      [field]: e.currentTarget.value
-    });
+    if (field === "email"){
+      return e => this.setState({
+        [field]: e.currentTarget.value.toLowerCase()
+      })
+    } else {
+      return e => this.setState({
+        [field]: e.currentTarget.value
+      });
+    }
   }
   render() {
     return (

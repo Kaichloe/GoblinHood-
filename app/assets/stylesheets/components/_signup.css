@@ -1,26 +1,32 @@
 .signup-block {
+  display: block;
   background-color: white;
   border-radius: 20px;
+  height: 70%;
+  width: 70%;
 }
 
 .signup-border{
-  background-color:#77dd77;  
+  background-color:white;  
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 10px;
 }
 
 .signup-title{
   display: flex;
-  font-size: 40px;
+  font-size: 120%;
   justify-content: center;
+  font-weight: 122px;
 }
 
 .signup-subtitle{
   display: flex;
   justify-content: center;
-  font-size: 35px;
-  font-size: 20px;
+  font-size: 110%;
+  font-weight: 100px;
+  
 }
 
 .name{
@@ -35,13 +41,26 @@
   justify-content: space-evenly;
 }
 
-.signup-button{
-  background-color: lightseagreen;
-  border-radius: 4px;
+.signup-button{ 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 25px;
+  min-width: 150px;
+  background-color: paleturquoise;
+}
+
+.signup-button:hover{
+  cursor: pointer;
+  background-color: turquoise;
 }
 
 .name-container{
   display: flex;
-  justify-content: space-evenly;
+  margin: 5px 5px;
 }
 
