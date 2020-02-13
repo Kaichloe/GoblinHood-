@@ -1,0 +1,32 @@
+.login-container{
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  overflow: hidden;
+}
+
+.login-img{
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+}
+
+.login-title{
+  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+.login-box {
+  display: flex;
+  background-color:white;
+  flex-direction: column;
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-login{
+
+}
+
+

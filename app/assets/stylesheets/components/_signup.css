@@ -19,6 +19,7 @@
   font-size: 120%;
   justify-content: center;
   font-weight: 122px;
+  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 .signup-subtitle{
@@ -26,7 +27,7 @@
   justify-content: center;
   font-size: 110%;
   font-weight: 100px;
-  
+  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 .name{
@@ -39,6 +40,7 @@
 .login-input{
   display: flex;
   justify-content: space-evenly;
+  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 .signup-button{ 
