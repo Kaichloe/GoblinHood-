@@ -14,4 +14,4 @@ const mdtp = dispatch => {
   }
 }
 
-export default connect(mstp, mdtp)(Profile)
+export default connect(mstp, mdtp)(Profile);

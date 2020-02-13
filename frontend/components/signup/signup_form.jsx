@@ -47,33 +47,34 @@ class SignupForm extends React.Component{
 
   render(){
     return (
-    <div className='signup-block'>
-      <h1 className="signup-title">Make Your Money Move</h1>
-      <h2 className="signup-subtitle">Goblinhood lets you invest in companies you love, commission-free.</h2>
-        <form className="signup-border" onSubmit={this.handleSubmit}>
+    <div className='signup-container'>
+        <img className="signup-img" src="https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png" />
+      <div className="signup-border">
+        <h1 className="signup-title">Make Your Money Move</h1>
+        <h2 className="signup-subtitle">Goblinhood lets you invest in companies you love, commission-free.</h2>
+        <form onSubmit={this.handleSubmit}>
           <div className="name-container">
-            <label className='name'>
-            <input 
-              required
-              type="text"
-              value={this.state.first_name}
-              placeholder="First Name"
-              onChange={this.update("first_name")}
-              className="login-input"
-            />
+              <label className='name'>
+              <input 
+                required
+                type="text"
+                value={this.state.first_name}
+                placeholder="First Name"
+                onChange={this.update("first_name")}
+                className="login-input"
+              />
           </label>
-        <br/>
-          <label className='name'>
-            <input
-              required
-              type="text"
-              placeholder="Last Name"
-              value={this.state.lastName}
-              onChange={this.update("last_name")}
-              className="login-input"
-            />
-          </label></div>
-          
+            <label className='name'>
+              <input
+                required
+                type="text"
+                placeholder="Last Name"
+                value={this.state.lastName}
+                onChange={this.update("last_name")}
+                className="login-input"
+              />
+            </label>
+          </div>
         <br/>
           <label className="signup-email">
             <input
@@ -102,7 +103,7 @@ class SignupForm extends React.Component{
             <input
               required 
               type="number"
-              placeholder="Starting Amount"
+              placeholder="Initial Investment"
               value={this.state.buying_power}
               onChange={this.update("buying_power")}
               className="login-buying-power"
@@ -118,6 +119,7 @@ class SignupForm extends React.Component{
               ))}
             </ul>
         </form>
+      </div>
     </div>
   )}
 }

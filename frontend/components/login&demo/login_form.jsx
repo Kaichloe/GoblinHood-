@@ -59,31 +59,31 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div className="login-container">
-        <img className="login-img" src="https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png"/>
+        <img className="login-img" src="https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png" />
         <div className="login-box">
           <h1 className="login-title">Welcome to Goblinhood</h1>
           <form onSubmit={this.handleSubmit}>
-            <label>Email Address
-              <input
-                required 
-                type="email"
-                value={this.state.email}
-                onChange={this.update("email")}
-                className="login-email"
-              />
-            </label>
-          <br/>
-            <label>Password
-              <input
-                required
-                type="password"
-                value={this.state.password}
-                onChange={this.update("password")}
-                className="login-password"
-              />
-              <br/>
+            <div className="input-container">
+              <label className="label">Email Address</label>
+                <input
+                  required 
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.update("email")}
+                  className="login-input"
+                />
+            <br/>
+              <label className="label">Password</label>
+                <input
+                  required
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.update("password")}
+                  className="login-input"
+                />
+            <br/>
+             
               <button className="login-button" type="submit">{this.props.formType}</button>
-            </label>
             <ul>
               {this.props.errors.map((error, i) => (
                 <li key={`error+${i}`}>
@@ -91,7 +91,8 @@ class LoginForm extends React.Component {
                 </li>
               ))}
             </ul>
-            <button className="demo-login" onClick={this.demoLogin}>Demo Login</button>
+              <button className="demo-login" onClick={this.demoLogin} >Demo Login</button>
+            </div>
           </form>
         </div>
       </div>

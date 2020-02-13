@@ -1,18 +1,23 @@
 .login-container{
   display: flex;
-  justify-content: space-around;
   height: 100%;
   overflow: hidden;
+}
+
+.input-container{
+  display: flex;
+  flex-direction: column;
 }
 
 .login-img{
   height: 100%;
   width: 50%;
-  overflow: hidden;
+  background-position: center;
+  background-size: cover;
 }
 
 .login-title{
-  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: normal;
 }
 
@@ -23,10 +28,55 @@
   width: 60%;
   align-items: center;
   justify-content: center;
-}
-
-.demo-login{
 
 }
 
+.login-button{ 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 25px;
+  min-width: 150px;
+  background-color:  #20ce99;
+}
+
+.login-button:hover{
+  cursor: pointer;
+  background-color:gold;
+}
+
+.demo-login{ 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 25px;
+  min-width: 150px;
+  background-color:  #20ce99;
+}
+
+.demo-login:hover{
+  cursor: pointer;
+  background-color: gold;
+}
+
+.login-input{
+  width: 325px;
+  height: 30px;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+  font-size: 16px;
+}
+
+.label {
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+}
 

@@ -1,11 +1,13 @@
+.splash-page{
 
+}
 .splash-signup {
     font-family: sans-serif;
     font-size: 18px;
     font-weight: 700;
     line-height: 18px;
     letter-spacing: normal;
-    color: rgb(255, 255, 255);
+    color: #20ce99;
     margin: 0px;
     text-decoration: unset;
     display: inline-flex;
@@ -30,12 +32,12 @@
   justify-content: center;
   background-color: lightgreen;
   size: 100px;
-  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 .splash-subtitle {
   display: flex;
   justify-content: center;
   height: 50px;
-  font-family: "Maison Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
 }
