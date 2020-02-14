@@ -17,8 +17,9 @@
 }
 
 .login-title{
-  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  font-weight: normal;
+  font-family: "DIN Pro", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 26px;
 }
 
 .login-box {
@@ -42,6 +43,7 @@
   height: 25px;
   min-width: 150px;
   background-color:  #20ce99;
+  font-size: 14px;
 }
 
 .login-button:hover{
@@ -60,11 +62,13 @@
   height: 25px;
   min-width: 150px;
   background-color:  #20ce99;
+  font-size: 14px;
 }
 
 .demo-login:hover{
   cursor: pointer;
   background-color: gold;
+  
 }
 
 .login-input{
@@ -76,7 +80,16 @@
 }
 
 .label {
-  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "DIN Pro", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: lighter;
+  font-size: 16px;
 }
+
+.login-errors{
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+}
+
 

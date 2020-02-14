@@ -14,7 +14,8 @@ class LoginForm extends React.Component {
 
   demoLogin(e){
     e.preventDefault();
-    this.props.processForm({ email:"admin_kai___activated@ggez.com", password: "adminkaiyip"}).then(()=> this.props.history.push("/"))
+    this.props.processForm({ email:"admin_kai___activated@ggez.com", password: "adminkaiyip"})
+    .then(()=> this.props.history.push("/"))
   }
     
   componentWillUnmount(){
@@ -69,7 +70,7 @@ class LoginForm extends React.Component {
               <button className="demo-login" onClick={this.demoLogin}>Demo Login</button>
             </div>
           </form>
-          <ul>
+          <ul className="login-errors">
             {this.props.errors.map((error, i) => (
               <li key={`error+${i}`}>
                 {error}
