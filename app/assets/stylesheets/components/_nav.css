@@ -1,6 +1,12 @@
+.nav-border{
+  display: flex;
+}
+
 ul {
   list-style: none;
+  display: flex;
 }
+
 
 li {
   display: inline;
@@ -51,6 +57,7 @@ li {
   color: rgb(255, 255, 255);
   margin: 0px;
   text-decoration: unset;
+  margin-left: 5px;
 }
 
 .nav-sign-in:hover{

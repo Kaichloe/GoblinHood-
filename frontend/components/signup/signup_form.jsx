@@ -103,7 +103,7 @@ class SignupForm extends React.Component{
           </label> 
           <br/>
           <button className="signup-button" type="submit">{this.props.formType}</button>
-            <ul>
+            <ul className="signup-errors">
               {this.props.errors.map((error, i) => (
                 <li key={`error+${i}`}>
                   {error}

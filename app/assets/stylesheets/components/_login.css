@@ -94,7 +94,10 @@
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: bold;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  margin: 2px 2px;
+  padding: 2px 2px;
 }
 
 
