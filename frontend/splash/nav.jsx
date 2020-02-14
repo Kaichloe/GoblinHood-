@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Homepage from '../components/homepage';
 
 const Nav = () => {
   return (
@@ -19,6 +20,8 @@ const Nav = () => {
             <a href="https://github.com/Kaichloe">Github</a>
           </li>
         </div>
+      </ul>
+      <ul>
         <div className="nav-right"> 
           <li>
             <Link className="nav-sign-up" to="/signup">Sign Up!</Link>

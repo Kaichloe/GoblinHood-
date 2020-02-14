@@ -1,5 +1,11 @@
+.home-container{
+  display: flex;
+  flex-direction: column;
+}
+
 .nav-border{
   display: flex;
+  justify-content: space-between;
 }
 
 ul {
@@ -69,5 +75,8 @@ li {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* justify-content: space-between; */
+}
+
+.nav-right{
+  padding-right: 15px; 
 }
