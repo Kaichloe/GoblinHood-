@@ -19,20 +19,6 @@ class SignupForm extends React.Component{
     this.props.processForm(user);
   }
 
-  // handleSubmit = async event => {
-  //   event.preventDefault();
-  //   const { email, password } = this.state;
-  //   const user = Object.assign({}, this.state)
-  //   const response = await sendRegisterRequest(email, password);
-  //   const responseJson = await response.json();
-
-  //   if (response.status !== 200) {
-  //     this.setState({ errors: responseJson.error });
-  //   } else {
-  //     this.props.processForm(user)
-  //   }
-  // }
-
   update(field) {
     if (field === "email") {
       return e => this.setState({
@@ -48,7 +34,7 @@ class SignupForm extends React.Component{
   componentWillUnmount() {
     this.props.clearErrors();
   };
-  
+
   render(){
     return (
     <div className='signup-container'>

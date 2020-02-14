@@ -1,11 +1,11 @@
 import React from 'react'
 import SignUpFormContainer from './components/signup/signup_form_container'
-import LoginFormContainer from './components/login&demo/login_form_container'
+import LoginFormContainer from './components/login/login_form_container'
 import { Route, Switch } from 'react-router-dom';
 import Homepage from './components/homepage';
 import { AuthRoute, ProtectedRoute } from './util/route_util';
 import ProfileContainer from './components/profile/profile_container';
-import DemoFormContainer from './components/login&demo/demo_container';
+import DemoFormContainer from './components/login/demo_container';
 
 const App = () => {
   return (

@@ -12,6 +12,7 @@ const mstp = ({ errors }) => {
 const mdtp = dispatch => {
   return {
     processForm: (user) => dispatch(signup(user)),
+    clearErrors: () => dispatch(receiveErrors([]))
   };
 };
 

@@ -8,33 +8,14 @@ class LoginForm extends React.Component {
       email: "",
       password: ""
     };
-    this.demoEmail = "admin_kai___activated@ggez.com"
-    this.demoPassword = "adminkaiyip"
-    // this.demoLogin = this.demoLogin.bind(this);
+    this.demoLogin = this.demoLogin.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
-
   }
 
-  // demoLogin(){
-  //   const adminE = this.demoEmail;
-  //   const adminP = this.demoPassword;
-  
-  //   for (let i = 0; i < adminE.length; i++) {
-  //     setTimeout(() => {
-  //       this.setState({email:this.state.email + adminE[i]})
-  //     }, (adminE.length * 60));
-  //   }
-
-  //   for (let k = 0; k < adminE.length; k++) {
-  //     setTimeout(() => {
-  //       this.setState({email:this.state.password + adminP[k]})
-  //     }, (adminP.length * 60));
-  //   }
-    
-  //   setTimeout(() => {
-  //       this.props.action(this.state);
-  //   }, (adminE.length * 60) + (adminP.length * 60) + 60);
-  // }
+  demoLogin(e){
+    e.preventDefault();
+    this.props.processForm({ email:"admin_kai___activated@ggez.com", password: "adminkaiyip"}).then(()=> this.props.history.push("/"))
+  }
     
   componentWillUnmount(){
       this.props.clearErrors();
@@ -43,9 +24,7 @@ class LoginForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state)
-    if (this.props.processForm(user)) {
-      this.props.history.push("/profile")
-    }
+    this.props.processForm(user).then(()=> this.props.history.push("/profile"))
   }
 
   update(field) {
@@ -85,18 +64,18 @@ class LoginForm extends React.Component {
                   className="login-input"
                 />
             <br/>
-             
               <button className="login-button" type="submit">{this.props.formType}</button>
-            <ul>
-              {this.props.errors.map((error, i) => (
-                <li key={`error+${i}`}>
-                  {error}
-                </li>
-              ))}
-            </ul>
-              <button className="demo-login" onClick={this.demoLogin} >Demo Login</button>
+            <br/>
+              <button className="demo-login" onClick={this.demoLogin}>Demo Login</button>
             </div>
           </form>
+          <ul>
+            {this.props.errors.map((error, i) => (
+              <li key={`error+${i}`}>
+                {error}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     )
