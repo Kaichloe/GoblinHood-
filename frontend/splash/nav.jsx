@@ -7,18 +7,13 @@ const Nav = () => {
     <div className="nav-border">
       <ul>
         <div className="nav-left">
-          <li>
+          <li className="app-name">
           GoblinHood
           </li>
         </div>
+      </ul>
+      <ul>
         <div className="nav-center">
-          <li>
-            <a href="https://www.linkedin.com/in/kaiyip-ho-216230191/">Linkedin</a>
-          </li>
-          <br/>
-          <li>
-            <a href="https://github.com/Kaichloe">Github</a>
-          </li>
         </div>
       </ul>
       <ul>

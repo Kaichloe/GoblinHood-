@@ -1,14 +1,29 @@
 .splash-page-container{
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   background-color: #20ce99;
   height: 600px;
-  width: 100%;
+  width:100%;
+ 
+} 
+
+
+.splash-left-layout{
+  width: 10%;
+}
+
+.splash-right{
+  width:55%;
+} 
+.splash-titles-container{
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  margin-top: 35px;
 }
 
 .splash-signup {
-    font-family: sans-serif;
+    font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 18px;
     font-weight: 700;
     line-height: 18px;
@@ -27,6 +42,7 @@
     min-width: 150px;
     background-color: rgb(36, 42, 45);
     padding-top: 5px;
+    width: 100px;
 }
 
 .splash-signup:hover{
@@ -36,18 +52,28 @@
 
 .splash-title{
   display: flex;
-  justify-content: center;
   font-size: 70px;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .splash-subtitle {
   display: flex;
   justify-content: center;
   font-size: 36px;
-  font-weight: 200;
+  font-weight: 100;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: normal;
-  padding-right: 600px;
 }
+
+.nav-center{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.linkedin{
+  padding-right: 5px;
+}
+

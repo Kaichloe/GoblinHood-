@@ -11,8 +11,8 @@
 ul {
   list-style: none;
   display: flex;
+  padding-left: 20px;
 }
-
 
 li {
   display: inline;
@@ -80,3 +80,11 @@ li {
 .nav-right{
   padding-right: 15px; 
 }
+
+.app-name{
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 23px;
+  font-weight: 350;
+  padding-top: 10px;
+}
+

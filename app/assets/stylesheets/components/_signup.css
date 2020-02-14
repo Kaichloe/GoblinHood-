@@ -44,6 +44,7 @@
   font-weight: 100px;
   font-family: "Maison Neue","Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: lighter;
+  text-align: center;
 }
 .name-container{
   display: flex;
