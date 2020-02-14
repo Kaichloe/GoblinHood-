@@ -4,7 +4,7 @@ import LoginForm from './login_form';
 
 const mstp = ({ errors }) => {
   return {
-    // errors: errors.session,
+    errors: errors.session,
     formType: "Sign In"
   };
 };
@@ -12,6 +12,7 @@ const mstp = ({ errors }) => {
 const mdtp = dispatch => {
   return {
     processForm: (user) => dispatch(login(user)),
+    clearErrors: () => dispatch(receiveErrors([]))
   };
 };
 

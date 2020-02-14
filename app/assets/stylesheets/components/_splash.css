@@ -1,30 +1,49 @@
-.splash-signup-border {
+.splash-page-container{
+  display: flex;
+  flex-direction: row;
+  background-color: #20ce99;
+  height: 600px;
+  width: 100%;
+}
+
+.splash-signup {
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: normal;
+    color:white;
+    margin: 0px;
+    text-decoration: unset;
     display: inline-flex;
-    -webkit-box-align: center;
     align-items: center;
-    -webkit-box-pack: center;
     justify-content: center;
     box-sizing: border-box;
     position: relative;
-    white-space: nowrap;
+    border-radius: 10px;
     cursor: pointer;
     height: 50px;
     min-width: 150px;
     background-color: rgb(36, 42, 45);
-    overflow: hidden;
-    padding: 0px 16px;
-    border-radius: 8px;
-    border-color: rgb(36, 42, 45);
 }
 
-.splash-signup {
-  font-family: sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 18px;
-    letter-spacing: normal;
-    color: rgb(255, 255, 255);
-    margin: 0px;
-    text-decoration: unset;
+.splash-signup:hover{
+  cursor: pointer;
+  background-color: teal;
+}
+
+.splash-title{
+  display: flex;
+  justify-content: center;
+  font-size: 76px;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+}
+
+.splash-subtitle {
+  display: flex;
+  justify-content: center;
+  font-size: 36px;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: normal;
 }

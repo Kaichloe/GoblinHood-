@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.1'
 
+gem 'email_validator'
 gem 'annotate'
 gem 'rails_12factor'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -51,6 +52,10 @@ group :development do
   gem 'binding_of_caller', '~> 0.8.0'
   gem 'better_errors', '~> 2.5', '>= 2.5.1'
   gem 'pry-rails', '~> 0.3.4'
+  gem 'guard', '>= 2.2.2', require: false
+  gem 'guard-livereload', '~> 2.5', require: false
+  gem 'rack-livereload'
+  gem 'rb-fsevent', require: false
 end
 
 group :test do

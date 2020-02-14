@@ -22,3 +22,4 @@ class Company < ApplicationRecord
     source: :user
 
 end
+

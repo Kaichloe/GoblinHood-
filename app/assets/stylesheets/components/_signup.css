@@ -1,0 +1,130 @@
+.signup-container {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  height: 80%;
+  width: 95%;
+  margin-bottom: 100px;
+}
+
+.signup-img-container{
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.signup-img{
+  height: 100%;
+  width: 80%;
+}
+
+.signup-border{
+  background-color:white;  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  padding-right: 150px;
+}
+
+.signup-title{
+  display: flex;
+  font-size: 25px;
+  justify-content: center;
+  font-weight: 122px;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+  font-weight: 500;
+}
+
+.signup-subtitle{
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 100px;
+  font-family: "Maison Neue","Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+}
+.name-container{
+  display: flex;
+  justify-content: end;
+}
+
+.name{
+  display: flex;
+  justify-content: center;
+  height: 25px;
+  border-radius: 4px;
+}
+
+.login-email{
+  display: flex;
+  justify-content: space-evenly;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  height: 25px;
+  width: 457px;
+  font-size: 14px;
+  font-weight: lighter;
+  border-radius: 4px;
+}
+
+.login-password{
+  display: flex;
+  justify-content: space-evenly;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  height: 25px;
+  width: 457px;
+  font-size: 14px;
+  font-weight: lighter;
+  border-radius: 4px;
+}
+
+.login-input{
+  display: flex;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  height: 25px;
+  width: 225px;
+  border-radius: 1px;
+}
+
+.signup-button{ 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 25px;
+  width: 457px;
+  background-color:  #20ce99;
+  font-size: 18px;
+}
+
+.signup-button:hover{
+  cursor: pointer;
+  background-color:gold;
+}
+
+.login-buying-power{
+  display: flex;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  height: 25px;
+  width: 500x;
+  font-size: 14px;
+  font-weight: lighter;
+  border-radius: 4px;
+}
+
+.signup-errors{
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+  margin: 4px 4px;
+  padding: 4px 4px;
+}
+
+

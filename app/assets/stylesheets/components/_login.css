@@ -1,0 +1,103 @@
+.login-container{
+  display: flex;
+  overflow: hidden;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+}
+
+.img-container{
+  display: flex;
+  height: 100%;
+  width: 55%;
+}
+.input-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.login-img{
+  height: 100%;
+  width: 100%;
+}
+
+.login-title{
+  font-family: "DIN Pro", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+}
+
+.login-box {
+  display: flex;
+  background-color:white;
+  flex-direction: column;
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.login-button{ 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 25px;
+  min-width: 150px;
+  background-color:  #20ce99;
+  font-size: 14px;
+}
+
+.login-button:hover{
+  cursor: pointer;
+  background-color:gold;
+}
+
+.demo-login{ 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 25px;
+  min-width: 150px;
+  background-color:  #20ce99;
+  font-size: 14px;
+}
+
+.demo-login:hover{
+  cursor: pointer;
+  background-color: gold;
+  
+}
+
+.login-input{
+  width: 325px;
+  height: 30px;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+  font-size: 16px;
+}
+
+.label {
+  font-family: "DIN Pro", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+  font-size: 16px;
+}
+
+.login-errors{
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin: 2px 2px;
+  padding: 2px 2px;
+}
+
+
