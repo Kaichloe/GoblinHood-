@@ -17,7 +17,7 @@ const Footer = () => {
           </div>
           <br/>
           <div>
-            <a href="https://github.com/Kaichloe">
+            <a className="github" href="https://github.com/Kaichloe">
               <img src="https://image.flaticon.com/icons/svg/1051/1051326.svg"
               width="35px"/>
             </a>
