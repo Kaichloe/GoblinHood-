@@ -38,7 +38,9 @@ class SignupForm extends React.Component{
   render(){
     return (
     <div className='signup-container'>
-        <img className="signup-img" src="https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png" />
+        <div className='signup-img=container'>
+          <img className="signup-img" src="https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png" />
+        </div>
       <div className="signup-border">
         <h1 className="signup-title">Make Your Money Move</h1>
         <h2 className="signup-subtitle">Goblinhood lets you invest in companies you love, commission-free.</h2>

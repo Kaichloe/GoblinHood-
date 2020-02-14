@@ -1,10 +1,20 @@
 .signup-container {
   display: flex;
-  justify-content: column;
+  overflow: hidden;
+  justify-content: center;
+  height: 80%;
+  width: 95%;
+  margin-bottom: 100px;
 }
 
-.signup-image{
-  width: 10%;
+.signup-img-container{
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.signup-img{
+  height: 100%;
+  width: 80%;
 }
 
 .signup-border{
@@ -14,6 +24,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  padding-right: 150px;
 }
 
 .signup-title{
@@ -23,11 +34,12 @@
   font-weight: 122px;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: lighter;
+  font-weight: 500;
 }
 
 .signup-subtitle{
   display: flex;
-  justify-content: center;
+  align-items: center;
   font-size: 20px;
   font-weight: 100px;
   font-family: "Maison Neue","Segoe UI", Helvetica, Arial, sans-serif;

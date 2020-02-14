@@ -42,7 +42,9 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div className="login-container">
-        <img className="login-img" src="https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png" />
+        <div className="img-container">
+          <img className="login-img" src="https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png" />
+        </div>
         <div className="login-box">
           <h1 className="login-title">Welcome to Goblinhood</h1>
           <form onSubmit={this.handleSubmit}>

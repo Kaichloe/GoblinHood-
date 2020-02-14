@@ -1,5 +1,9 @@
 .splash-page-container{
-
+  display: flex;
+  flex-direction: row;
+  background-color: #20ce99;
+  height: 100%;
+  width: 100%;
 }
 
 .splash-signup {
@@ -8,7 +12,7 @@
     font-weight: 700;
     line-height: 18px;
     letter-spacing: normal;
-    color: #20ce99;
+    color:white;
     margin: 0px;
     text-decoration: unset;
     display: inline-flex;
@@ -31,14 +35,15 @@
 .splash-title{
   display: flex;
   justify-content: center;
-  background-color: lightgreen;
-  size: 100px;
+  font-size: 76px;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: 600;
 }
 
 .splash-subtitle {
   display: flex;
   justify-content: center;
-  height: 50px;
+  font-size: 36px;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-weight: normal;
 }
