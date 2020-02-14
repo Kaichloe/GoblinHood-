@@ -15,7 +15,7 @@ class LoginForm extends React.Component {
   demoLogin(e){
     e.preventDefault();
     this.props.processForm({ email:"admin_kai___activated@ggez.com", password: "adminkaiyip"})
-    .then(()=> this.props.history.push("/"))
+    .then(()=> this.props.history.push("/profile"))
   }
     
   componentWillUnmount(){
