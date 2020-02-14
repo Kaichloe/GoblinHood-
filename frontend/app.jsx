@@ -7,16 +7,18 @@ import { AuthRoute, ProtectedRoute } from './util/route_util';
 import ProfileContainer from './components/profile/profile_container';
 import DemoFormContainer from './components/login&demo/demo_container';
 
-const App = () => (
-  <div>
-      <Route exact path="/" component={Homepage}/> 
-      <Switch>
-        <ProtectedRoute exact path="/profile"component={ProfileContainer}/>
-        <AuthRoute exact path="/demoUser" component={DemoFormContainer} /> 
-        <AuthRoute exact path="/signup" component={SignUpFormContainer}/> 
-        <AuthRoute exact path="/login" component={LoginFormContainer}/>
-      </Switch>
-  </div>
-);
+const App = () => {
+  return (
+    <div>
+        <Switch>
+          <ProtectedRoute exact path="/profile" component={ProfileContainer}/>
+          <AuthRoute exact path="/demoUser" component={DemoFormContainer} /> 
+          <AuthRoute exact path="/signup" component={SignUpFormContainer}/> 
+          <AuthRoute exact path="/login" component={LoginFormContainer}/>
+          <Route exact path="/" component={Homepage}/>
+        </Switch>
+    </div>
+  )
+};
 
 export default App;

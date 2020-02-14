@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, Redirect} from 'react-router-dom';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -35,14 +36,16 @@ class LoginForm extends React.Component {
   //   }, (adminE.length * 60) + (adminP.length * 60) + 60);
   // }
     
-  // componentWillUnmount(){
-  //     this.props.clearErrors();
-  // };
+  componentWillUnmount(){
+      this.props.clearErrors();
+  };
   
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state)
-    this.props.processForm(user);
+    if (this.props.processForm(user)) {
+      this.props.history.push("/profile")
+    }
   }
 
   update(field) {
