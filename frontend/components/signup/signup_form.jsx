@@ -50,7 +50,7 @@ class SignupForm extends React.Component{
                 value={this.state.first_name}
                 placeholder="First Name"
                 onChange={this.update("first_name")}
-                className="login-input"
+                className="signup-input"
               />
           </label>
             <label className='name'>

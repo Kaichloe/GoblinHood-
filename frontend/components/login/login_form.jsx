@@ -59,12 +59,16 @@ class LoginForm extends React.Component {
     return (
       <div className="login-container">
         <div className="img-container">
-          <img className="login-img" src="https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png" />
+          <img className="login-img" src={window.login_img} />
         </div>
-        <div className="login-box">
+        <div className="big-box">
+          <div className="first-box"></div>
+          <div className="second-box">
+
+          <div className="input-container">
           <h1 className="login-title">Welcome to Goblinhood</h1>
+
           <form onSubmit={this.handleSubmit}>
-            <div className="input-container">
               <label className="label">Email Address</label>
                 <input
                   required 
@@ -73,6 +77,7 @@ class LoginForm extends React.Component {
                   onChange={this.update("email")}
                   className="login-input"
                 />
+
             <br/>
               <label className="label">Password</label>
                 <input
@@ -82,21 +87,27 @@ class LoginForm extends React.Component {
                   onChange={this.update("password")}
                   className="login-input"
                 />
+                <ul className="login-errors">
+                  {this.props.errors.map((error, i) => (
+                    <div>
+                      <li key={`error+${i}`}>
+                        {error}
+                      </li>
+                    </div>
+                  ))}
+                </ul>
+
             <br/>
               <button className="login-button" type="submit">{this.props.formType}</button>
             <br/>
+          
+              </form>
+              <button className="demo-login" onClick={this.demoLogin}>Demo Login
+          </button>
             </div>
-          </form>
-          <button className="demo-login" onClick={this.demoLogin}>Demo Login</button>
-          <ul className="login-errors">
-            {this.props.errors.map((error, i) => (
-              <div>
-                <li key={`error+${i}`}>
-                  {error}
-                </li>
-              </div>
-            ))}
-          </ul>
+            <div className="half-box"></div>
+        </div>
+        <div className="third-box"></div>
         </div>
       </div>
     )
