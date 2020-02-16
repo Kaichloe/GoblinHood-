@@ -1,2 +1,14 @@
-<div id="root">
-Hello!</div>
+ <% if logged_in? %>
+    <script type="text/javascript">
+      window.currentUser = <%= render(
+        "api/users/user.json.jbuilder",
+        user: current_user
+      ).html_safe %>
+    </script>
+  <% end %>
+
+<script type="text/javascript">
+    
+</script>
+
+<div id="root">You failed!</div>

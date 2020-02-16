@@ -10,17 +10,18 @@ class Api::SessionsController < ApplicationController
       login(@user)
       render "api/users/show"
     else
-      render json: ["Invalid email/password combination"], status: 401
+      render json: ["Unable to log in with provided credentials."], status: :unauthorized 
     end
   end
 
   def destroy
-    @user = current_user
-    if @user
-      logout
-      render "api/users/show"
-    else
-      render json: ["Not signed in"], status: 404
-    end
-  end
+        @user = current_user
+
+        if @user
+            logout!
+            render "api/users/show"
+        else
+            render json: ["No user signed in"], status: 404
+        end
+   end
 end

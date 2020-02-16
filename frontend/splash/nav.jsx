@@ -19,10 +19,10 @@ const Nav = () => {
       <ul>
         <div className="nav-right"> 
           <li>
-            <Link className="nav-sign-up" to="/signup">Sign Up!</Link>
+            <Link className="nav-sign-in" to="/login">Sign In</Link>
           </li>
           <li>
-            <Link className="nav-sign-in" to="/login">Sign In!</Link>
+            <Link className="nav-sign-up" to="/signup">Sign Up</Link>
           </li>
         </div>
       </ul>

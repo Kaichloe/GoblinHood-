@@ -8,4 +8,4 @@
 #  // this.demoEmail = "admin_kai___activated@ggez.com"
 #     // this.demoPassword = "adminkaiyip"
 
-kai= User.create!(email: 'admin_kai___activated@ggez.com', password: 'adminkaiyip', first_name: 'Kai', last_name: 'Ho', buying_power: 999999999)
+kai= User.create!(email: 'admin_status_activated__welcome__back__admin_kai@wedabest.com', password: 'adminkaiyipisbackbaby', first_name: 'Kai', last_name: 'Ho', buying_power: 999999999)

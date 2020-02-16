@@ -5,8 +5,8 @@ import LoginForm from './login_form';
 const mstp = ({ errors }) => {
   return {
     demoUser:{
-      email:"admin_kai___activated@ggez.com",
-      password:"adminkaiyip"
+      email:"admin_status_activated__welcome__back__admin_kai@wedabest.com",
+      password:"adminkaiyipisbackbaby"
     },
     errors: errors.session,
     formType: "Sign In"

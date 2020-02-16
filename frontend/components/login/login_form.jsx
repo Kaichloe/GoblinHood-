@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect} from 'react-router-dom';
+
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -8,14 +8,37 @@ class LoginForm extends React.Component {
       email: "",
       password: ""
     };
+    this.demoEmail = "admin_status_activated__welcome__back__admin_kai@wedabest.com";
+    this.demoPassword = "adminkaiyipisbackbaby";
     this.demoLogin = this.demoLogin.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  demoLogin(e){
-    e.preventDefault();
-    this.props.processForm({ email:"admin_kai___activated@ggez.com", password: "adminkaiyip"})
-    .then(()=> this.props.history.push("/profile"))
+  demoLogin() {
+    const email = this.demoEmail;
+    const password = this.demoPassword;
+    const Speed = 80;
+    for (let i = 0; i < email.length; i++) {
+      setTimeout(() => {
+        this.setState({ email: this.state.email + email[i] });
+      }, i * Speed);
+    }
+    for (let k = 0; k < password.length; k++) {
+      setTimeout(() => {
+        this.setState({ password: this.state.password + password[k] });
+      }, (email.length * Speed) + k * Speed);
+    }
+    setTimeout(() => {
+      this.props.processForm(this.state);
+    }, (email.length * Speed) + (password.length * Speed) + Speed);
+  }
+
+  componentDidMount() {
+    if (this.props.demo) {
+      setTimeout(() => {
+        this.demoLogin(this.props.demo);
+      }, 500);
+    }
   }
     
   componentWillUnmount(){
@@ -39,6 +62,7 @@ class LoginForm extends React.Component {
       });
     }
   }
+
   render() {
     return (
       <div className="login-container">
@@ -69,9 +93,10 @@ class LoginForm extends React.Component {
             <br/>
               <button className="login-button" type="submit">{this.props.formType}</button>
             <br/>
-              <button className="demo-login" onClick={this.demoLogin}>Demo Login</button>
+              
             </div>
           </form>
+          <button className="demo-login" onClick={this.demoLogin}>Demo Login</button>
           <ul className="login-errors">
             {this.props.errors.map((error, i) => (
               <li key={`error+${i}`}>
