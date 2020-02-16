@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   width: 35%;
-  margin-top: 35px;
+  margin-top: 30px;
 }
 
 .splash-signup {
@@ -40,7 +40,6 @@
   height: 50px;
   min-width: 150px;
   background-color: rgb(36, 42, 45);
-  padding-top: 5px;
   width: 100px;
 }
 
@@ -55,15 +54,19 @@
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: 600;
   margin-bottom: 20px;
+  margin-right: 10px;
 }
 
 .splash-subtitle {
   display: flex;
   justify-content: center;
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 100;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: normal;
+  margin-top: 5px;
+  margin-bottom: 15pxpx;
+  font-style: normal;
 }
 
 .nav-center{

@@ -29,18 +29,10 @@ class LoginForm extends React.Component {
       }, (email.length * Speed) + k * Speed);
     }
     setTimeout(() => {
-      this.props.processForm(this.state);
+      this.props.processForm(this.state).then(() => this.props.history.push("/profile"));
     }, (email.length * Speed) + (password.length * Speed) + Speed);
   }
 
-  componentDidMount() {
-    if (this.props.demo) {
-      setTimeout(() => {
-        this.demoLogin(this.props.demo);
-      }, 500);
-    }
-  }
-    
   componentWillUnmount(){
       this.props.clearErrors();
   };
@@ -93,15 +85,16 @@ class LoginForm extends React.Component {
             <br/>
               <button className="login-button" type="submit">{this.props.formType}</button>
             <br/>
-              
             </div>
           </form>
           <button className="demo-login" onClick={this.demoLogin}>Demo Login</button>
           <ul className="login-errors">
             {this.props.errors.map((error, i) => (
-              <li key={`error+${i}`}>
-                {error}
-              </li>
+              <div>
+                <li key={`error+${i}`}>
+                  {error}
+                </li>
+              </div>
             ))}
           </ul>
         </div>

@@ -17,7 +17,6 @@ const mdtp = dispatch => {
   return {
     processForm: (user) => dispatch(login(user)),
     clearErrors: () => dispatch(receiveErrors([])),
-    demoLogin: (user) => dispatch(login(user)),
   };
 };
 
