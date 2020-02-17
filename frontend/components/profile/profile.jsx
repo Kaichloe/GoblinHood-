@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import NewsFormContainer from '../news/news_container';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -9,7 +11,8 @@ class Profile extends React.Component {
     return (
       <div>
         <p>You're logged in!</p>
-        <button onClick={this.props.logout}>Logout</button>
+        <Link to="/" onClick={this.props.logout}>Logout</Link>
+        <NewsFormContainer/>
       </div>
     )
   }

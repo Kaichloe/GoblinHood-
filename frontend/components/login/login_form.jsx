@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
   demoLogin() {
     const email = this.demoEmail;
     const password = this.demoPassword;
-    const Speed = 80;
+    const Speed = 60;
     for (let i = 0; i < email.length; i++) {
       setTimeout(() => {
         this.setState({ email: this.state.email + email[i] });

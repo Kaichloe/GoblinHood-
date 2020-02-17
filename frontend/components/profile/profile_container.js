@@ -10,7 +10,7 @@ const mstp = (state) => {
 
 const mdtp = dispatch => {
   return {
-    logout: () => dispatch(logout()).then(() => this.props.history.push("/"))
+    logout: () => dispatch(logout())
   }
 }
 

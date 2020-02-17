@@ -15,13 +15,14 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
-        @user = current_user
+    @user = current_user
 
-        if @user
-            logout!
-            render "api/users/show"
-        else
-            render json: ["No user signed in"], status: 404
-        end
-   end
+    if @user
+      logout!
+      render "api/users/show"
+    else
+      render json: ["No user signed in"], status: 404
+    end
+  end
+  
 end
