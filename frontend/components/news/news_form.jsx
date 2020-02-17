@@ -10,22 +10,30 @@ class NewsForm extends React.Component{
     this.props.fetchNews()
   }
 
-  render(){
-    debugger
-    let articles; 
-    if (this.props.news){
-      debugger
-      articles = this.props.news.map(el => <li key={}>{el.title}</li>)
+  displayNews(){
+    if (this.props.news === []){
+      return []
     } else {
-      articles = [];
-    }
+      return this.props.news.map(el => {
+        return (
+          
+            <li>
+              {el.title}
+              {el.content}
+            </li>
     
+        )
+      })
+    }
+  }
+
+  render(){
     return (
-      <div>
-        {
-          articles 
-        }
-      </div>
+      <ul>
+        {this.displayNews()}
+      </ul>
+       
+      
     )
   }
 };

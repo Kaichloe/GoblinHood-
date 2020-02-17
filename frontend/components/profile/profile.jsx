@@ -9,7 +9,7 @@ class Profile extends React.Component {
 
   render(){
     return (
-      <div>
+      <div className="profile">
         <p>You're logged in!</p>
         <Link to="/" onClick={this.props.logout}>Logout</Link>
         <NewsFormContainer/>
