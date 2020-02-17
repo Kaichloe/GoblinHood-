@@ -11,7 +11,7 @@ const Nav = () => {
           GoblinHood
           </li>
         </div>
-      </ul>ß
+      </ul>
       <ul>
         <div className="nav-center"> 
         </div>
