@@ -40,10 +40,10 @@ class SignupForm extends React.Component{
     <div className='signup-container'>
       <div className="signup-border">
         <h1 className="signup-title">Make Your Money Move</h1>
-        <h2 className="signup-subtitle">Goblinhood lets you invest in companies you love, commission-free.</h2>
+        <h2 className="signup-subtitle">Goblinhood lets you invest in companies you love, muggle-free.</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="name-container">
-              <label className='name'>
+              <label className='fname'>
               <input 
                 required
                 type="text"
@@ -53,14 +53,14 @@ class SignupForm extends React.Component{
                 className="signup-input"
               />
           </label>
-            <label className='name'>
+            <label className="lname">
               <input
                 required
                 type="text"
                 placeholder="Last Name"
                 value={this.state.lastName}
                 onChange={this.update("last_name")}
-                className="login-input"
+                className="signup-input"
               />
             </label>
           </div>
@@ -98,18 +98,19 @@ class SignupForm extends React.Component{
               className="login-buying-power"
             />
           </label> 
-          <br/>
-          <button className="signup-button" type="submit">{this.props.formType}</button>
-            <ul className="signup-errors">
+          <br/> 
+          <ul className="signup-errors">
               {this.props.errors.map((error, i) => (
                 <li key={`error+${i}`}>
                   {error}
                 </li>
               ))}
             </ul>
-            <div>
-              <label>Already Started?</label>
-              <button></button>
+          <button className="signup-button" type="submit">{this.props.formType}</button>
+          <br/>
+            <div className="signup-footer">
+              <label className="text">Already Started?</label>
+              <button className="redirect-signup" onClick={()=> this.props.history.push("/login")}>Log in to complete your application</button>
             </div>
         </form>
       </div>

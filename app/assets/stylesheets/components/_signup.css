@@ -1,20 +1,8 @@
-.signup-container {
+.signup-container{
   display: flex;
-  overflow: hidden;
   justify-content: center;
-  height: 80%;
-  width: 95%;
-  margin-bottom: 100px;
-}
-
-.signup-img-container{
-  display: flex;
-  height: 100%;
-  width: 100%;
-}
-.signup-img{
-  height: 100%;
-  width: 80%;
+  align-items: center;
+  padding: 25px 25px;
 }
 
 .signup-border{
@@ -24,17 +12,17 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  padding-right: 150px;
+  padding-top: 50px;
+  padding-bottom: 10px;
 }
 
 .signup-title{
   display: flex;
-  font-size: 25px;
-  justify-content: center;
-  font-weight: 122px;
+  font-size: 48px;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  font-weight: lighter;
-  font-weight: 500;
+  font-weight: 100;
+  margin: 15px 0px;
+  
 }
 
 .signup-subtitle{
@@ -44,48 +32,72 @@
   font-weight: 100px;
   font-family: "Maison Neue","Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: lighter;
-  text-align: center;
+
 }
 .name-container{
   display: flex;
-  justify-content: end;
+  
 }
 
-.name{
-  display: flex;
-  justify-content: center;
-  height: 25px;
-  border-radius: 4px;
+.fname{
+  padding-right: 10px;
+  padding-bottom: 10px;
+} 
+
+.lname{
+  padding-left: 10px;
+  padding-bottom: 10px;
 }
 
 .login-email{
   display: flex;
-  justify-content: space-evenly;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  height: 25px;
-  width: 457px;
-  font-size: 14px;
-  font-weight: lighter;
+  height: 40px;
+  width: 577px;
+  font-size: 16px;
+  color:#b4c2c7;
   border-radius: 4px;
+  font-weight: lighter;
+  border: 1px solid #b1bfc4;
+}
+
+.login-email:focus{
+  outline: 5px  #20ce99;
+  border-color:#20ce99;
 }
 
 .login-password{
   display: flex;
-  justify-content: space-evenly;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  height: 25px;
-  width: 457px;
-  font-size: 14px;
-  font-weight: lighter;
+  height: 40px;
+  width: 577px;
+  font-size: 16px;
+  color:#b4c2c7;
   border-radius: 4px;
+  font-weight: lighter;
+  border: 1px solid #b1bfc4;
+}
+
+.login-password:focus{
+  outline: 5px  #20ce99;
+  border-color:#20ce99;
 }
 
 .signup-input{
   display: flex;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  height: 25px;
-  width: 225px;
-  border-radius: 1px;
+  height: 40px;
+  width: 274px;
+  font-size: 16px;
+  color:#b4c2c7;
+  font-weight: lighter;
+  border: 1px solid #b1bfc4;
+  border-radius: 4px;
+}
+
+.signup-input:focus{
+  outline: 5px  #20ce99;
+  border-color:#20ce99;
 }
 
 .signup-button{ 
@@ -96,27 +108,36 @@
   position: relative;
   border-radius: 10px;
   cursor: pointer;
-  height: 25px;
-  width: 457px;
+  height: 40px;
+  width: 577px;
   background-color:  #20ce99;
   font-size: 18px;
+  color: white;
 }
 
 .signup-button:hover{
   cursor: pointer;
-  background-color:gold;
+  background-color:darkcyan;
 }
 
 .login-buying-power{
   display: flex;
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  height: 25px;
-  width: 500x;
+  height: 40px;
+  width: 577px;
   font-size: 14px;
   font-weight: lighter;
+  font-size: 16px;
+  color:#b4c2c7;
+  font-weight: lighter;
+  border: 1px solid #b1bfc4;
   border-radius: 4px;
 }
 
+.login-buying-power:focus{
+  outline: 5px  #20ce99;
+  border-color:#20ce99;
+}
 .signup-errors{
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: bold;
@@ -126,6 +147,28 @@
   font-size: 16px;
   margin: 4px 4px;
   padding: 4px 4px;
+} 
+
+.signup-footer{
+  padding-top: 40px;
+  display: flex;
+  justify-content: center;
 }
 
+.text{
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  color: lightgrey;
+  font-weight: 100;
+}
+.redirect-signup{
+  border: none;
+  font-size: 18px;
+  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  text-decoration: underline;
+  color: #20ce99;
+}
 
+.redirect-signup:hover{
+  color: darkcyan;
+}
