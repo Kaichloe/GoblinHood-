@@ -81,7 +81,7 @@ class SignupForm extends React.Component{
             <input
               required
               type="password"
-              placeholder="Password(min. 10 characters)"
+              placeholder="Password (min. 10 characters)"
               value={this.state.password}
               onChange={this.update("password")}
               className="login-password"

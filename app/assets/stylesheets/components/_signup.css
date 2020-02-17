@@ -22,7 +22,6 @@
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: 100;
   margin: 15px 0px;
-  
 }
 
 .signup-subtitle{
@@ -36,29 +35,30 @@
 }
 .name-container{
   display: flex;
-  
 }
 
 .fname{
-  padding-right: 10px;
+  padding-right: 11px;
   padding-bottom: 10px;
 } 
 
 .lname{
-  padding-left: 10px;
+  padding-left: 11px;
   padding-bottom: 10px;
 }
 
 .login-email{
   display: flex;
-  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
   height: 40px;
   width: 577px;
   font-size: 16px;
-  color:#b4c2c7;
+  color:black;
   border-radius: 4px;
   font-weight: lighter;
   border: 1px solid #b1bfc4;
+  padding-left: 18px;
+  box-sizing: border-box;
 }
 
 .login-email:focus{
@@ -68,14 +68,16 @@
 
 .login-password{
   display: flex;
-  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  height: 40px;
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+  height:40px;
   width: 577px;
   font-size: 16px;
-  color:#b4c2c7;
+  color:black;
   border-radius: 4px;
   font-weight: lighter;
   border: 1px solid #b1bfc4;
+  padding-left: 18px;
+  box-sizing: border-box;
 }
 
 .login-password:focus{
@@ -85,14 +87,16 @@
 
 .signup-input{
   display: flex;
-  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
   height: 40px;
   width: 274px;
   font-size: 16px;
-  color:#b4c2c7;
+  color:black;
   font-weight: lighter;
   border: 1px solid #b1bfc4;
   border-radius: 4px;
+  padding-left: 18px;
+  box-sizing: border-box;
 }
 
 .signup-input:focus{
@@ -122,16 +126,18 @@
 
 .login-buying-power{
   display: flex;
-  font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
   height: 40px;
   width: 577px;
   font-size: 14px;
   font-weight: lighter;
   font-size: 16px;
-  color:#b4c2c7;
+  color:black;
   font-weight: lighter;
   border: 1px solid #b1bfc4;
   border-radius: 4px;
+  padding-left: 18px;
+  box-sizing: border-box;
 }
 
 .login-buying-power:focus{
