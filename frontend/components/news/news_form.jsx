@@ -15,13 +15,16 @@ class NewsForm extends React.Component{
       return []
     } else {
       return this.props.news.map(el => {
+        const redirect = (el) => el.url
         return (
-          
-            <li>
-              {el.title}
-              {el.content}
-            </li>
-    
+          <div className="news-box">
+            <a className="news-link" href={el.url}></a>
+            <div className="news-text">   
+              <span className="news-source">{el.source.name}</span>
+              <p>{el.title}</p>
+            </div>
+            <img className="news-img" src={el.urlToImage}/>
+          </div>
         )
       })
     }
@@ -29,11 +32,10 @@ class NewsForm extends React.Component{
 
   render(){
     return (
-      <ul>
+      <div className="news-inner-container">
+        <h1>Recent News</h1>
         {this.displayNews()}
-      </ul>
-       
-      
+      </div>
     )
   }
 };

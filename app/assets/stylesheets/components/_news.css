@@ -1,9 +1,56 @@
+
 .news-container{
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
+  width: 100%;
   flex-direction: column;
 }
 
-.profile{
+.news-title{
+  display: flex;
+  width: 50%;
+  justify-content: center;
+}
+
+.news-inner-container{
   display: flex;
   flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  padding-right: 300px;
+}
+
+.news-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0px 10px 0px;
+  font-family: "DIN Pro", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  
+}
+
+.news-box:hover{
+  background-color: lightgreen;
+}
+
+.news-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.news-img{
+  display: flex;
+  height: 100px;
+  width: 100px;
+}
+
+.news-link{
+  position: absolute;
+  width: 50%;
+  height: 50%;
 }

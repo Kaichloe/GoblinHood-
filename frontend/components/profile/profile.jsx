@@ -10,9 +10,22 @@ class Profile extends React.Component {
   render(){
     return (
       <div className="profile">
-        <p>You're logged in!</p>
-        <Link to="/" onClick={this.props.logout}>Logout</Link>
-        <NewsFormContainer/>
+        <div className="profile-1">
+          <p>You're logged in!</p>
+          <Link to="/" onClick={this.props.logout}>Logout</Link>
+        </div>
+        <div className="main-container profile 2">
+          <div className="graph-container">
+            <p>HELLO</p>
+          </div>
+          <div className="news-container">
+            <NewsFormContainer/>
+          </div>
+        </div>
+        <div className="profile-3">
+        </div>
+        <div className="profile-4">
+        </div>
       </div>
     )
   }

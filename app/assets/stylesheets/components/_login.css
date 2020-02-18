@@ -35,7 +35,8 @@
   font-family: "DIN Pro", "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: 600;
   font-size: 26px;
-  text-decoration: unset
+  text-decoration: unset;
+  margin-bottom: 20px;
 }
 
 .big-box {

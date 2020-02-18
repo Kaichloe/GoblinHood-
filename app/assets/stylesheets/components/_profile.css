@@ -1,0 +1,40 @@
+
+.profile{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  
+}
+
+.profile-1{
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  height: 100%;
+}
+
+.main-container{
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+}
+
+.profile-3{
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 100%;
+}
+
+.profile-4{
+  display: flex;
+  flex-direction: column;
+  width:15%;
+  height: 100%;
+}
+
+.graph-container{
+  background-color:#20ce99;
+  justify-content: center;
+}
