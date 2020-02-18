@@ -17,7 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore();
   }
-
+  // const newsAPIkey = window.newsAPIkey;
+  // window.newsAPIkey = " "
+  ReactDOM.render(<h1>Nothing to see here</h1>, document.getElementById('important-info'));
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);
 })
+
+

@@ -4,7 +4,7 @@ import { fetchNews } from '../../actions/news_actions';
 
 const mstp = state => {
   return {
-    news: (state.entities.news.slice(0,6))
+    news: (state.entities.news.slice(0,7))
   }
 }
 
