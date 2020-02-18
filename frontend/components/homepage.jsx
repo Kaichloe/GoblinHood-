@@ -1,8 +1,8 @@
 // should hold nav and splash 
-import Splash from '../splash/splash';
-import Nav from '../splash/nav';
+import Splash from './splash/splash';
+import Nav from './splash/nav';
 import React from 'react';
-import Footer from '../splash/footer'
+import Footer from './splash/footer'
 
 const Homepage = () => {
   return (
