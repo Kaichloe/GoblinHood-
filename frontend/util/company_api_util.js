@@ -12,16 +12,9 @@ export const fetchCompany = (ticker) => {
   };
 };
 
-export const fetchCompanyHistoricPrices = (ticker, range, interval) => {
+export const fetchCompanyHistoricPrices = (ticker, interval, range) => {
   return $.ajax({
     method: "get",
-    url: `https://cloud.iexapis.com/stable/stock/${ticker}/chart/${range}/?filter=date,close,label,change,changeOverTime&chartInterval=${interval}&types=quote&token=sk_1a46f435974a47cd88c7f5d8bcca1c4f`,
-  });
-};
-
-export const fetchCompanyBasics = (ticker) => {
-  return $.ajax({
-    method:"get",
-    url: `https://cloud.iexapis.com/stable/stock/${ticker}/company/batch?&types=quote&token=sk_1a46f435974a47cd88c7f5d8bcca1c4f`
+    url: `https://intraday.worldtradingdata.com/api/v1/intraday?symbol=${ticker}&interval=${interval}&range=${range}&api_token=Gtx3Q1nLNn6xaBl4vl6pZWI60BThrtkiJFEl5O7dVhZiAdywzcjZbEA8tAe6`
   });
 };

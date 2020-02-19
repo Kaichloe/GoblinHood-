@@ -42,14 +42,14 @@ export const fetchCompanies = () => dispatch => {
     .then(companies => dispatch(receiveCompanies(companies)))
 };
 
-export const fetchCompanyHistoricPrices = (ticker, range, interval) => (dispatch) => {return APICompUtil.fetchCompanyHistoricPrices(ticker, range, interval)
+export const fetchCompanyHistoricPrices = (ticker, interval, range) => (dispatch) => {return APICompUtil.fetchCompanyHistoricPrices(ticker, interval, range)
   .then((prices) => dispatch(receiveCompanyHistoricPrices(prices)));
 }
   
-export const fetchCompanyBasics= (ticker) => dispatch => {
-  return APICompUtil.fetchCompanyBasics(ticker)
-    .then(companyData => dispatch(receiveCompanyBasics(companyData)))
-};
+// export const fetchCompanyBasics= (ticker) => dispatch => {
+//   return APICompUtil.fetchCompanyBasics(ticker)
+//     .then(companyData => dispatch(receiveCompanyBasics(companyData)))
+// };
 
 
 

@@ -5,16 +5,16 @@ import {
 } from '../actions/company_actions';
 
 const companiesReducer = (oldState = {}, action) => {
-  Object.freeze(state);
+  Object.freeze(oldState);
   switch (action.type) {
-    case RECEIVE_COMPANY:
-      return Object.assign({}, oldState, { [action.company.id]: action.company });
-    case RECEIVE_COMPANIES:
-      return Object.assign({}, action.companies);
+    // case RECEIVE_COMPANY:
+    //   return Object.assign({}, oldState, { [action.company.symbol]: action.company });
+    // case RECEIVE_COMPANIES:
+    //   return Object.assign({}, action.companies);
     case RECEIVE_COMPANY_HISTORIC_PRICES:
-      return Object.assign({}, oldState, { [action.id]: action.prices });
-    case RECEIVE_COMPANY_BASICS:
-      return Object.assign({}, oldState, { [action.id]: action.company_data })
+      return Object.assign({}, oldState, action.stock);
+    // case RECEIVE_COMPANY_BASICS:
+    //   return Object.assign({}, oldState, { [action.id]: action.company_data })
     default:
       return oldState;
   }
