@@ -6,6 +6,7 @@ import Homepage from './components/homepage';
 import { AuthRoute, ProtectedRoute } from './util/route_util';
 import ProfileContainer from './components/profile/profile_container';
 import DemoFormContainer from './components/login/demo_container';
+import ChartContainer from "./components/company/chart_container";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Homepage}/>
           <ProtectedRoute exact path="/profile" component={ProfileContainer}/>
+          <ProtectedRoute path="/stocks/:ticker" component={ChartContainer} />
           <AuthRoute exact path="/demoUser" component={DemoFormContainer}/> 
           <AuthRoute exact path="/signup" component={SignUpFormContainer}/> 
           <AuthRoute exact path="/login" component={LoginFormContainer}/>

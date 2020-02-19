@@ -10,7 +10,7 @@ const mstp = (state, ownProps) => {
 
 const mdtp = dispatch =>{
   return {
-    fetchCompanyBasic: ()
+    fetchCompanyBasic: 
   }
 }
 
