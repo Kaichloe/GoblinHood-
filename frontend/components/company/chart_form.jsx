@@ -7,8 +7,9 @@ class ChartForm extends React.Component {
   }
 
   componentDidMount(){
-    this.fetchHistorialPrices(this.props.ticker,"1D", "30")
+    this.fetchHistorialPrices(this.props.ticker,"1d", "15")
   }
+
   render(){
     return (
       <div>
