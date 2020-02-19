@@ -4,14 +4,14 @@ import { fetchCompanyHistoricPrices } from '../../actions/company_actions';
 
 const mstp = (state, ownProps) => {
   return {
-    stock: state.entities.stock,
-    ticker: ownProps.match.params.ticker
+    company: state.entities.company,
+    symbol: ownProps.match.params.symbol
   }
 }
 
 const mdtp = (dispatch) => {
   return {
-    fetchCompanyHistoricPrices: (ticker, interval, range) => dispatch(fetchCompanyHistoricPrices(ticker, interval, range))
+    fetchCompanyHistoricPrices: (symbol) => dispatch(fetchCompanyHistoricPrices(symbol))
   }
 }
 

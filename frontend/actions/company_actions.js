@@ -42,7 +42,7 @@ export const fetchCompanies = () => dispatch => {
     .then(companies => dispatch(receiveCompanies(companies)))
 };
 
-export const fetchCompanyHistoricPrices = (ticker, interval, range) => (dispatch) => {return APICompUtil.fetchCompanyHistoricPrices(ticker, interval, range)
+export const fetchCompanyHistoricPrices = (symbol) => (dispatch) => {return APICompUtil.fetchCompanyHistoricPrices(symbol)
   .then((prices) => dispatch(receiveCompanyHistoricPrices(prices)));
 }
   
