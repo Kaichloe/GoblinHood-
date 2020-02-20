@@ -1,4 +1,3 @@
-
 .profile{
   display: flex;
   flex-direction: column;
@@ -18,6 +17,8 @@
   display: flex;
   flex-direction: column; 
   justify-content: center;
+  width: 45%;
+  margin-left: 300px;
 }
 
 .profile-3{
@@ -35,6 +36,5 @@
 }
 
 .graph-container{
-  background-color:#20ce99;
   justify-content: center;
 }
