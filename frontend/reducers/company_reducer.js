@@ -1,14 +1,22 @@
-import { RECEIVE_HISTORICAL_PRICES } from '../actions/company_actions';
+import { RECEIVE_HISTORICAL_PRICES, RECEIVE_BIG_HISTORICAL_PRICES,  } from '../actions/company_actions';
 
 const companiesReducer = (oldState = [], action) => {
+  let innerData;
+  let dateClosePrices;
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_HISTORICAL_PRICES:
-      const innerData = action.priceData.intraday;
-      let dateClosePrices = Object.keys(innerData).map(key => {
+      innerData = action.priceData.intraday;
+      dateClosePrices = Object.keys(innerData).map(key => {
         return [key, innerData[key]['close']];
       });
-      return dateClosePrices ;
+      return dateClosePrices;
+    case RECEIVE_BIG_HISTORICAL_PRICES:
+      innerData = action.priceData.history;
+      dateClosePrices = Object.keys(innerData).map(key => {
+        return [key, innerData[key]['close']];
+      });
+      return dateClosePrices;
     default:
       return oldState;
   }

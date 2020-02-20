@@ -4,16 +4,48 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'rec
 class ChartForm extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      shares: 0
+    }
     this.maxPrice = this.maxPrice.bind(this);
   }
 
   componentDidMount(){
-    this.props.fetchPriceData(this.props.symbol, "30")
+    this.props.fetchBigPriceData(this.props.symbol, "2019-12-03")
   }
  //60min per data and 5days 
 
+
+ oneYearDate() {
+  var d = new Date(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear() - 1;
+
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
+
+  return [year, month, day].join('-');
+}
+
+fiveYearDate(){
+  var d = new Date(),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear() - 1;
+
+  if (month.length < 2)
+    month = '0' + month;
+  if (day.length < 2)
+    day = '0' + day;
+
+  return [year, month, day].join('-');
+}
+
   ChangeDate(range){
-    const symbol = this.props.symbol
+    const symbol = this.props.symbol;
     switch (range) {
       case "1D":
         return this.props.fetchPriceData(symbol, "1")
@@ -21,6 +53,12 @@ class ChartForm extends React.Component {
         return this.props.fetchPriceData(symbol, "5")
       case "1M":
         return this.props.fetchPriceData(symbol, "30")
+      case "1Y":
+        const oneYearDate = this.oneYearDate;
+        return this.props.fetchBigPriceData(symbol, oneYearDate)
+      case "5Y":
+        const FiveYearDate = this.oneYearDate;
+        return this.props.fetchBigPriceData(symbol, FiveYearDate)
       default:
         break;
     }
@@ -48,30 +86,31 @@ class ChartForm extends React.Component {
             dot={false}/>
             <XAxis dataKey="date" hide={true} />
             <YAxis domain={[0, this.maxPrice() + 5]} hide={true} />
+            <Tooltip/>
           </LineChart>
         </div>
 
-        <div className="chart-buttons">
-          <button onClick={()=> this.ChangeDate("1D")}>1D</button>
-          <button onClick={() => this.ChangeDate("1W")}>1W</button>
-          <button onClick={() => this.ChangeDate("1M")}>1M</button>
-          <button onClick={() => this.ChangeDate("1D")}>1Y</button>
-          <button onClick={() => this.ChangeDate("1D")}>5Y</button>
+        <div className="chart-buttons-container">
+          <button className='chart-buttons' onClick={()=> this.ChangeDate("1D")}>1D</button>
+          <button className='chart-buttons' onClick={() => this.ChangeDate("1W")}>1W</button>
+          <button className='chart-buttons' onClick={() => this.ChangeDate("1M")}>1M</button>
+          <button className='chart-buttons' onClick={() => this.ChangeDate("1D")}>1Y</button>
+          <button className='chart-buttons' onClick={() => this.ChangeDate("1D")}>5Y</button>
         </div>
 
-        {/* <form className="Stockbar">
+        <form className="Stockbar">
           <h2>Buy {this.props.symbol}</h2>
             <label>Shares</label>
             <input 
               type="number"
-              value={this.state.shares}
-              onChange={this.update('shares')}
+              // value={this.state.shares}
+              // onChange={this.update('shares')}
             />
             <div>
               <span>Market Price</span>
               <span>{}</span>
             </div>
-        </form> */}
+        </form>
       </div>
     )
   }
