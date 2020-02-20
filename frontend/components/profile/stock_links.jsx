@@ -9,12 +9,12 @@ class StockLinks extends React.Component{
 
   render(){
     return(
-      <div className="stock-links">
-        <label className="stock-watchlist">WatchList</label>
-        <Link to='/profile/stocks/SNAP'>Snap Inc.</Link>
-        <Link to='/profile/stocks/TWTR'>Twitter</Link>
-        <Link to='/profile/stocks/C'>Citi</Link>
-        <Link to='/profile/stocks/XOM'>XOM</Link>
+      <div className="stock-links-container">
+        <label className="stock-watchlist">Portfolio</label>
+        <Link className="stock-links" to='/profile/stocks/SNAP'>Snap Inc.</Link>
+        <Link className="stock-links" to='/profile/stocks/TWTR'>Twitter</Link>
+        <Link className="stock-links" to='/profile/stocks/C'>Citi</Link>
+        <Link className="stock-links" to='/profile/stocks/XOM'>XOM</Link>
       </div>
     )
   }
