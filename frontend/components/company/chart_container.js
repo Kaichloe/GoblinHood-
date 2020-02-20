@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ChartForm from './chart_form';
-import { fetchCompanyHistoricPrices } from '../../actions/company_actions';
+import { fetchPriceData } from '../../actions/company_actions';
 
 const mstp = (state, ownProps) => {
   return {
@@ -11,7 +11,7 @@ const mstp = (state, ownProps) => {
 
 const mdtp = (dispatch) => {
   return {
-    fetchCompanyHistoricPrices: (symbol) => dispatch(fetchCompanyHistoricPrices(symbol))
+    fetchPriceData: (symbol) => dispatch(fetchPriceData(symbol))
   }
 }
 

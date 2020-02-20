@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NewsFormContainer from '../news/news_container';
+import PortfolioChart from './portfolio_chart';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class Profile extends React.Component {
         </div>
         <div className="main-container profile 2">
           <div className="graph-container">
-            <p>HELLO</p>
+            <PortfolioChart/>
           </div>
           <div className="news-container">
             <NewsFormContainer/>
