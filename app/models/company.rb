@@ -18,7 +18,7 @@ class Company < ApplicationRecord
   has_many :watchlist
 
   has_many :shareholders,
-    through: :tranactions
+    through: :tranactions,
     source: :user
 
 end
