@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import NewsForm from './news_form';
 import { fetchNews } from '../../actions/news_actions';
 
-const mstp = state => {
+const mstp = (state, ownProps) => {
   return {
-    news: (state.entities.news.slice(0,6))
+    news: state.entities.news
   }
 }
 
