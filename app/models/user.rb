@@ -22,7 +22,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true 
   validates :password, length: { minimum: 10 }, allow_nil: true
 
-  has_many :transactions
+  #has_many :transactions
   
   has_many :watchlist
 
