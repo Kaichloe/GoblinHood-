@@ -9,9 +9,9 @@ const receivePriceHistory = (priceData) => {
   };
 };
 
-export const fetchPriceData = symbol => dispatch => {
+export const fetchPriceData = (symbol, range) => dispatch => {
   return (
-    APICompUtil.fetchHistoricalPrices(symbol).then(priceData => dispatch(receivePriceHistory(priceData)))
+    APICompUtil.fetchHistoricalPrices(symbol, range).then(priceData => dispatch(receivePriceHistory(priceData)))
   )
 };
 

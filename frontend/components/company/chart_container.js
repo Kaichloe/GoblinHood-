@@ -11,7 +11,7 @@ const mstp = (state, ownProps) => {
 
 const mdtp = (dispatch) => {
   return {
-    fetchPriceData: (symbol) => dispatch(fetchPriceData(symbol))
+    fetchPriceData: (symbol,range) => dispatch(fetchPriceData(symbol, range))
   }
 }
 
