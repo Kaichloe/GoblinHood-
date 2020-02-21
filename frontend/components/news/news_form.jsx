@@ -1,13 +1,21 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class NewsForm extends React.Component{
   constructor(props){
     super(props)
-
   };
   
   componentDidMount(){
-    this.props.fetchNews()
+    const symbol = this.props.symbol;
+    const pageOn = this.props.match.url;
+    const stock = "stock"
+    
+    if (pageOn === "/profile") {
+      this.props.fetchNews(stock)
+    } else {
+      this.props.fetchNews(symbol)
+    }
   }
 
   displayNews(){
@@ -15,7 +23,6 @@ class NewsForm extends React.Component{
       return []
     } else {
       return this.props.news.map((el, i) => {
-       
         return (
           <div className="news-box" key={`el+${i}`} >
             <a className="news-link" href={el.url}></a>
@@ -40,4 +47,4 @@ class NewsForm extends React.Component{
   }
 };
 
-export default NewsForm;
+export default withRouter(NewsForm);

@@ -25,9 +25,6 @@ class Profile extends React.Component {
         </div>
       <div className="profile">
         <div className="profile-1">
-          {/* <h2 className='buying-power'>$9,999,999</h2>
-          <Link to="/profile ">Home</Link>
-          <Link to="/" onClick={this.props.logout}>Logout</Link> */}
         </div>
         <div className="main-container profile 2">
           <div className="graph-container">

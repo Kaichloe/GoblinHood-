@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import ChartForm from './chart_form';
 import { fetchPriceData, fetchBigPriceData } from '../../actions/company_actions';
-
+import { withRouter } from 'react-router-dom';
 
 const mstp = (state, ownProps) => {
   return {
@@ -17,4 +17,4 @@ const mdtp = (dispatch) => {
   }
 }
 
-export default connect(mstp, mdtp)(ChartForm);
+export default withRouter(connect(mstp, mdtp)(ChartForm));

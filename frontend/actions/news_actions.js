@@ -8,6 +8,6 @@ export const receiveNews = (news) => {
   };
 };
 
-export const fetchNews = () => (dispatch) => {
-  return APIUtil.fetchNews().then((news)=> dispatch(receiveNews(news)))
+export const fetchNews = (symbol) => (dispatch) => {
+  return APIUtil.fetchNews(symbol).then((news)=> dispatch(receiveNews(news)))
 }

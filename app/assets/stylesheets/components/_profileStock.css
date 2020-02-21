@@ -19,7 +19,7 @@
 }
 
 .home-button{
-  margin-right: 10px;
+  margin-right: 20px;
   text-decoration: none;
   color: black;
   font-weight: bold;
@@ -79,7 +79,7 @@
   justify-content: center;
   width: 55%;
   margin-right: 100px;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .profile-3{
@@ -170,3 +170,11 @@
   outline: none;
   border-color: none;
 }
+
+.stockname{
+  display: flex;
+  margin: 0;
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+  font-size: 18px;
+}
+
