@@ -97,16 +97,43 @@
   display: inline-block;
   align-items: center;
   width: 225px;
-  max-height: 600px;
+  max-height: 400px;
   margin-top: 3%;
   margin-right: 5%;
   margin-left: 5%;
   background: white;
   box-sizing: border-box;
-  overflow-y: scroll;
   box-shadow: 0 0 4px 1px rgba(0,0,0,0.01), 0 3px 24px rgba(48,51,51,0.09);
 }
 
+.stock-portfolio{
+  font-size: 16px;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+  border-bottom: 1px solid #f4f4f5;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.stock-links{
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+  text-decoration: none;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color:black;
+  font-weight: 400;
+}
+
+.stock-links:hover{
+  color:#20ce99;
+}
 
 .profile-4{
   display: flex;
