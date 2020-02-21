@@ -59,7 +59,7 @@ class LoginForm extends React.Component {
     return (
       <div className="login-container">
         <div className="img-container">
-          <img className="login-img" src={window.login_img} />
+          <img className="login-img" src='https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png'/>
         </div>
         <div className="big-box">
           <div className="first-box"></div>
