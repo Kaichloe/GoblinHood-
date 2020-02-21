@@ -36,7 +36,7 @@ fiveYearDate(){
   var d = new Date(),
     month = '' + (d.getMonth() + 1),
     day = '' + d.getDate(),
-    year = d.getFullYear() - 1;
+    year = d.getFullYear() - 5;
 
   if (month.length < 2)
     month = '0' + month;
@@ -57,11 +57,11 @@ fiveYearDate(){
         return this.props.fetchPriceData(symbol, "30")
       case "1Y":
         const oneYear = this.oneYearDate();
-        console.log(oneYear)
+        // console.log(oneYear)
         return this.props.fetchBigPriceData(symbol,oneYear)
       case "5Y":
         const fiveYears = this.fiveYearDate();
-        console.log(fiveYears)
+        // console.log(fiveYears)
         return this.props.fetchBigPriceData(symbol,fiveYears)
       default:
         break;
