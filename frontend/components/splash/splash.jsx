@@ -12,7 +12,7 @@ const Splash = ()=> {
         <div><Link className="splash-signup" to="/signup">Sign Up</Link></div>
       </div>
       <div className="splash-right">
-          <img src={window.splash_img}/>
+          <img src={window.phone_img}/>
       </div>
     </div>
   )
