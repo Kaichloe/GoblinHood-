@@ -1,24 +1,17 @@
-# README
+#  GoblinHood
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[View Live Site Here](https://https://goblinhood.herokuapp.com/)
 
-Things you may want to cover:
+## About
+GoblinHood is a clone of the popular commision-free trading app, RobinHood. I choose to make a clone of RobinHood because I use it on the daily combined with my background in Finance. 
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Technologies 
+  * Frontend: React, Redux
+  * Backend: Ruby on Rails, PostgreSQL
+  * Data Visualization: Recharts Library
+  * Styling: CSS and HTML5
+  * APIs
+    * Financial Data: World Trading Data
+    * News Data: News API
+    
+## Features 
