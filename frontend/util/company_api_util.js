@@ -1,17 +1,32 @@
-//less than 30months button, limited to 25 per day 
+//for less than 1month
 export const fetchHistoricalPrices = (symbol, range) => {
   return $.ajax({
     method: "get",
-    url: `https://intraday.worldtradingdata.com/api/v1/intraday?symbol=${symbol}&interval=5&range=${range}&api_token=lqA24OYqT8Ec2Iywslqb2j1LkOULJcdcY4d1F0GDkPXvfKGGoeBqK9himIQE`
+    url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${range}/?token=sk_182c581f47a940bdbdb2661ea5101724`
   });
 };
 
-//greater than 5days button 
+// for greater than one month 
 export const fetchBigHistoricalPrices = (symbol, range) => {
   return $.ajax({
     method: "get",
-    url: `https://api.worldtradingdata.com/api/v1/history?symbol=${symbol}&api_token=lqA24OYqT8Ec2Iywslqb2j1LkOULJcdcY4d1F0GDkPXvfKGGoeBqK9himIQE&date_from=${range}`
+    url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${range}/?token=sk_182c581f47a940bdbdb2661ea5101724`,
   });
 };
+
+export const fetchCompanyBasics = (symbol) => {
+  return $.ajax({
+    method: 'GET',
+    url: `https://cloud.iexapis.com/stable/stock/${symbol}/company/batch?&types=quote&token=sk_182c581f47a940bdbdb2661ea5101724`,
+  })
+};
+
+export const fetchCompanyKeyStats = (symbol) => {
+  return $.ajax({
+    method: 'GET',
+    url: `https://cloud.iexapis.com/stable/stock/${symbol}/stats/batch?&types=quote&filter=dividendYield,peRatio,marketcap,week52high,week52low,avg10Volume&token=sk_182c581f47a940bdbdb2661ea5101724`,
+  })
+};
+
 
 

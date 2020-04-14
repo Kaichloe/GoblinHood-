@@ -1,6 +1,7 @@
 import React from 'react';
 import ChartContainer from './chart_container';
 import NewsFormContainer from '../news/news_container';
+import CompanyInfo from './company_container';
 import { Link } from 'react-router-dom';
 
 class StockShow extends React.Component {
@@ -29,6 +30,7 @@ class StockShow extends React.Component {
             <div className="graph-container">
               <ChartContainer/>
             </div>
+            <CompanyInfo/>
             <div className="news-container">
               <NewsFormContainer />
             </div>

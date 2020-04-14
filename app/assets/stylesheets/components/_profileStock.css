@@ -169,6 +169,11 @@
 .chart-buttons:focus{
   outline: none;
   border-color: none;
+  color: #20ce99;
+}
+
+.chart-buttons:active {
+    color: #21ce99;
 }
 
 .stockname{

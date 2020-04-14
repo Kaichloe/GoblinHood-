@@ -5,18 +5,15 @@ import { Route, Switch } from 'react-router-dom';
 import Homepage from './components/homepage';
 import { AuthRoute, ProtectedRoute } from './util/route_util';
 import ProfileContainer from './components/profile/profile_container';
-import DemoFormContainer from './components/login/demo_container';
-// import ChartContainer from "./components/company/chart_container";
 import StockShow from './components/company/stock_show';
 
 const App = () => {
   return (
     <div>
         <Switch>
-          <Route exact path="/" component={Homepage}/>
-          {/* <AuthRoute exact path="/demoUser" component={DemoFormContainer}/>  */}
-          <AuthRoute exact path="/signup" component={SignUpFormContainer}/> 
+          <Route exact path="/" component={Homepage} />
           <AuthRoute exact path="/login" component={LoginFormContainer}/>
+          <AuthRoute exact path="/signup" component={SignUpFormContainer}/> 
           <ProtectedRoute exact path="/profile" component={ProfileContainer}/>
           <ProtectedRoute path="/profile/stocks/:symbol" component={StockShow} />
         </Switch>

@@ -5,10 +5,6 @@ import { receiveErrors } from '../../actions/session_actions';
 
 const mstp = ({ errors }) => {
   return {
-    // demoUser:{
-    //   email:"admin_status_activated__welcome__back__admin_kai@wedabest.com",
-    //   password:"adminkaiyipisbackbaby"
-    // },
     errors: errors.session,
     formType: "Sign In"
   };

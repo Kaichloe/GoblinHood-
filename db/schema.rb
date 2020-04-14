@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_12_170836) do
+ActiveRecord::Schema.define(version: 2020_04_14_182903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,13 +26,12 @@ ActiveRecord::Schema.define(version: 2020_02_12_170836) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "company_id", null: false
     t.float "purchase_price", null: false
     t.integer "quantity", null: false
     t.integer "average_per_share", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_transactions_on_company_id", unique: true
+    t.string "ticker"
     t.index ["user_id"], name: "index_transactions_on_user_id", unique: true
   end
 
@@ -45,16 +44,16 @@ ActiveRecord::Schema.define(version: 2020_02_12_170836) do
     t.float "buying_power", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "portfolio_value"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
 
   create_table "watchlists", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_watchlists_on_company_id", unique: true
+    t.string "ticker", null: false
     t.index ["user_id"], name: "index_watchlists_on_user_id", unique: true
   end
 

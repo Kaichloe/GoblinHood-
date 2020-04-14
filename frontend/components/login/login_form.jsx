@@ -17,7 +17,8 @@ class LoginForm extends React.Component {
   demoLogin() {
     const email = this.demoEmail;
     const password = this.demoPassword;
-    const Speed = 50;
+    const Speed = 35; 
+    document.getElementById("demo-button").disabled = true;
     for (let i = 0; i < email.length; i++) {
       setTimeout(() => {
         this.setState({ email: this.state.email + email[i] });
@@ -31,6 +32,7 @@ class LoginForm extends React.Component {
     setTimeout(() => {
       this.props.processForm(this.state).then(() => this.props.history.push("/profile"));
     }, (email.length * Speed) + (password.length * Speed) + Speed);
+
   }
 
   componentWillUnmount(){
@@ -101,7 +103,7 @@ class LoginForm extends React.Component {
               <button className="login-button" type="submit">{this.props.formType}</button>
             <br/>
               </form>
-              <button className="demo-login" onClick={this.demoLogin}>Demo Login
+              <button id="demo-button" className="demo-login" onClick={this.demoLogin}>Demo Login
           </button>
             </div>
             <div className="half-box"></div>

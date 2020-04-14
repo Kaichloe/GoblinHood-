@@ -9,9 +9,9 @@
 #  session_token   :string           not null
 #  password_digest :string           not null
 #  buying_power    :float            not null
-#  portfolio_value :float            not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  portfolio_value :float
 #
 
 class User < ApplicationRecord
@@ -22,8 +22,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true 
   validates :password, length: { minimum: 10 }, allow_nil: true
 
-  #has_many :transactions
-  
+  has_many :transactions
   has_many :watchlist
 
   has_many :companies,

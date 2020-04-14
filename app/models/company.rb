@@ -13,8 +13,6 @@ class Company < ApplicationRecord
 
   validates :company_name, :ticker_symbol, presence: true
   
-  #has_many :transactions
-
   has_many :watchlist
 
   has_many :shareholders,

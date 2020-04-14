@@ -19,7 +19,6 @@ class StockLinks extends React.Component{
         <Link className="stock-links" to='/profile/stocks/AAPL'>AAPL</Link>
         <Link className="stock-links" to='/profile/stocks/BAC'>BAC</Link>
         <Link className="stock-links" to='/profile/stocks/GE'>GE</Link>
-        
       </div>
     )
   }
