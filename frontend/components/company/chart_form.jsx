@@ -2,16 +2,23 @@ import React from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { withRouter } from 'react-router-dom';
 import Odometer from 'react-odometerjs';
-import moment from 'moment';
+import moment, { monthsShort } from 'moment';
 
 class ChartForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: "5y",
+      time: "1D",
       fiveYearData: {},
-      
+      oneDayData: {},
+      fiveDayData: {},
+      shares: 0,
+      price: 0,
+      defaultPrice: 0,
+      openPrice: 0,
     };
+    this.handleMove = this.handleMove.bind(this);
+    this.handleLeave = this.handleLeave.bind(this);
     this.customToolTip = this.customToolTip.bind(this);
   }
 
@@ -19,109 +26,164 @@ class ChartForm extends React.Component {
     this.props
       .fetchPriceData(this.props.symbol, "5y")
       .then((data) => this.setState({ fiveYearData: data }));
+    // this.props
+    //   .fetchPriceData(this.props.symbol, "5dm")
+    //   .then((data) => this.setState({ fiveDayData: data }));
+    this.props.fetchPriceData(this.props.symbol, "1d")
+      .then((data) => this.setState({ oneDayData: data }))
+      .then((data) => this.setState({price: this.props.defaultPrice.close.toFixed(2)}))
+      .then((data) => this.setState({defaultPrice: this.props.defaultPrice.close.toFixed(2)}))
+      .then(((data)=> this.setState({openPrice: this.props.openPrice.open.toFixed(2)})))
+
+      // this.setState({price: this.props.defaultPrice.close})
+    // this.setState({openingPrice: this.props.openingPrice.open})
   }
 
-  changeDate(range) {
-    const symbol = this.props.symbol;
-    switch (range) {
-      case "1D":
-        return this.props.fetchPriceData(symbol, "1d");
-      case "1W":
-        return this.props.fetchPriceData(symbol, "5dm");
-      default:
+  iterator(inputDate){
+    let data = this.state.fiveYearData.priceData
+    let newData;
+    for (let i = data.length-1; i > 0; i--) {
+      if (data[i].date === inputDate){
+        newData = data.slice(i);
         break;
+      }  
     }
+    return newData;
   }
 
-  checker() {
-    const button = document.getElementById("buttons");
-    if ((button.style.color = "black")) {
-      console.log(false);
-    } else {
-      console.log(true);
-    }
+
+  changeDate(input) {
+    this.setState({time: input});
   }
 
-  // formatTime(time){
-  //   time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+  // handleBuy() {
+  //   let newState = {
+  //     ticker: this.props.symbol,
+  //     units: parseInt(this.state.shares),
+  //     price: this.currentMarketPrice(),
+  //     user_id: this.props.currentUserId,
+  //   };
+  //   this.setState({ buyStock: newState }, () =>
+  //     this.props.buyStock(this.state.buyStock)
+  //   );
   // }
 
-  // parseData(){
-  //   let data = [];
-  //   const button1 = document.getElementById('button-1')
-  //   const button2 = document.getElementById('button-2')
-  //   const button3 = document.getElementById('button-3')
-  //   const button4 = document.getElementById('button-4')
-  //   const button5 = document.getElementById('button-5')
-  //   const allButtons = [button1, button2, button3];
+  handleLeave() {
+    let defaultPrice = this.state.defaultPrice;
+    // console.log(defaultPrice)
+    // console.log(this.props.openPrice.open)
+    this.setState({price: defaultPrice})
+  }
 
-  //   for (let i = 0; i < allButtons.length; i++) {
-  //     if (allButtons[i].style.color === "#21ce99"){
-  //       switch (allButton[i]) {
-  //         case button1:
+  handleMove(e) {  
+    // console.log(e.activePayload[0].payload.close)
+    this.setState({price: e.activePayload[0].payload.close.toFixed(2)})
+  } 
 
-  //           break;
-  //         case button3:
-  //           this.props.company.forEach(el => {
-  //             data.push({ date: `:${el.date}`, price: el.uClose })
-  //           })
-  //           return data
-  //           break;
-  //       }
 
-  //     }
-
-  //   }
-  // }
-
-  // parseData(){
-  //   let data = [];
-  //   let el = this.props.priceData;
-  //   for (let i = 0; i < el.length; i++) {
-  //     data.push({date: el[i].minute, price: el[i].close})
-  //   }
-  // }
-
-  customToolTip(e) {
-    let formatted
-    if (this.state.time === "1d") {
-      formatted = moment(e.label).format("LT");
-    } else if (this.state.time === "1w") {
-      formatted = moment(e.label).format("LLL");
-    } else {
-      formatted = moment(e.label).format("L");
-    }
-    return <div className="custom-tooltip">{formatted}</div>;
+  customToolTip({payload}) {
+    if (Object.values(payload).length > 0 ) {
+      if(this.state.time === "1D" || this.state.time === "1W"){
+        return <div className="customTooltip">{payload[0].payload.label} {payload[0].payload.date}</div>
+      } else {
+        return <div className="customTooltip">{payload[0].payload.date}</div>
+      }
+    } 
   }
 
   render() {
-    let data = this.props.priceData;
+
+    let date = new Date;
+    let year = date.getFullYear();
+    let day = date.getDate();
+    let month = (date.getMonth() + 1);
+    let time = this.state.time;
+    let data;
+    
+    if(time === "1D"){
+      data = this.state.oneDayData.priceData
+    } else if (time === "1W"){
+      data = this.state.fiveDayData.priceData
+    } else if (time === "5Y" ){
+      data = this.state.fiveYearData.priceData
+    } else if (time === "1Y"){
+      if (day < 10){
+        day = [0,day].join("")
+      }
+      if (month < 10){
+        month = [0,month].join("")
+      }
+      year = year - 1;
+      let yearDate = [year,month,day].join("-");
+      data = this.iterator(yearDate)
+    } else if (time === "3M"){
+      month = month - 3;
+        if (day < 10){
+          day = [0,day].join("")
+        }
+        if (month < 0 ){
+          month = month + 12;
+          year = year - 1
+        } else if (month < 10 ){
+          month = [0, month].join("");
+        }
+        let threeMonth = [year,month,day].join("-");
+        data = this.iterator(threeMonth);
+    } else if (time === "1M"){
+      month = month - 1;
+        if (day < 10 ){
+          day = [0,day].join("");
+        }
+        if (month ===  0 ){
+          month = month + 12;
+          year = year - 1
+        } else if (month < 10){
+          month = [0, month].join("");
+        }
+        let oneMonth = [year,month,day].join("-");
+        data = this.iterator(oneMonth);
+    }
+    
+    let color = "#21ce99";
+    // if (data[0].open > data.slice(-1)[0].close){
+    //   color = "#ff0000";
+    // } else {
+    //   color = "#21ce99";
+    // }
+    
+    const stockChart = (
+
+      <LineChart width={600} height={300} data={data} onMouseMove={this.handleMove}
+          onMouseLeave={this.handleLeave}>
+        <Line
+          type="linear"
+          dataKey="close"
+          stroke={color}
+          connectNulls={true}
+          strokeWidth={2}
+          dot={false}
+        />
+        <XAxis dataKey="date" hide={true} allowDataOverflow={false} />
+        <YAxis domain={["dataMin", "dataMax"]} hide={true} />
+        <Tooltip position={{y: 1}} content={this.customToolTip} />
+      </LineChart>
+    );
+
     return (
       <div className="StockPage">
         <h3 className="stockname">{this.props.companyName}</h3>
 
-        <div id="price-change" className="stock-price">
-          $<Odometer value={5} />
+        <div id="price" className="stock-price">
+          ${this.state.price}
+        </div>
+        <div className="stock-change">
+          ${(this.state.price - this.state.openPrice).toFixed(2)}
+        </div>
+        <div className="stock-change-percent">
+          [{(((this.state.price - this.state.openPrice)/ this.state.openPrice) * 100).toFixed(2)}%]
         </div>
 
-        <div className="StockChart">
-          <LineChart width={600} height={300} data={data}>
-            <Line
-              type="linear"
-              dataKey="close"
-              stroke="#21CE99"
-              connectNulls={true}
-              strokeWidth={2}
-              dot={false}
-            />
-            <XAxis dataKey="date" hide={true} allowDataOverflow={false} />
-            <YAxis domain={["dataMin", "dataMax"]} hide={true} />
-            <Tooltip
-              position={{ y: 1 }}
-              content={this.customToolTip}
-            />
-          </LineChart>
-        </div>
+        <div className="StockChart">{stockChart}</div>
 
         <div className="chart-buttons-container">
           <button
@@ -166,24 +228,9 @@ class ChartForm extends React.Component {
           >
             5Y
           </button>
-          <button onClick={() => console.log(this.props)}>TEST</button>
+          <button onClick={() => this.handleHover(e)}>TEST</button>
           <button onClick={() => console.log(this.state)}>TEST2</button>
-          
         </div>
-
-        {/* <form className="Stockbar">
-          <h2>Buy {this.props.symbol}</h2>
-            <label>Shares</label>
-            <input 
-              type="number"
-              // value={this.state.shares}
-              // onChange={this.update('shares')}
-            />
-            <div>
-              <span>Market Price</span>
-              <span>{}</span>
-            </div>
-        </form> */}
       </div>
     );
   }

@@ -4,6 +4,7 @@ import NewsFormContainer from '../news/news_container';
 import PortfolioChartContainer from './portfolio_chart_container';
 import StockLinks from './stock_links';
 
+
 class Profile extends React.Component {
   constructor(props) {
     super(props)
@@ -28,7 +29,7 @@ class Profile extends React.Component {
         </div>
         <div className="main-container profile 2">
           <div className="graph-container">
-            <PortfolioChartContainer />
+            <PortfolioChartContainer/>
           </div>
           <div className="news-container">
             <NewsFormContainer/>

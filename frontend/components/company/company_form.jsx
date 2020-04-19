@@ -14,9 +14,6 @@ class CompanyForm extends React.Component{
   }
 
   render (){
-
-    // let about = [];
-    // this.props.basics.forEach()
     return (
       <div className="company-info">
         <div className="company-about-header">About</div>
@@ -42,10 +39,9 @@ class CompanyForm extends React.Component{
             </div>
             <div>
               <div className="subrow-title">Market Cap</div> <br />
-              {this.props.stats.marketCap}
+              {this.props.stats.marketcap}
             </div>
           </div>
-
           <div className="info-row2">
             <div>
               <div className="subrow-title">Price to Earning Ratio</div> 
@@ -65,7 +61,6 @@ class CompanyForm extends React.Component{
             </div>
           </div>
         </div>
-        <button onClick={() => console.log(this.props.stats)}></button>
       </div>
     );
   }
