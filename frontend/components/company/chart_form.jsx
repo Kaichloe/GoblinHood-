@@ -11,15 +11,19 @@ class ChartForm extends React.Component {
       fiveYearData: {},
       oneDayData: {},
       fiveDayData: {},
-      shares: 0,
+      shares: "",
       form: "BUY",
       price: 0,
       defaultPrice: 0,
       openPrice: 0,
+      ownShares: "",
     };
     this.handleMove = this.handleMove.bind(this);
     this.handleLeave = this.handleLeave.bind(this);
     this.customToolTip = this.customToolTip.bind(this);
+    this.buyForm = this.buyForm.bind(this);
+    this.sellForm = this.sellForm.bind(this);
+    this.handleTransaction = this.handleTransaction.bind(this);
   }
 
   componentDidMount() {
@@ -29,133 +33,184 @@ class ChartForm extends React.Component {
     // this.props
     //   .fetchPriceData(this.props.symbol, "5dm")
     //   .then((data) => this.setState({ fiveDayData: data }));
-    this.props.fetchPriceData(this.props.symbol, "1d")
+    this.props
+      .fetchPriceData(this.props.symbol, "1d")
       .then((data) => this.setState({ oneDayData: data }))
-      .then((data) => this.setState({price: this.props.defaultPrice.close.toFixed(2)}))
-      .then((data) => this.setState({defaultPrice: this.props.defaultPrice.close.toFixed(2)}))
-      .then((data)=> this.setState({openPrice: this.props.openPrice.open.toFixed(2)}))
-      .then((data)=> this.setState({buying_power: this.props.balance}))
-
+      .then((data) =>
+        this.setState({
+          price: parseFloat(this.props.defaultPrice.close.toFixed(2)),
+        })
+      )
+      .then((data) =>
+        this.setState({
+          defaultPrice: parseFloat(this.props.defaultPrice.close.toFixed(2)),
+        })
+      )
+      .then((data) =>
+        this.setState({
+          openPrice: parseFloat(this.props.openPrice.open.toFixed(2)),
+        })
+      )
+      .then((data) =>
+        this.setState({ buying_power: parseFloat(this.props.balance) })
+      );
+    // .then(() => this.setState({ownShares: this.props.transactions}))
   }
 
-  iterator(inputDate){
-    let data = this.state.fiveYearData.priceData
+  iterator(inputDate) {
+    let data = this.state.fiveYearData.priceData;
     let newData;
-    for (let i = data.length-1; i > 0; i--) {
-      if (data[i].date === inputDate){
+    for (let i = data.length - 1; i > 0; i--) {
+      if (data[i].date === inputDate) {
         newData = data.slice(i);
         break;
-      }  
+      }
     }
     return newData;
   }
 
-
-  changeDate(input) {
-    this.setState({time: input});
+  update(field) {
+    return (e) =>
+      this.setState({
+        [field]: e.currentTarget.value,
+      });
   }
 
-  // handleBuy() {
-  //   let newState = {
-  //     ticker: this.props.symbol,
-  //     units: parseInt(this.state.shares),
-  //     price: this.currentMarketPrice(),
-  //     user_id: this.props.currentUserId,
-  //   };
-  //   this.setState({ buyStock: newState }, () =>
-  //     this.props.buyStock(this.state.buyStock)
-  //   );
-  // }
+  changeDate(input) {
+    this.setState({ time: input });
+  }
+
+  buyForm() {
+    const submitButton = document.getElementById("transaction-submit-button");
+    const buyPower = document.getElementById("transaction-info");
+    submitButton.innerHTML = "Place Buy Order";
+    buyPower.innerHTML = `$${this.state.buying_power}`;
+    this.setState({ shares: 0, form: "BUY" });
+  }
+
+  sellForm() {
+    const submitButton = document.getElementById("transaction-submit-button");
+    // const buyPower = document.getElementById("transaction-info")
+    // buyPower.innerHTML = `${this.state.ownShares}`
+    submitButton.innerHTML = "Place Sell Order";
+    this.setState({ shares: 0, form: "SELL" });
+  }
+
+  handleTransaction(e) {
+  
+      e.preventDefault();
+    debugger
+    const transactionParams = {
+        user_id: this.props.currentUserId,
+        ticker: this.props.symbol,
+        purchase_price: this.state.defaultPrice,
+        quantity: parseInt(this.state.shares),
+        transaction_type: this.state.form,
+      };
+      console.log(transactionParams);
+      this.props.createTransaction(transactionParams);
+      // .then(() => this.setState({ shares: 0 }));
+  
+  }
 
   handleLeave() {
     let defaultPrice = this.state.defaultPrice;
     // console.log(defaultPrice)
     // console.log(this.props.openPrice.open)
-    this.setState({price: defaultPrice})
+    this.setState({ price: defaultPrice });
   }
 
-  handleMove(e) {  
+  handleMove(e) {
     // console.log(e.activePayload[0].payload.close)
-    if (e.activePayload !== undefined && e.activePayload[0].payload.close !== null) {
+    if (
+      e.activePayload !== undefined &&
+      e.activePayload[0].payload.close !== null
+    ) {
       this.setState({ price: e.activePayload[0].payload.close.toFixed(2) });
     }
-  } 
-
+  }
 
   customToolTip({payload}) {
     if (Object.values(payload).length > 0 ) {
-      if(this.state.time === "1D" || this.state.time === "1W"){
-        return <div className="customTooltip">{payload[0].payload.label} {payload[0].payload.date}</div>
+      if (this.state.time === "1D" || this.state.time === "1W") {
+        return (
+          <div className="customTooltip">
+            {payload[0].payload.label} {payload[0].payload.date}
+          </div>
+        );
       } else {
-        return <div className="customTooltip">{payload[0].payload.date}</div>
+        return <div className="customTooltip">{payload[0].payload.date}</div>;
       }
-    } 
+    }
   }
 
   render() {
-
-    let date = new Date;
+    let date = new Date();
     let year = date.getFullYear();
     let day = date.getDate();
-    let month = (date.getMonth() + 1);
+    let month = date.getMonth() + 1;
     let time = this.state.time;
     let data;
-    
-    if(time === "1D"){
-      data = this.state.oneDayData.priceData
-    } else if (time === "1W"){
-      data = this.state.fiveDayData.priceData
-    } else if (time === "5Y" ){
-      data = this.state.fiveYearData.priceData
-    } else if (time === "1Y"){
-      if (day < 10){
-        day = [0,day].join("")
+
+    if (time === "1D") {
+      data = this.state.oneDayData.priceData;
+    } else if (time === "1W") {
+      data = this.state.fiveDayData.priceData;
+    } else if (time === "5Y") {
+      data = this.state.fiveYearData.priceData;
+    } else if (time === "1Y") {
+      if (day < 10) {
+        day = [0, day].join("");
       }
-      if (month < 10){
-        month = [0,month].join("")
+      if (month < 10) {
+        month = [0, month].join("");
       }
       year = year - 1;
-      let yearDate = [year,month,day].join("-");
-      data = this.iterator(yearDate)
-    } else if (time === "3M"){
+      let yearDate = [year, month, day].join("-");
+      data = this.iterator(yearDate);
+    } else if (time === "3M") {
       month = month - 3;
-        if (day < 10){
-          day = [0,day].join("")
-        }
-        if (month < 0 ){
-          month = month + 12;
-          year = year - 1
-        } else if (month < 10 ){
-          month = [0, month].join("");
-        }
-        let threeMonth = [year,month,day].join("-");
-        data = this.iterator(threeMonth);
-    } else if (time === "1M"){
+      if (day < 10) {
+        day = [0, day].join("");
+      }
+      if (month < 0) {
+        month = month + 12;
+        year = year - 1;
+      } else if (month < 10) {
+        month = [0, month].join("");
+      }
+      let threeMonth = [year, month, day].join("-");
+      data = this.iterator(threeMonth);
+    } else if (time === "1M") {
       month = month - 1;
-        if (day < 10 ){
-          day = [0,day].join("");
-        }
-        if (month ===  0 ){
-          month = month + 12;
-          year = year - 1
-        } else if (month < 10){
-          month = [0, month].join("");
-        }
-        let oneMonth = [year,month,day].join("-");
-        data = this.iterator(oneMonth);
+      if (day < 10) {
+        day = [0, day].join("");
+      }
+      if (month === 0) {
+        month = month + 12;
+        year = year - 1;
+      } else if (month < 10) {
+        month = [0, month].join("");
+      }
+      let oneMonth = [year, month, day].join("-");
+      data = this.iterator(oneMonth);
     }
-    //red if stock ends lowers than it is 
+    //red if stock ends lowers than it is
     let color;
-    if (data !== undefined && data[0].open > data.slice(-1)[0].close){
+    if (data !== undefined && data[0].open > data.slice(-1)[0].close) {
       color = "#ff0000";
     } else {
       color = "#21ce99";
     }
-    
-    const stockChart = (
 
-      <LineChart width={600} height={300} data={data} onMouseMove={this.handleMove}
-          onMouseLeave={this.handleLeave}>
+    const stockChart = (
+      <LineChart
+        width={600}
+        height={300}
+        data={data}
+        onMouseMove={this.handleMove}
+        onMouseLeave={this.handleLeave}
+      >
         <Line
           type="linear"
           dataKey="close"
@@ -166,7 +221,7 @@ class ChartForm extends React.Component {
         />
         <XAxis dataKey="date" hide={true} allowDataOverflow={false} />
         <YAxis domain={["dataMin", "dataMax"]} hide={true} />
-        <Tooltip position={{y: 1}} content={this.customToolTip} />
+        <Tooltip position={{ y: 1 }} content={this.customToolTip} />
       </LineChart>
     );
 
@@ -238,43 +293,62 @@ class ChartForm extends React.Component {
           <button onClick={() => console.log(this.state)}>TEST2</button>
         </div>
 
-      <form action=""></form>
         <div className="transaction-container">
           <div className="transaction-header">
-            <button className="transaction-form">
+            <button className="transaction-form" onClick={this.buyForm}>
               BUY <span>{this.props.symbol}</span>
             </button>
-            <button className="transaction-form">
+            <button className="transaction-form" onClick={this.sellForm}>
               SELL <span>{this.props.symbol}</span>
             </button>
           </div>
 
-          <div className="transaction-shares-container">
-            <span>Shares</span>
-            <input type="text" className="transaction-input" placeholder="0"/>
-          </div>
+          <form className="transaction-formtype">
+            <div className="transaction-shares-container">
+              <span>Shares</span>
+              <input
+                type="text"
+                className="transaction-input"
+                placeholder="0"
+                onChange={this.update("shares")}
+                value={this.state.shares}
+                min="0"
+                step="1"
+                required
+              />
+            </div>
 
-          <div className="transaction-price">
-            <span>Market Price</span>
-            <span>{this.state.defaultPrice}</span>
-          </div>
+            <div className="transaction-price">
+              <span>Market Price</span>
+              <span>{this.state.defaultPrice}</span>
+            </div>
 
-          <div className="transaction-total">
-            <span>Estimated Cost</span>
-            <span>{this.state.shares * this.state.defaultPrice}</span>
-          </div>
-          
-          <div className="transaction-submit-container">
-            <button className="transaction-button" type="submit">Place Buy Order</button>
-          </div>
+            <div className="transaction-total">
+              <span>Estimated Cost</span>
+              <span>
+                {(this.state.shares * this.state.defaultPrice).toFixed(2)}
+              </span>
+            </div>
 
-          <div className="transaction-info">
-            ${this.state.buying_power}
-          </div>
-          
-          <div className="transaction-watchlist-button">
-            <input type="submit" value="Add to Watchlist"/>
-          </div>
+            <div className="transaction-submit-container">
+              <button
+                id="transaction-submit-button"
+                className="transaction-button"
+                type="submit"
+                onClick={this.handleTransaction}
+              >
+                Place Buy Order
+              </button>
+            </div>
+
+            <div id="transaction-info" className="transaction-info">
+              ${this.state.buying_power}
+            </div>
+
+            <div className="transaction-watchlist-button">
+              <input type="submit" value="Add to Watchlist" />
+            </div>
+          </form>
         </div>
       </div>
     );

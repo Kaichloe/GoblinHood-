@@ -6,6 +6,7 @@ const mstp = (state) => {
   return {
     balance: state.entities.users[state.session.id].buying_power,
     transactions: state.entities.transactions,
+    currentUser: state.entities.users[state.session.id]
   };
 };
 

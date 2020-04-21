@@ -1,7 +1,7 @@
 //for less than 1month
 export const fetchHistoricalPrices = (symbol, range) => {
   return $.ajax({
-    method: "get",
+    method: 'GET',
     url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${range}/?token=sk_182c581f47a940bdbdb2661ea5101724`
   });
 };
@@ -9,7 +9,7 @@ export const fetchHistoricalPrices = (symbol, range) => {
 // for greater than one month 
 export const fetchBigHistoricalPrices = (symbol, range) => {
   return $.ajax({
-    method: "get",
+    method: 'GET',
     url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${range}/?token=sk_182c581f47a940bdbdb2661ea5101724`,
   });
 };

@@ -1,14 +1,10 @@
-export const createTransaction = (transaction) => {
+export const createTransaction = transaction => {
+  console.log(transaction)
+  debugger
   return $.ajax({
     method: "POST",
-    url: "api/transactions",
-    data: { transaction },
-  });
-};
+    url: `api/transactions/`,
+    data: {transaction}
+  })
+}
 
-export const fetchTransactions = () => {
-  return $.ajax({
-    method: "GET",
-    url: "api/transactions",
-  });
-};

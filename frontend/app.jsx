@@ -6,19 +6,20 @@ import Homepage from './components/homepage';
 import { AuthRoute, ProtectedRoute } from './util/route_util';
 import ProfileContainer from './components/profile/profile_container';
 import StockShow from './components/company/stock_show';
+// import chart_container from './components/company/chart_container';
 
 const App = () => {
   return (
     <div>
-        <Switch>
-          <Route exact path="/" component={Homepage} />
-          <AuthRoute exact path="/login" component={LoginFormContainer}/>
-          <AuthRoute exact path="/signup" component={SignUpFormContainer}/> 
-          <ProtectedRoute exact path="/profile" component={ProfileContainer}/>
-          <ProtectedRoute path="/profile/stocks/:symbol" component={StockShow} />
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={Homepage} />
+        <AuthRoute exact path="/login" component={LoginFormContainer} />
+        <AuthRoute exact path="/signup" component={SignUpFormContainer} />
+        <ProtectedRoute exact path="/profile" component={ProfileContainer} />
+        <ProtectedRoute path="/profile/stocks/:symbol" component={StockShow} />
+      </Switch>
     </div>
-  )
+  );
 };
 
 export default App;

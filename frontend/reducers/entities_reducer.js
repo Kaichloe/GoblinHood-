@@ -8,10 +8,10 @@ import transactionReducer from './transaction_reducer';
 
 const EntitiesReducer = combineReducers({
   users:UsersReducer,
+  // transactions: transactionReducer,
   news:NewsReducer,
   company: companiesReducer,
   stats: companyStatReducer,
-  transactions: transactionReducer
 })
 
 export default EntitiesReducer; 

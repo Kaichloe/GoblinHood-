@@ -1,14 +1,15 @@
-import { RECEIVE_TRANSACTION, FETCH_ALL_TRANSACTIONS } from '../actions/transaction_actions';
+import { RECEIVE_CURRENT_USER } from '../actions/session_actions';
+import { merge } from 'lodash';
 
-const transactionReducer = (oldState = [] , action) =>{
-  Object.freeze(oldState);
+const _nullState = {}
+
+const transactionReducer = (state = _nullState, action) => {
+  Object.freeze(state);
   switch (action.type) {
-    case RECEIVE_TRANSACTION:
-      return Object.assign({}, oldState, {[action.transaction.id]: action.transaction});
-    case FETCH_ALL_TRANSACTIONS:
-      return Object.assign({}, oldState, action.allTransaction)
+    case RECEIVE_CURRENT_USER:
+      return merge({}, state, action.transactions)
     default:
-      return oldState;
+      return _nullState;
   }
 }
 

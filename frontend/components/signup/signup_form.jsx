@@ -8,7 +8,8 @@ class SignupForm extends React.Component{
       last_name: "",
       email: "",
       password: "",
-      buying_power: ""
+      buying_power: "",
+      portfolio_value: 0
     };
     this.handleSubmit = this.handleSubmit.bind(this)
   }

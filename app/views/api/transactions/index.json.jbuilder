@@ -1,1 +1,1 @@
-json.extract! :transaction, :user_id, :ticker, :purchase_price, :quantity, :transaction_type, :created_at 
+json.extract! transaction, :user_id, :ticker_symbol, :transaction_amount, :created_at, :transaction_type
