@@ -1,6 +1,7 @@
 .profile-container{
   display: flex;
   flex-direction: column;
+  background-color: #1b1b1b;
 }
 
 .profile-nav-container{
@@ -10,6 +11,7 @@
   justify-content: space-evenly;
   width: 100%;
   padding-top: 25px;
+  color: whitesmoke;
 }
 
 .nav-buttons{
@@ -21,7 +23,7 @@
 .home-button{
   margin-right: 20px;
   text-decoration: none;
-  color: black;
+  color: whitesmoke;
   font-weight: bold;
 }
 

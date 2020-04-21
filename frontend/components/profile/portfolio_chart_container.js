@@ -5,6 +5,7 @@ import PortfolioChart from "./portfolio_chart"
 const mstp = (state) => {
   return {
     balance: state.entities.users[state.session.id].buying_power,
+    transactions: state.entities.transactions,
   };
 };
 

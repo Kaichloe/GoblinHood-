@@ -4,7 +4,7 @@ import Profile from './profile'
 
 const mstp = (state) => {
   return{
-    currentUser: state.entities.users[0]
+    currentUser: state.entities.users[state.session.id]
   }
 }
 

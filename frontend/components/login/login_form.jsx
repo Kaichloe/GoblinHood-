@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
   demoLogin() {
     const email = this.demoEmail;
     const password = this.demoPassword;
-    const Speed = 35; 
+    const Speed = 30; 
     document.getElementById("demo-button").disabled = true;
     for (let i = 0; i < email.length; i++) {
       setTimeout(() => {

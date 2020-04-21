@@ -9,24 +9,9 @@ class StockShow extends React.Component {
     super(props)
   }
 
-  // currentPrice(){
-  //   let data = this.props;
-  //   for (let i = data.length-1; i > 0; i--){
-  //     if (data[i].close !== null){
-  //       return data[i].close
-  //     }
-  //   }
-  // }
-
-  // openPrice(){
-  //   console.log(this.props)
-  //   return this.props
-  // }
-
   render() {
 
-    // const defaultPrice = this.currentPrice();
-    // const openPrice = this.openPrice();
+ 
 
     return (
       <div className="profile-container">
@@ -39,7 +24,6 @@ class StockShow extends React.Component {
           <div className="nav-buttons">
             <Link className="home-button" to="/profile">Home</Link>
             <Link className="logout-button" to="/" onClick={this.props.logout}>Logout</Link>
-            <button onClick={() => console.log(this.props)}>tester</button>
           </div>
         </div>
         <div className="profile">

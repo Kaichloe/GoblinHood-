@@ -12,7 +12,7 @@ const mstp = (state, ownProps) => {
     companyName: state.entities.stats.companyName,
     symbol: ownProps.match.params.symbol,
     balance: state.entities.users[state.session.id].buying_power,
-    currentUser: state.entities.users[0]
+    currentUser: state.entities.users[state.session.id],
   };
 }
 

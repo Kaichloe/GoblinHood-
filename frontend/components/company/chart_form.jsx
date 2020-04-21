@@ -1,8 +1,7 @@
 import React from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { withRouter } from 'react-router-dom';
-import Odometer from 'react-odometerjs';
-import moment, { monthsShort } from 'moment';
+
 
 class ChartForm extends React.Component {
   constructor(props) {
@@ -13,6 +12,7 @@ class ChartForm extends React.Component {
       oneDayData: {},
       fiveDayData: {},
       shares: 0,
+      form: "BUY",
       price: 0,
       defaultPrice: 0,
       openPrice: 0,
@@ -23,9 +23,9 @@ class ChartForm extends React.Component {
   }
 
   componentDidMount() {
-    this.props
-      .fetchPriceData(this.props.symbol, "5y")
-      .then((data) => this.setState({ fiveYearData: data }));
+    // this.props
+    //   .fetchPriceData(this.props.symbol, "5y")
+    //   .then((data) => this.setState({ fiveYearData: data }));
     // this.props
     //   .fetchPriceData(this.props.symbol, "5dm")
     //   .then((data) => this.setState({ fiveDayData: data }));
@@ -33,10 +33,9 @@ class ChartForm extends React.Component {
       .then((data) => this.setState({ oneDayData: data }))
       .then((data) => this.setState({price: this.props.defaultPrice.close.toFixed(2)}))
       .then((data) => this.setState({defaultPrice: this.props.defaultPrice.close.toFixed(2)}))
-      .then(((data)=> this.setState({openPrice: this.props.openPrice.open.toFixed(2)})))
+      .then((data)=> this.setState({openPrice: this.props.openPrice.open.toFixed(2)}))
+      .then((data)=> this.setState({buying_power: this.props.balance}))
 
-      // this.setState({price: this.props.defaultPrice.close})
-    // this.setState({openingPrice: this.props.openingPrice.open})
   }
 
   iterator(inputDate){
@@ -77,7 +76,9 @@ class ChartForm extends React.Component {
 
   handleMove(e) {  
     // console.log(e.activePayload[0].payload.close)
-    this.setState({price: e.activePayload[0].payload.close.toFixed(2)})
+    if (e.activePayload !== undefined && e.activePayload[0].payload.close !== null) {
+      this.setState({ price: e.activePayload[0].payload.close.toFixed(2) });
+    }
   } 
 
 
@@ -143,13 +144,13 @@ class ChartForm extends React.Component {
         let oneMonth = [year,month,day].join("-");
         data = this.iterator(oneMonth);
     }
-    
-    let color = "#21ce99";
-    // if (data[0].open > data.slice(-1)[0].close){
-    //   color = "#ff0000";
-    // } else {
-    //   color = "#21ce99";
-    // }
+    //red if stock ends lowers than it is 
+    let color;
+    if (data !== undefined && data[0].open > data.slice(-1)[0].close){
+      color = "#ff0000";
+    } else {
+      color = "#21ce99";
+    }
     
     const stockChart = (
 
@@ -180,7 +181,12 @@ class ChartForm extends React.Component {
           ${(this.state.price - this.state.openPrice).toFixed(2)}
         </div>
         <div className="stock-change-percent">
-          [{(((this.state.price - this.state.openPrice)/ this.state.openPrice) * 100).toFixed(2)}%]
+          [
+          {(
+            ((this.state.price - this.state.openPrice) / this.state.openPrice) *
+            100
+          ).toFixed(2)}
+          %]
         </div>
 
         <div className="StockChart">{stockChart}</div>
@@ -230,6 +236,45 @@ class ChartForm extends React.Component {
           </button>
           <button onClick={() => this.handleHover(e)}>TEST</button>
           <button onClick={() => console.log(this.state)}>TEST2</button>
+        </div>
+
+      <form action=""></form>
+        <div className="transaction-container">
+          <div className="transaction-header">
+            <button className="transaction-form">
+              BUY <span>{this.props.symbol}</span>
+            </button>
+            <button className="transaction-form">
+              SELL <span>{this.props.symbol}</span>
+            </button>
+          </div>
+
+          <div className="transaction-shares-container">
+            <span>Shares</span>
+            <input type="text" className="transaction-input" placeholder="0"/>
+          </div>
+
+          <div className="transaction-price">
+            <span>Market Price</span>
+            <span>{this.state.defaultPrice}</span>
+          </div>
+
+          <div className="transaction-total">
+            <span>Estimated Cost</span>
+            <span>{this.state.shares * this.state.defaultPrice}</span>
+          </div>
+          
+          <div className="transaction-submit-container">
+            <button className="transaction-button" type="submit">Place Buy Order</button>
+          </div>
+
+          <div className="transaction-info">
+            ${this.state.buying_power}
+          </div>
+          
+          <div className="transaction-watchlist-button">
+            <input type="submit" value="Add to Watchlist"/>
+          </div>
         </div>
       </div>
     );

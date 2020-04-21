@@ -11,7 +11,7 @@
 #  buying_power    :float            not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  portfolio_value :float
+#  portfolio_value :float            default(0.0), not null
 #
 
 class User < ApplicationRecord
