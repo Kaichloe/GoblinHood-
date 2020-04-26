@@ -1,6 +1,6 @@
 export const createTransaction = transaction => {
   console.log(transaction)
-  debugger
+  // debugger
   return $.ajax({
     method: "POST",
     url: `api/transactions/`,

@@ -10,5 +10,6 @@
 #
 
 class Watchlist < ApplicationRecord
+  validates :ticker, presence: true
   belongs_to :user
 end

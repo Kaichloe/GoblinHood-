@@ -1,6 +1,6 @@
 import * as APIUtil from '../util/session_api_util';
 import * as TransactionAPIUtil from "../util/transaction_api_util";
-
+import * as WatchlistAPIUtil from "../util/watchlist_api_util";
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 export const RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
@@ -49,5 +49,13 @@ export const logout = () => dispatch => (
 
 export const createTransaction = (transaction) => (dispatch) =>
   TransactionAPIUtil.createTransaction(transaction).then(
-    (res) => dispatch(receiveCurrentUser(res)),
+    (res) => dispatch(receiveCurrentUser(res))
   );
+
+export const createWatchStock = (stock) => (dispatch) => {
+  return WatchlistAPIUtil.watchStock(stock).then((res) => dispatch(receiveCurrentUser(res)))
+};
+
+export const destroyWatchStock = (stock) => (dispatch) => {
+  return WatchlistAPIUtil.unWatchStock(stock).then((res) => dispatch(receiveCurrentUser(res)))
+};

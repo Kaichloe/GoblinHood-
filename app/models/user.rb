@@ -23,7 +23,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 10 }, allow_nil: true
 
   has_many :transactions
-  has_many :watchlist
+  has_many :watchlists
 
   has_many :companies,
     through: :transactions,
@@ -51,7 +51,19 @@ class User < ApplicationRecord
     save!
     self.session_token
   end
-
+  
+  def owned_stocks
+    owned_stocks = Hash.new(0)
+    self.transactions.each do |transaction|
+      if transaction.transaction_type == "BUY"
+        owned_stocks[transaction.ticker] += transaction.quantity
+      elsif transaction.transaction_type == "SELL"
+        owned_stocks[transaction.ticker] -= transaction.quantity
+      end
+    end
+    return owned_stocks
+  end
+  
   private
 
   def ensure_session_token
@@ -69,5 +81,6 @@ class User < ApplicationRecord
     end
     self.session_token
   end
+
 
 end

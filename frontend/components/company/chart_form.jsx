@@ -1,6 +1,7 @@
 import React from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { withRouter } from 'react-router-dom';
+import Odometer from 'react-odometerjs';
 
 
 class ChartForm extends React.Component {
@@ -8,6 +9,9 @@ class ChartForm extends React.Component {
     super(props);
     this.state = {
       time: "1D",
+      oneYearData: {},
+      oneMonthData: {},
+      threeMonthData: {},
       fiveYearData: {},
       oneDayData: {},
       fiveDayData: {},
@@ -16,14 +20,14 @@ class ChartForm extends React.Component {
       price: 0,
       defaultPrice: 0,
       openPrice: 0,
-      ownShares: "",
+      sharesOwned: '',
     };
     this.handleMove = this.handleMove.bind(this);
     this.handleLeave = this.handleLeave.bind(this);
-    this.customToolTip = this.customToolTip.bind(this);
     this.buyForm = this.buyForm.bind(this);
     this.sellForm = this.sellForm.bind(this);
     this.handleTransaction = this.handleTransaction.bind(this);
+    this.renderStockOrFunds = this.renderStockOrFunds.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +38,7 @@ class ChartForm extends React.Component {
     //   .fetchPriceData(this.props.symbol, "5dm")
     //   .then((data) => this.setState({ fiveDayData: data }));
     this.props
-      .fetchPriceData(this.props.symbol, "1d")
+      .fetchPriceData(this.props.symbol, "5d")
       .then((data) => this.setState({ oneDayData: data }))
       .then((data) =>
         this.setState({
@@ -57,7 +61,7 @@ class ChartForm extends React.Component {
     // .then(() => this.setState({ownShares: this.props.transactions}))
   }
 
-  iterator(inputDate) {
+  iterator(inputDate, number) {
     let data = this.state.fiveYearData.priceData;
     let newData;
     for (let i = data.length - 1; i > 0; i--) {
@@ -66,7 +70,16 @@ class ChartForm extends React.Component {
         break;
       }
     }
-    return newData;
+    switch (number) {
+      case 1:
+        this.setState({ oneMonthData: newData });
+      case 2:
+        this.setState({ threeMonthData: newData });
+      case 3:
+        this.setState({ oneYearData: newData });
+      default:
+        break;
+    }
   }
 
   update(field) {
@@ -76,41 +89,59 @@ class ChartForm extends React.Component {
       });
   }
 
-  changeDate(input) {
-    this.setState({ time: input });
-  }
-
   buyForm() {
-    const submitButton = document.getElementById("transaction-submit-button");
-    const buyPower = document.getElementById("transaction-info");
+    const submitButton = document.getElementById("transaction-submit-button")
     submitButton.innerHTML = "Place Buy Order";
-    buyPower.innerHTML = `$${this.state.buying_power}`;
     this.setState({ shares: 0, form: "BUY" });
   }
 
   sellForm() {
     const submitButton = document.getElementById("transaction-submit-button");
-    // const buyPower = document.getElementById("transaction-info")
-    // buyPower.innerHTML = `${this.state.ownShares}`
     submitButton.innerHTML = "Place Sell Order";
     this.setState({ shares: 0, form: "SELL" });
   }
 
   handleTransaction(e) {
-  
-      e.preventDefault();
-    debugger
+    e.preventDefault();
+    // debugger
     const transactionParams = {
-        user_id: this.props.currentUserId,
-        ticker: this.props.symbol,
-        purchase_price: this.state.defaultPrice,
-        quantity: parseInt(this.state.shares),
-        transaction_type: this.state.form,
-      };
-      console.log(transactionParams);
-      this.props.createTransaction(transactionParams);
-      // .then(() => this.setState({ shares: 0 }));
-  
+      user_id: this.props.currentUserId,
+      ticker: this.props.symbol,
+      purchase_price: this.state.defaultPrice,
+      quantity: parseInt(this.state.shares),
+      transaction_type: this.state.form,
+    };
+    // console.log(transactionParams);
+    this.props.createTransaction(transactionParams)
+    .then(() => this.setState({ shares: 0 }))
+    
+    
+  }
+
+  renderStockOrFunds(){
+    let allStocks = this.props.currentUser.owned_stocks;
+    let ticker = this.props.symbol;
+    let stockTickerCount = allStocks[ticker];
+    if (stockTickerCount === undefined){
+      stockTickerCount = 0
+    }
+    if (this.state.form === "BUY"){
+      return(
+      <div className="buying-power">
+        ${Number(this.props.balance).toLocaleString()}
+        <br/>
+        <p>Buying Power Available</p>
+      </div>
+      )
+    } else {
+      return (
+      <div>
+        {stockTickerCount}
+        <br/>
+        <p>Shares Owned</p>
+      </div>
+      )
+    }
   }
 
   handleLeave() {
@@ -121,79 +152,81 @@ class ChartForm extends React.Component {
   }
 
   handleMove(e) {
-    // console.log(e.activePayload[0].payload.close)
-    if (
-      e.activePayload !== undefined &&
-      e.activePayload[0].payload.close !== null
-    ) {
+    if (e.isTooltipActive !== false && e.activePayload[0].payload.close !== null ) {
       this.setState({ price: e.activePayload[0].payload.close.toFixed(2) });
     }
   }
 
-  customToolTip({payload}) {
-    if (Object.values(payload).length > 0 ) {
-      if (this.state.time === "1D" || this.state.time === "1W") {
-        return (
-          <div className="customTooltip">
-            {payload[0].payload.label} {payload[0].payload.date}
-          </div>
-        );
-      } else {
-        return <div className="customTooltip">{payload[0].payload.date}</div>;
-      }
+
+  changeDate(input) {
+  let date = new Date();
+  let year = date.getFullYear();
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let data;
+  this.setState({ time: input });
+
+  if (input === "1D") {
+    data = this.state.oneDayData.priceData;
+  } else if (input === "1W") {
+    data = this.state.fiveDayData.priceData;
+  } else if (input === "5Y") {
+    data = this.state.fiveYearData.priceData;
+  } else if (input === "1Y") {
+    if (day < 10) {
+      day = [0, day].join("");
     }
-  }
-
-  render() {
-    let date = new Date();
-    let year = date.getFullYear();
-    let day = date.getDate();
-    let month = date.getMonth() + 1;
-    let time = this.state.time;
-    let data;
-
-    if (time === "1D") {
-      data = this.state.oneDayData.priceData;
-    } else if (time === "1W") {
-      data = this.state.fiveDayData.priceData;
-    } else if (time === "5Y") {
-      data = this.state.fiveYearData.priceData;
-    } else if (time === "1Y") {
-      if (day < 10) {
-        day = [0, day].join("");
-      }
-      if (month < 10) {
-        month = [0, month].join("");
-      }
+    if (month < 10) {
+      month = [0, month].join("");
+    }
+    year = year - 1;
+    let yearDate = [year, month, day].join("-");
+    data = this.iterator(yearDate, 3);
+  } else if (input === "3M") {
+    month = month - 3;
+    if (day < 10) {
+      day = [0, day].join("");
+    }
+    if (month < 0) {
+      month = month + 12;
       year = year - 1;
-      let yearDate = [year, month, day].join("-");
-      data = this.iterator(yearDate);
-    } else if (time === "3M") {
-      month = month - 3;
-      if (day < 10) {
-        day = [0, day].join("");
-      }
-      if (month < 0) {
-        month = month + 12;
-        year = year - 1;
-      } else if (month < 10) {
-        month = [0, month].join("");
-      }
-      let threeMonth = [year, month, day].join("-");
-      data = this.iterator(threeMonth);
-    } else if (time === "1M") {
-      month = month - 1;
-      if (day < 10) {
-        day = [0, day].join("");
-      }
-      if (month === 0) {
-        month = month + 12;
-        year = year - 1;
-      } else if (month < 10) {
-        month = [0, month].join("");
-      }
-      let oneMonth = [year, month, day].join("-");
-      data = this.iterator(oneMonth);
+    } else if (month < 10) {
+      month = [0, month].join("");
+    }
+    let threeMonth = [year, month, day].join("-");
+    data = this.iterator(threeMonth, 2);
+  } else if (input === "1M") {
+    month = month - 1;
+    if (day < 10) {
+      day = [0, day].join("");
+    }
+    if (month === 0) {
+      month = month + 12;
+      year = year - 1;
+    } else if (month < 10) {
+      month = [0, month].join("");
+    }
+    let oneMonth = [year, month, day].join("-");
+    data = this.iterator(oneMonth, 1);
+  }
+  
+}
+  render() {
+    let data; 
+    let time = this.state.time;
+
+    if (time === "1Y"){
+      data = this.state.oneYearData;
+    } else if (time === "1D"){
+      data = this.state.oneDayData.priceData;
+    } else if (time === "1M"){
+      data = this.state.oneMonthData;
+    } else if (time === "3M"){
+      data = this.state.threeMonthData;
+    } else if (time === "5Y"){
+      data = this.state.fiveYearData.priceData;
+    } else if (time === "1W"){
+      data = this.state.fiveDayData.priceData;
     }
     //red if stock ends lowers than it is
     let color;
@@ -205,6 +238,7 @@ class ChartForm extends React.Component {
 
     const stockChart = (
       <LineChart
+        margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
         width={600}
         height={300}
         data={data}
@@ -219,9 +253,16 @@ class ChartForm extends React.Component {
           strokeWidth={2}
           dot={false}
         />
-        <XAxis dataKey="date" hide={true} allowDataOverflow={false} />
+        <XAxis dataKey="customDate" hide={true} allowDataOverflow={false} />
         <YAxis domain={["dataMin", "dataMax"]} hide={true} />
-        <Tooltip position={{ y: 1 }} content={this.customToolTip} />
+        <Tooltip
+          position={{ y: 0 }}
+          formatter={(value, name, props) => {
+            return [""];
+          }}
+          isAnimationActive={false}
+          cursor={{ stroke: "Gainsboro", strokeWidth: 2 }}
+        />
       </LineChart>
     );
 
@@ -289,7 +330,6 @@ class ChartForm extends React.Component {
           >
             5Y
           </button>
-          <button onClick={() => this.handleHover(e)}>TEST</button>
           <button onClick={() => console.log(this.state)}>TEST2</button>
         </div>
 
@@ -342,9 +382,9 @@ class ChartForm extends React.Component {
             </div>
 
             <div id="transaction-info" className="transaction-info">
-              ${this.state.buying_power}
+              {this.renderStockOrFunds()}
             </div>
-
+          
             <div className="transaction-watchlist-button">
               <input type="submit" value="Add to Watchlist" />
             </div>

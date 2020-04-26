@@ -11,10 +11,12 @@ const mstp = (state, ownProps) => {
     openPrice: Object.values(state.entities.company).slice(0, 1)[0],
     companyName: state.entities.stats.companyName,
     symbol: ownProps.match.params.symbol,
-    balance: state.entities.users[state.session.id].buying_power,
+    balance: state.entities.users[state.session.id].buying_power.toFixed(2),
     user_port_val: state.entities.users[state.session.id].portfolio_value,
+    currentUser: state.entities.users[state.session.id], 
     currentUserId: state.session.id,
-    transactions: state.entities.users[state.session.id].transactions[0],
+    transactions: state.entities.users[state.session.id].transactions,
+    error: state.errors.session,
   };
 }
 

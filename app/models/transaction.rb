@@ -17,21 +17,34 @@ class Transaction < ApplicationRecord
   presence: true
   validates :purchase_price, :quantity, numericality: {greater_than: 0}
   validates :transaction_type, inclusion: { in: ["BUY", "SELL"]}
-  
+  validate :valid_transaction
   belongs_to :user
-  after_save :portfolio_actions
+  after_save :portfolio_change
 
-  def portfolio_actions
+  def portfolio_change
     user = self.user
     total_portfolio_value = user.portfolio_value
-    total_funds = user.buying_power
+    total_buying_power = user.buying_power
     if self.transaction_type == "BUY"
       total_portfolio_value += (self.purchase_price * self.quantity)
-      total_funds -= (self.purchase_price * self.quantity)
+      total_buying_power -= (self.purchase_price * self.quantity)
     else
-      total_portfolio_value -= (self.purchase_price * self.uantity)
-      total_funds += (self.purchase_price * quantity)
+      total_portfolio_value -= (self.purchase_price * self.quantity)
+      total_buying_power += (self.purchase_price * self.quantity)
     end
-    user.update(portfolio_value: total_portfolio_value, buying_power: total_funds)
+    user.update(portfolio_value: total_portfolio_value, buying_power: total_buying_power)
   end
+
+  def valid_transaction
+    stock_shares = self.user.owned_stocks[self.ticker]
+    buying_power = self.user.buying_power
+    transaction_total = self.purchase_price * self.quantity
+
+    if self.transaction_type == "SELL" && (stock_shares - self.quantity < 0)
+      errors[:quantity] << "You do not own enough shares to sell"
+    elsif self.transaction_type == "BUY" && buying_power - transaction_total < 0
+      errors[:purchase_price] << "You do not have enough funds"
+    end
+  end
+
 end
