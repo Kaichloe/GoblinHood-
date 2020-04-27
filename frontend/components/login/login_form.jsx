@@ -18,7 +18,10 @@ class LoginForm extends React.Component {
     const email = this.demoEmail;
     const password = this.demoPassword;
     const Speed = 30; 
+
     document.getElementById("demo-button").disabled = true;
+    this.setState({email: "", password: ""});
+    
     for (let i = 0; i < email.length; i++) {
       setTimeout(() => {
         this.setState({ email: this.state.email + email[i] });
@@ -61,57 +64,66 @@ class LoginForm extends React.Component {
     return (
       <div className="login-container">
         <div className="img-container">
-          <img className="login-img" src='https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png'/>
+          <img
+            className="login-img"
+            src="https://cdn.robinhood.com/assets/generated_assets/94977d34f99015525dcd0fc9987fcbe6.png"
+          />
         </div>
         <div className="big-box">
           <div className="first-box"></div>
           <div className="second-box">
+            <div className="input-container">
+              <h1 className="login-title">Welcome to Goblinhood</h1>
 
-          <div className="input-container">
-          <h1 className="login-title">Welcome to Goblinhood</h1>
-
-          <form onSubmit={this.handleSubmit}>
-              <label className="label">Email Address</label>
+              <form onSubmit={this.handleSubmit}>
+                <label className="label">Email Address</label>
                 <input
-                  required 
+                  required
                   type="email"
                   value={this.state.email}
                   onChange={this.update("email")}
                   className="login-input"
+                  id="login-input"
                 />
 
-            <br/>
-              <label className="label">Password</label>
+                <br />
+                <label className="label">Password</label>
                 <input
                   required
                   type="password"
                   value={this.state.password}
                   onChange={this.update("password")}
                   className="login-input"
+                  id="login-input"
                 />
                 <ul className="login-errors">
                   {this.props.errors.map((error, i) => (
                     <div>
-                      <li key={`error+${i}`}>
-                        {error}
-                      </li>
+                      <li key={`error+${i}`}>{error}</li>
                     </div>
                   ))}
                 </ul>
 
-            <br/>
-              <button className="login-button" type="submit">{this.props.formType}</button>
-            <br/>
+                <br />
+                <button className="login-button" type="submit">
+                  {this.props.formType}
+                </button>
+                <br />
               </form>
-              <button id="demo-button" className="demo-login" onClick={this.demoLogin}>Demo Login
-          </button>
+              <button
+                id="demo-button"
+                className="demo-login"
+                onClick={this.demoLogin}
+              >
+                Demo Login
+              </button>
             </div>
             <div className="half-box"></div>
-        </div>
-        <div className="third-box"></div>
+          </div>
+          <div className="third-box"></div>
         </div>
       </div>
-    )
+    );
   }
 }
 

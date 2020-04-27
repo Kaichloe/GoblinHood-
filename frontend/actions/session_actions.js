@@ -49,13 +49,18 @@ export const logout = () => dispatch => (
 
 export const createTransaction = (transaction) => (dispatch) =>
   TransactionAPIUtil.createTransaction(transaction).then(
-    (res) => dispatch(receiveCurrentUser(res))
+    (res) => dispatch(receiveCurrentUser(res)), err=> (
+      dispatch(receiveErrors(err.responseJSON))
+    )
   );
 
 export const createWatchStock = (stock) => (dispatch) => {
-  return WatchlistAPIUtil.watchStock(stock).then((res) => dispatch(receiveCurrentUser(res)))
+  return WatchlistAPIUtil.watchStock(stock).then((res) => dispatch(receiveCurrentUser(res))), err => (
+    dispatch(receiveErrors(err.responseJSON))
+  )
 };
 
 export const destroyWatchStock = (stock) => (dispatch) => {
-  return WatchlistAPIUtil.unWatchStock(stock).then((res) => dispatch(receiveCurrentUser(res)))
+  return WatchlistAPIUtil.unWatchStock(stock).then((res) => dispatch(receiveCurrentUser(res))), err=> 
+      dispatch(receiveErrors(err.responseJSON))
 };

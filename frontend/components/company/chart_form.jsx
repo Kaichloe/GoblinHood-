@@ -196,7 +196,7 @@ class ChartForm extends React.Component {
     };
     // console.log(transactionParams);
     this.props.createTransaction(transactionParams)
-    .then(()=> this.setState({transactionErrors :this.renderErrors()}))
+    .then(()=> this.setState({transactionErrors : this.renderErrors()}))
     .then(()=> this.setWatching())
     
   }
@@ -452,6 +452,7 @@ class ChartForm extends React.Component {
           >
             5Y
           </button>
+          <button onClick={() => console.log(this.props.error)}>TEST</button>
           <button onClick={() => console.log(this.state)}>TEST2</button>
         </div>
 
