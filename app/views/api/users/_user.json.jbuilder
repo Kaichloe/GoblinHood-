@@ -7,5 +7,6 @@ end
 
 json.watchlist user.watchlists do |watchlist|
     json.id watchlist.id 
+    json.user_id watchlist.user_id
     json.ticker watchlist.ticker
 end

@@ -1,7 +1,7 @@
 import React from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { withRouter } from 'react-router-dom';
-// import Odometer from 'react-odometerjs';
+
 
 
 class ChartForm extends React.Component {
@@ -70,11 +70,12 @@ class ChartForm extends React.Component {
   checkWatched(){
     let watchlist = this.props.currentUser.watchlist;
     let ticker = this.props.symbol
-    if (watchlist.includes(ticker)){
-      this.setState({ watched: true})
-    } else {
-      this.setState({watched: false})
+    for (let i = 0; i < watchlist.length; i++) {
+      if (watchlist[i].ticker === ticker){
+        return this.setState({watched: true})
+      }
     }
+    this.setState({watched: false })
   }
 
   setWatching(){
@@ -359,7 +360,7 @@ class ChartForm extends React.Component {
 
     const stockChart = (
       <LineChart
-        margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+        margin={{ top: 20, right: 30, left: 0, bottom: 30 }}
         width={600}
         height={300}
         data={data}
