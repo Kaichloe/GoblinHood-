@@ -1,7 +1,7 @@
 import React from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { withRouter } from 'react-router-dom';
-import Odometer from 'react-odometerjs';
+// import Odometer from 'react-odometerjs';
 
 
 class ChartForm extends React.Component {
@@ -21,13 +21,19 @@ class ChartForm extends React.Component {
       defaultPrice: 0,
       openPrice: 0,
       sharesOwned: '',
+      watched: null,
+      transactionErrors: null
     };
+    this.handleWatchlistButton = this.handleWatchlistButton.bind(this);
+    this.watchlistButton= this.watchlistButton.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.handleLeave = this.handleLeave.bind(this);
     this.buyForm = this.buyForm.bind(this);
     this.sellForm = this.sellForm.bind(this);
     this.handleTransaction = this.handleTransaction.bind(this);
     this.renderStockOrFunds = this.renderStockOrFunds.bind(this);
+    this.setWatching = this.setWatching.bind(this);
+    this.removeWatching = this.removeWatching.bind(this);
   }
 
   componentDidMount() {
@@ -58,7 +64,83 @@ class ChartForm extends React.Component {
       .then((data) =>
         this.setState({ buying_power: parseFloat(this.props.balance) })
       );
-    // .then(() => this.setState({ownShares: this.props.transactions}))
+      this.checkWatched();
+  }
+
+  checkWatched(){
+    let watchlist = this.props.currentUser.watchlist;
+    let ticker = this.props.symbol
+    if (watchlist.includes(ticker)){
+      this.setState({ watched: true})
+    } else {
+      this.setState({watched: false})
+    }
+  }
+
+  setWatching(){
+    debugger
+    if (this.state.form = "BUY" && this.state.watched === false ){
+      let watchlist_params = {
+        user_id: this.props.currentUserId,
+        ticker: this.props.symbol
+      }
+      console.log(watchlist_params)
+      this.props.createWatchStock(watchlist_params).then(()=> this.setState({watched: true}))
+    }
+  }
+
+  removeWatching(){
+    let allStocks = this.props.currentUser.owned_stocks;
+    let ticker = this.props.symbol;
+    let stockTickerCount = allStocks[ticker];
+    
+    if (stockTickerCount === undefined){
+      stockTickerCount = 0 
+    }
+
+    if (this.state.watched === true && stockTickerCount > 0 ){
+      let watchlist_params = {
+        user_id: this.props.currentUserId,
+        ticker: this.props.symbol
+      };
+      this.props.destroyWatchStock(watchlist_params).then(() =>
+      this.setState({watched: false}))
+    }
+  }
+
+  handleWatchlistButton(input){
+    return (e) =>{
+      e.stopPropagation();
+      let watchlist_params = {
+        user_id: this.props.currentUserId,
+        ticker: this.props.symbol
+      };
+
+      if (input === "watch"){
+        this.props.createWatchStock(watchlist_params).then(() => this.setState({watched : true}))
+      } else if (input === "unwatch") {
+        this.props.destroyWatchStock(watchlist_params).then(() => this.setState({watched : false}))
+      }
+    }
+  }
+
+  watchlistButton(){
+    if (this.state.watched === true){
+      return(
+        <input type="submit" className="watchlist-button" value="Remove From Watchlist"
+          onClick={this.handleWatchlistButton("unwatch")}  
+        />
+      )
+    } else {
+      return (
+        <input
+          type="submit"
+          className="watchlist-button"
+          value="Add to Watchlist"
+          onClick={this.handleWatchlistButton("watch")}
+        />
+      );
+    }
   }
 
   iterator(inputDate, number) {
@@ -113,8 +195,8 @@ class ChartForm extends React.Component {
     };
     // console.log(transactionParams);
     this.props.createTransaction(transactionParams)
-    .then(() => this.setState({ shares: 0 }))
-    
+    .then(()=> this.setState({transactionErrors :this.renderErrors()}))
+    .then(()=> this.setWatching())
     
   }
 
@@ -122,9 +204,11 @@ class ChartForm extends React.Component {
     let allStocks = this.props.currentUser.owned_stocks;
     let ticker = this.props.symbol;
     let stockTickerCount = allStocks[ticker];
+
     if (stockTickerCount === undefined){
       stockTickerCount = 0
     }
+
     if (this.state.form === "BUY"){
       return(
       <div className="buying-power">
@@ -144,6 +228,43 @@ class ChartForm extends React.Component {
     }
   }
 
+  renderErrors(){
+    if (this.props.error.length > 0){
+      if (this.state.shares < 0){
+        return(
+          <div className="invalid-shares">
+            Please enter a valid number of shares
+          </div>
+        )
+      }
+
+      if (this.state.form === "BUY"){
+        let totalStockCost = this.state.defaultPrice * this.state.shares;
+        let buying_power = this.props.balance;
+        if( totalStockCost > buying_power){
+          return ( <div className="not-enough-funds">
+            You do not have enough fund for this transaction
+          </div>) 
+        }
+      }
+
+      if (this.state.form === "SELL"){
+        let allStocks = this.props.currentUser.owned_stocks;
+        let ticker = this.props.symbol;
+        let stockTickerCount = allStocks[ticker];
+
+        if(this.state.shares > stockTickerCount){
+          return (
+            <div className="not_enough-shares">
+              You do not own enough shares for this transaction
+            </div>
+          )
+        }
+      }
+    }
+  }
+
+
   handleLeave() {
     let defaultPrice = this.state.defaultPrice;
     // console.log(defaultPrice)
@@ -152,7 +273,7 @@ class ChartForm extends React.Component {
   }
 
   handleMove(e) {
-    if (e.isTooltipActive !== false && e.activePayload[0].payload.close !== null ) {
+    if (e.activePayload !== undefined ) {
       this.setState({ price: e.activePayload[0].payload.close.toFixed(2) });
     }
   }
@@ -381,12 +502,16 @@ class ChartForm extends React.Component {
               </button>
             </div>
 
+            <div className="transaction-errors">
+              {this.state.transactionErrors}
+            </div>
+
             <div id="transaction-info" className="transaction-info">
               {this.renderStockOrFunds()}
             </div>
           
             <div className="transaction-watchlist-button">
-              <input type="submit" value="Add to Watchlist" />
+              {this.watchlistButton()}
             </div>
           </form>
         </div>

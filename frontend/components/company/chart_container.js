@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import ChartForm from './chart_form';
 import { fetchPriceData } from '../../actions/company_actions';
-import { createTransaction } from '../../actions/session_actions';
+import { createTransaction, destroyWatchStock, createWatchStock } from '../../actions/session_actions';
 import { withRouter } from 'react-router-dom';
 
 const mstp = (state, ownProps) => {
@@ -16,7 +16,7 @@ const mstp = (state, ownProps) => {
     currentUser: state.entities.users[state.session.id], 
     currentUserId: state.session.id,
     transactions: state.entities.users[state.session.id].transactions,
-    error: state.errors.session,
+    error: Object.values(state.errors.session),
   };
 }
 
@@ -25,6 +25,8 @@ const mdtp = (dispatch) => {
   return {
     fetchPriceData: (symbol,range) => dispatch(fetchPriceData(symbol, range)),
     createTransaction: (transaction) => dispatch(createTransaction(transaction)),
+    createWatchStock: (stock) => dispatch(createWatchStock(stock)),
+    destroyWatchStock: (stock) => dispatch(destroyWatchStock(stock)),
   }
 }
 

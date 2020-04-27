@@ -1,5 +1,5 @@
 class Api::WatchlistsController < ApplicationController
-  before_action :ensure_logged_in
+  before_action :require_logged_in
 
   def create 
     watchlist = Watchlist.new(watchlist_params)
@@ -25,11 +25,9 @@ class Api::WatchlistsController < ApplicationController
     end
   end
 
-
-
   private 
 
   def watchlist_params
-    params.require(:watchlist).permit(:user_id, :ticker)
+    params.require(:stock).permit(:user_id, :ticker)
   end
 end
