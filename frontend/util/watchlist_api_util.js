@@ -8,7 +8,7 @@ export const watchStock = stock => {
 
 export const unWatchStock = stock => {
   return $.ajax({
-    method: "DELETE",
+    method: 'DELETE',
     url: `/api/watchlists/${stock.ticker}`,
   });
 }

@@ -1,63 +1,108 @@
 import React from 'react';
 
-class CompanyForm extends React.Component{
-  constructor(props){
-    super(props)
+class CompanyForm extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      
+      basics: {},
+      keyStats: {},
+    };
+  }
+
+  componentDidMount() {
+    this.props
+      .fetchCompanyBasics(this.props.symbol)
+      .then((res) => this.setState(res));
+    this.props
+      .fetchCompanyKeyStats(this.props.symbol)
+      .then((res) => this.setState(res));
+  }
+
+  formatNumber(num) {
+    const _suffix = ["K", "M", "B", "T"];
+    if (num > 1000) {
+      let i = 0;
+      while (num > 1000) {
+        num /= 1000;
+        i += 1;
+      }
+      return `${num.toFixed(2)}${_suffix[i - 1]}`;
+    } else {
+      return num;
     }
   }
 
-  componentDidMount(){
-    this.props.fetchCompanyBasics(this.props.symbol).then(res=> this.setState(res))
-    this.props.fetchCompanyKeyStats(this.props.symbol).then(res => this.setState(res))
-  }
-
-  render (){
+  render() {
+    let employees = this.state.basics.employees;
     return (
       <div className="company-info">
-        <div className="company-about-header">About</div>
+        <div className="company-about-header">
+          <p className="about-title">About</p>
+        </div>
         <div className="company-about">
           <p>{this.props.stats.description}</p>
         </div>
 
         <div className="company-stats">
-          <div className="info-row1">
+          <div className="info-col1">
             <div>
-              <div className="subrow-title">CEO</div> <br />
-              <p>{this.props.stats.CEO}</p>
+              <div className="subrow-title">CEO</div>
+               <span className="inner-stat">
+              {this.state.basics.CEO}
+               </span>
             </div>
+            <br/>
             <div>
-              <div className="subrow-title">Employees</div> <br />
-              {this.props.stats.employees}
-            </div>
-            <div>
-              <div className="subrow-title">Headquarters</div> <br />
-              <span>
-                {this.props.stats.city}, {this.props.stats.state}
-              </span>
-            </div>
-            <div>
-              <div className="subrow-title">Market Cap</div> <br />
-              {this.props.stats.marketcap}
+              <div className="subrow-title">P/E Ratio</div>
+               <span className="inner-stat">
+              {this.state.keyStats.peRatio}
+               </span>
             </div>
           </div>
-          <div className="info-row2">
+          <div className="info-col2">
             <div>
-              <div className="subrow-title">Price to Earning Ratio</div> 
-              {this.props.stats.peRatio}
+              <div className="subrow-title">Employees</div>
+              <span className="inner-stat">
+                {this.formatNumber(employees)}
+              </span>
             </div>
+            <br/>
             <div>
-              <div className="subrow-title">Average Volume</div> 
-              {this.props.stats.avg10Volume}
+              <div className="subrow-title">Average Volume</div>
+               <span className="inner-stat">
+              {this.formatNumber(this.state.keyStats.avg10Volume)}
+              </span>
             </div>
+          </div>
+          <div className="info-col3">
             <div>
-              <div className="subrow-title">52 Week High</div> 
-              {this.props.stats.week52high}
+              <div className="subrow-title">Headquarters</div>
+              <span className="inner-stat">
+                {this.state.basics.city}, {this.state.basics.state}
+              </span>
             </div>
+            <br/>
             <div>
-              <div className="subrow-title">52 Week Low</div> 
-              <p>{this.props.stats.week52low}</p>
+              <div className="subrow-title">52 Week High</div>$
+               <span className="inner-stat">
+              {this.state.keyStats.week52high}
+              </span>
+            </div>
+          </div>
+
+          <div className="info-col4">
+          <div>
+            <div className="subrow-title">Market Cap</div>
+             <span className="inner-stat">
+            {this.formatNumber(this.state.keyStats.marketcap)}
+            </span>
+          </div>
+          <br/>
+            <div>
+              <div className="subrow-title">52 Week Low</div>
+               <span className="inner-stat">
+              ${this.state.keyStats.week52low}
+               </span>
             </div>
           </div>
         </div>

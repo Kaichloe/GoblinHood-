@@ -34,8 +34,10 @@ const receiveBigPriceHistory = (priceData) => {
 
 export const fetchPriceData = (symbol, range) => dispatch => {
   return (
-    APICompUtil.fetchHistoricalPrices(symbol, range).then(priceData => dispatch(receivePriceHistory(priceData)))
-  )
+    APICompUtil.fetchHistoricalPrices(symbol, range).then((priceData) =>
+      dispatch(receivePriceHistory(priceData))
+    )
+  );
 };
 
 export const fetchCompanyBasics = (symbol) => dispatch => {

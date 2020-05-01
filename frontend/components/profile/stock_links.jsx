@@ -5,22 +5,45 @@ class StockLinks extends React.Component{
   constructor(props){
     super(props)
 
+    this.sharesOwn = this.sharesOwn.bind(this);
+    this.watchlistLinks= this.watchlistLinks.bind(this);
   }
 
+  sharesOwn(ticker){
+    let owned_stocks = this.props.owned_stocks;
+    let shares = owned_stocks[ticker];
+
+    if (shares > 1 ){
+      return `${shares} shares` 
+    } else if (shares === 1){
+      return `${shares} share`
+    } 
+  
+  }
+
+  watchlistLinks(){
+    let watchlist = this.props.watchlist
+    let results = [];
+    for (let i = 0; i < watchlist.length; i++) {
+      results.push(
+      <Link  key={watchlist[i].ticker} className="stock-links" to={`/profile/stocks/${watchlist[i].ticker}`}>
+        <div className="first-column">
+          <p>{watchlist[i].ticker}</p>
+          <p>{this.sharesOwn(watchlist[i].ticker)}</p>
+        </div>
+      </Link>
+      )
+    }
+    return results
+  }
   render(){
-    return(
+    return (
       <div className="stock-links-container">
-        <label className="stock-portfolio">Portfolio</label>
-        <Link className="stock-links" to='/profile/stocks/SNAP'>SNAP</Link>
-        <Link className="stock-links" to='/profile/stocks/TWTR'>TWTR</Link>
-        <Link className="stock-links" to='/profile/stocks/C'>C</Link>
-        <Link className="stock-links" to='/profile/stocks/IBM'>IBM</Link>
         <label className="stock-portfolio">WatchList</label>
-        <Link className="stock-links" to='/profile/stocks/AAPL'>AAPL</Link>
-        <Link className="stock-links" to='/profile/stocks/BAC'>BAC</Link>
-        <Link className="stock-links" to='/profile/stocks/GE'>GE</Link>
+        <button onClick={() => console.log(this.props.watchlist)}></button>
+        {this.watchlistLinks()}
       </div>
-    )
+    );
   }
 }
 

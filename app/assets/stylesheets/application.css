@@ -31,6 +31,13 @@ input, h1, p, div {
   padding: 0;
 }
 
+button:focus{
+  outline:none;
+}
+
+input:focus{
+  outline:none;
+}
 /* #root{
   background-color: #1b1b1b;
 } */

@@ -21,8 +21,7 @@ class ChartForm extends React.Component {
       defaultPrice: 0,
       openPrice: 0,
       sharesOwned: '',
-      watched: null,
-      transactionErrors: null
+      watched: '',
     };
     this.handleWatchlistButton = this.handleWatchlistButton.bind(this);
     this.watchlistButton= this.watchlistButton.bind(this);
@@ -34,7 +33,13 @@ class ChartForm extends React.Component {
     this.renderStockOrFunds = this.renderStockOrFunds.bind(this);
     this.setWatching = this.setWatching.bind(this);
     this.removeWatching = this.removeWatching.bind(this);
+    this.priceChange = this.priceChange.bind(this);
+    this.percentChange = this.percentChange.bind(this);
   }
+
+  // componentDidUpdate(){
+  //   this.checkWatched();
+  // }
 
   componentDidMount() {
     // this.props
@@ -45,6 +50,7 @@ class ChartForm extends React.Component {
     //   .then((data) => this.setState({ fiveDayData: data }));
     this.props
       .fetchPriceData(this.props.symbol, "5d")
+        // .then((data)=> console.log(data))
       .then((data) => this.setState({ oneDayData: data }))
       .then((data) =>
         this.setState({
@@ -79,14 +85,14 @@ class ChartForm extends React.Component {
   }
 
   setWatching(){
-    debugger
+    // debugger
     if (this.state.form = "BUY" && this.state.watched === false ){
       let watchlist_params = {
         user_id: this.props.currentUserId,
         ticker: this.props.symbol
       }
-      console.log(watchlist_params)
-      this.props.createWatchStock(watchlist_params).then(()=> this.setState({watched: true}))
+      // console.log(watchlist_params)
+      this.props.createWatchStock(watchlist_params).then((res)=>this.setState({ watched: true}))
     }
   }
 
@@ -104,8 +110,8 @@ class ChartForm extends React.Component {
         user_id: this.props.currentUserId,
         ticker: this.props.symbol
       };
-      this.props.destroyWatchStock(watchlist_params).then(() =>
-      this.setState({watched: false}))
+      this.props.destroyWatchStock(watchlist_params)
+      this.setState({watched: false})
     }
   }
 
@@ -118,9 +124,12 @@ class ChartForm extends React.Component {
       };
 
       if (input === "watch"){
-        this.props.createWatchStock(watchlist_params).then(() => this.setState({watched : true}))
+        this.props.createWatchStock(watchlist_params)
+        this.setState({watched: true})
       } else if (input === "unwatch") {
-        this.props.destroyWatchStock(watchlist_params).then(() => this.setState({watched : false}))
+        // console.log(watchlist_params)
+        this.props.destroyWatchStock(watchlist_params)
+        this.setState({watched: false})
       }
     }
   }
@@ -175,13 +184,13 @@ class ChartForm extends React.Component {
   buyForm() {
     const submitButton = document.getElementById("transaction-submit-button")
     submitButton.innerHTML = "Place Buy Order";
-    this.setState({ shares: 0, form: "BUY" });
+    this.setState({ shares: "", form: "BUY" });
   }
 
   sellForm() {
     const submitButton = document.getElementById("transaction-submit-button");
     submitButton.innerHTML = "Place Sell Order";
-    this.setState({ shares: 0, form: "SELL" });
+    this.setState({ shares: "", form: "SELL" });
   }
 
   handleTransaction(e) {
@@ -196,7 +205,6 @@ class ChartForm extends React.Component {
     };
     // console.log(transactionParams);
     this.props.createTransaction(transactionParams)
-    .then(()=> this.setState({transactionErrors : this.renderErrors()}))
     .then(()=> this.setWatching())
     
   }
@@ -211,29 +219,27 @@ class ChartForm extends React.Component {
     }
 
     if (this.state.form === "BUY"){
-      return(
-      <div className="buying-power">
-        ${Number(this.props.balance).toLocaleString()}
-        <br/>
-        <p>Buying Power Available</p>
-      </div>
-      )
+      return (
+        <div className="buying-power">
+          <p className="transaction-buying-power">
+            ${Number(this.props.balance).toLocaleString()}
+          </p>
+          <p className="transaction-buying-power-word">Buying Power Available</p>
+        </div>
+      );
     } else {
       return (
-      <div>
-        {stockTickerCount}
-        <br/>
-        <p>Shares Owned</p>
+      <div className="transaction-shares">
+        <p className="transaction-shares-count">You have {stockTickerCount} Shares</p>
       </div>
       )
     }
   }
 
   renderErrors(){
-    if (this.props.error.length > 0){
       if (this.state.shares < 0){
         return(
-          <div className="invalid-shares">
+          <div className="transaction-errors">
             Please enter a valid number of shares
           </div>
         )
@@ -243,8 +249,8 @@ class ChartForm extends React.Component {
         let totalStockCost = this.state.defaultPrice * this.state.shares;
         let buying_power = this.props.balance;
         if( totalStockCost > buying_power){
-          return ( <div className="not-enough-funds">
-            You do not have enough fund for this transaction
+          return ( <div className="transaction-errors">
+            You do not have enough funds for this transaction
           </div>) 
         }
       }
@@ -256,15 +262,33 @@ class ChartForm extends React.Component {
 
         if(this.state.shares > stockTickerCount){
           return (
-            <div className="not_enough-shares">
+            <div className="transaction-errors">
               You do not own enough shares for this transaction
             </div>
           )
         }
       }
+  }
+
+  priceChange(){
+    let change = (this.state.price - this.state.openPrice).toFixed(2);
+
+    if (change > 0){
+      return `+$${change}`
+    }else {
+      return `-$${change}`
     }
   }
 
+  percentChange(){
+    let percent = (((this.state.price - this.state.openPrice) / this.state.openPrice) * 100).toFixed(2);
+    
+    if (percent > 0){
+      return `[+${percent}%]`
+    } else{
+      return `[-${percent}%]`
+    }
+  }
 
   handleLeave() {
     let defaultPrice = this.state.defaultPrice;
@@ -359,140 +383,144 @@ class ChartForm extends React.Component {
     }
 
     const stockChart = (
-      <LineChart
-        margin={{ top: 20, right: 30, left: 0, bottom: 30 }}
-        width={600}
-        height={300}
-        data={data}
-        onMouseMove={this.handleMove}
-        onMouseLeave={this.handleLeave}
-      >
-        <Line
-          type="linear"
-          dataKey="close"
-          stroke={color}
-          connectNulls={true}
-          strokeWidth={2}
-          dot={false}
-        />
-        <XAxis dataKey="customDate" hide={true} allowDataOverflow={false} />
-        <YAxis domain={["dataMin", "dataMax"]} hide={true} />
-        <Tooltip
-          position={{ y: 0 }}
-          formatter={(value, name, props) => {
-            return [""];
-          }}
-          isAnimationActive={false}
-          cursor={{ stroke: "Gainsboro", strokeWidth: 2 }}
-        />
-      </LineChart>
+      <ResponsiveContainer >
+        <LineChart
+          margin={{ top: 40, right: 30, left: 30, bottom: 50 }}
+          data={data}
+          onMouseMove={this.handleMove}
+          onMouseLeave={this.handleLeave}
+        >
+          <Line
+            type="linear"
+            dataKey="close"
+            stroke={color}
+            connectNulls={true}
+            strokeWidth={2}
+            dot={false}
+          />
+          <XAxis dataKey="customDate" hide={true} allowDataOverflow={false} />
+          <YAxis domain={["dataMin", "dataMax"]} hide={true} />
+          <Tooltip
+            contentStyle={{ border: "0", backgroundColor: "transparent" }}
+            position={{ y: 1}}
+            formatter={(value, name, props) => {
+              return [""];
+            }}
+            isAnimationActive={false}
+            cursor={{ stroke: "Gainsboro", strokeWidth: 2 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
     );
 
     return (
-      <div className="StockPage">
-        <h3 className="stockname">{this.props.companyName}</h3>
+      <>
+        <div className="StockPage">
+          <h3 className="stockname">{this.props.companyName}</h3>
 
-        <div id="price" className="stock-price">
-          ${this.state.price}
-        </div>
-        <div className="stock-change">
-          ${(this.state.price - this.state.openPrice).toFixed(2)}
-        </div>
-        <div className="stock-change-percent">
-          [
-          {(
-            ((this.state.price - this.state.openPrice) / this.state.openPrice) *
-            100
-          ).toFixed(2)}
-          %]
-        </div>
+          <div id="price" className="stock-price">
+            ${this.state.price}
+          </div>
+          <div className="stock-change-container">
+            <div className="stock-change">
+              {/* ${(this.state.price - this.state.openPrice).toFixed(2)} */}
+              {this.priceChange()}
+            </div>
+            <div className="stock-change-percent">{this.percentChange()}</div>
+          </div>
 
-        <div className="StockChart">{stockChart}</div>
+          <div className="StockChart">{stockChart}</div>
 
-        <div className="chart-buttons-container">
-          <button
-            id="button-1"
-            className="chart-buttons"
-            onClick={() => this.changeDate("1D")}
-          >
-            1D
-          </button>
-          <button
-            id="button-2"
-            className="chart-buttons"
-            onClick={() => this.changeDate("1W")}
-          >
-            1W
-          </button>
-          <button
-            id="button-3"
-            className="chart-buttons"
-            onClick={() => this.changeDate("1M")}
-          >
-            1M
-          </button>
-          <button
-            id="button-3"
-            className="chart-buttons"
-            onClick={() => this.changeDate("3M")}
-          >
-            3M
-          </button>
-          <button
-            id="button-4"
-            className="chart-buttons"
-            onClick={() => this.changeDate("1Y")}
-          >
-            1Y
-          </button>
-          <button
-            id="button-5"
-            className="chart-buttons"
-            onClick={() => this.changeDate("5Y")}
-          >
-            5Y
-          </button>
-          <button onClick={() => console.log(this.props.error)}>TEST</button>
-          <button onClick={() => console.log(this.state)}>TEST2</button>
+          <div className="chart-buttons-container">
+            <button
+              id="button-1"
+              className="chart-buttons"
+              onClick={() => this.changeDate("1D")}
+            >
+              1D
+            </button>
+            <button
+              id="button-2"
+              className="chart-buttons"
+              onClick={() => this.changeDate("1W")}
+            >
+              1W
+            </button>
+            <button
+              id="button-3"
+              className="chart-buttons"
+              onClick={() => this.changeDate("1M")}
+            >
+              1M
+            </button>
+            <button
+              id="button-3"
+              className="chart-buttons"
+              onClick={() => this.changeDate("3M")}
+            >
+              3M
+            </button>
+            <button
+              id="button-4"
+              className="chart-buttons"
+              onClick={() => this.changeDate("1Y")}
+            >
+              1Y
+            </button>
+            <button
+              id="button-5"
+              className="chart-buttons"
+              onClick={() => this.changeDate("5Y")}
+            >
+              5Y
+            </button>
+            {/* <button onClick={() => console.log(this.setState({watched: false}))}>TEST</button>
+          <button onClick={() => console.log(this.state)}>TEST2</button> */}
+          </div>
         </div>
-
         <div className="transaction-container">
           <div className="transaction-header">
-            <button className="transaction-form" onClick={this.buyForm}>
-              BUY <span>{this.props.symbol}</span>
+            <button
+              className={`transaction-form-${this.state.form === "BUY"}`}
+              onClick={this.buyForm}
+            >
+              <span className="transaction-span-form"> Buy {this.props.symbol}</span>
             </button>
-            <button className="transaction-form" onClick={this.sellForm}>
-              SELL <span>{this.props.symbol}</span>
+            <button
+              className={`transaction-form-${this.state.form === "SELL"}`}
+              onClick={this.sellForm}
+            >
+              <span className="transaction-span-form">Sell {this.props.symbol}</span>
             </button>
           </div>
 
           <form className="transaction-formtype">
             <div className="transaction-shares-container">
-              <span>Shares</span>
+              <span className="transaction-span">Shares</span>
               <input
                 type="text"
                 className="transaction-input"
                 placeholder="0"
                 onChange={this.update("shares")}
                 value={this.state.shares}
-                min="0"
-                step="1"
-                required
               />
             </div>
 
             <div className="transaction-price">
-              <span>Market Price</span>
-              <span>{this.state.defaultPrice}</span>
-            </div>
-
-            <div className="transaction-total">
-              <span>Estimated Cost</span>
-              <span>
-                {(this.state.shares * this.state.defaultPrice).toFixed(2)}
+              <span className="transaction-span">Market Price</span>
+              <span className="transaction-span">
+                ${this.state.defaultPrice}
               </span>
             </div>
 
+            <div className="transaction-total">
+              <span className="transaction-span">Estimated Cost</span>
+              <span className="transaction-span">
+                ${(this.state.shares * this.state.defaultPrice).toFixed(2)}
+              </span>
+            </div>
+
+              <div className="transaction-errors">{this.renderErrors()}</div>
             <div className="transaction-submit-container">
               <button
                 id="transaction-submit-button"
@@ -504,20 +532,17 @@ class ChartForm extends React.Component {
               </button>
             </div>
 
-            <div className="transaction-errors">
-              {this.state.transactionErrors}
-            </div>
 
             <div id="transaction-info" className="transaction-info">
               {this.renderStockOrFunds()}
             </div>
-          
+
             <div className="transaction-watchlist-button">
               {this.watchlistButton()}
             </div>
           </form>
         </div>
-      </div>
+      </>
     );
   }
 }

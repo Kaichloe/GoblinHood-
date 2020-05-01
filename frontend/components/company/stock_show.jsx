@@ -33,9 +33,11 @@ class StockShow extends React.Component {
             <div className="graph-container">
               <ChartContainer />
             </div>
-            <CompanyInfo/>
-            <div className="news-container">
-              <NewsFormContainer />
+            <div className="stock-info">
+              <CompanyInfo/>
+              <div className="news-container">
+                <NewsFormContainer />
+              </div>
             </div>
           </div>
           <div className="profile-3">

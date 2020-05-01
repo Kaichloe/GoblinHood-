@@ -1,7 +1,8 @@
 .news-container{
   display: flex;
-  width: 100%;
+  width: 65vw;
   flex-direction: column;
+  max-width: 1000px;
 }
 
 .news-title-main{
@@ -16,6 +17,7 @@
   font-size: 30px;
   padding-top: 20px;
   padding-bottom: 20px;
+  font-weight: 600;
 }
 
 .news-inner-container{

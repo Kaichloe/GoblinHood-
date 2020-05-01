@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NewsFormContainer from '../news/news_container';
 import PortfolioChartContainer from './portfolio_chart_container';
-import StockLinks from './stock_links';
+import StockLinksContainer from './stock_links_container';
 
 
 class Profile extends React.Component {
@@ -36,7 +36,7 @@ class Profile extends React.Component {
           </div>
         </div>
         <div className="profile-3">
-          <StockLinks/>
+          <StockLinksContainer/>
         </div>
         <div className="profile-4">
         </div>

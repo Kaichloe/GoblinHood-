@@ -17,9 +17,8 @@ class Api::WatchlistsController < ApplicationController
     watchlists = Watchlist.where(user_id: current_user.id)
     watchlist = watchlists.find_by(ticker: params[:ticker])
     @user = current_user
-    
     if watchlist.destroy
-      render "api/user/show"
+      render "api/users/show"
     else 
       render json: ["Stock could not be unwatched"], status: 422
     end
@@ -30,4 +29,5 @@ class Api::WatchlistsController < ApplicationController
   def watchlist_params
     params.require(:stock).permit(:user_id, :ticker)
   end
+
 end

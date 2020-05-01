@@ -23,7 +23,7 @@
 .home-button{
   margin-right: 20px;
   text-decoration: none;
-  color: whitesmoke;
+  /* color: whitesmoke; */
   font-weight: bold;
 }
 
@@ -64,14 +64,14 @@
   display: flex;
   height: 80%;
   width: 100%;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .profile-1{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  width: 10%;
   height: 100%;
 }
 
@@ -79,16 +79,16 @@
   display: flex;
   flex-direction: column; 
   justify-content: center;
-  width: 55%;
-  margin-right: 100px;
+  width: 100%;
+  /* margin-right: 100px; */
   margin-top: 50px;
 }
 
-.profile-3{
+/* .profile-3{
   display: flex;
   flex-direction: column;
   width: 100%;
-}
+} */
 
 .stock-links-container{
   display: flex;
@@ -145,13 +145,44 @@
 }
 
 .graph-container{
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.StockPage{
+  width: 65vw;
+  max-width: 1000px;
+  /* border-bottom: 2px solid lightgray; */
+  margin-right: 5%;
+}
+
+.StockChart{
+  width: 100%;
+  height: 25vh;
+}
+
+.stock-info{
+  display: flex;
+  flex-direction: column;
+  width: 65vw;
+  max-width: 1000px;
+  margin-right: 100px;
+}
+
+.company-info{
+  display: flex;
+  flex-direction: column;
+  width: 65vw;
+  max-width: 1000px;
 }
 
 .chart-buttons-container{
   display: flex;
-  justify-content: space-evenly;
-  width: 50%;
+  justify-content: space-between;
+  width: 40%;
+  max-width: 500px;
 }
 
 .chart-buttons{
@@ -159,7 +190,7 @@
   border: none;
   color: black;
   font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bolder;
   border-color: none;
 }
@@ -175,13 +206,254 @@
 }
 
 .chart-buttons:active {
-    color: #21ce99;
+  color: #21ce99;
 }
 
 .stockname{
   display: flex;
   margin: 0;
   font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.company-about-header{
+  font-size: 26px;
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+  font-weight: 500;
+  border-bottom: 2px solid lightgray;
+  border-top: 2px solid lightgray;
+  margin-bottom: 10px;
+}
+
+.about-title{
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 20px;
+
+}
+
+.stock-price{
+  font-size: 18px;
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+}
+
+.stock-change-container{
+  display: flex;
+}
+
+.stock-change{
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+.stock-change-percent{
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+  font-size: 13px;
+}
+
+div, p, button, input, span{
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+}
+
+.company-about{
+  margin-bottom: 30px;
+}
+
+.company-stats{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info-col1{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.info-col2{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-col3{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-col4{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.subrow-title{
+  font-weight: 600;
   font-size: 18px;
 }
+
+.inner-stat{
+  font-size: 14px;
+}
+
+.transaction-container{
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.089);
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 50%;
+  max-height: 500px;
+  min-width: 25%;
+  max-width: 300px;
+  box-sizing: border-box
+
+}
+
+.transaction-header{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+}
+
+.transaction-form-false, .transaction-form-true {
+  width:100%;
+  display:block;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  border: none;
+  box-sizing: border-box;
+  height:40px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.transaction-form-false:hover{
+  width:100%;
+  display:block;
+  color: #21ce99;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.transaction-form-true{
+  background-color: #21ce99;
+  cursor: pointer;
+  box-sizing: border-box;
+  color: white;
+}
+
+.transaction-shares-container{
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  justify-content: space-between;
+}
+
+.transaction-input{
+  text-align: right;
+  width: 48%;
+  border: none;
+  background-color: #fafafa;
+  border-radius: 2px;
+
+}
+
+.transaction-input:hover, .transaction-input:focus{
+  cursor: pointer;
+  border: 2px solid #21ce99;
+}
+
+.transaction-formtype{
+  padding: 15px;
+  height: 100%;
+}
+
+.transaction-span{
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.transaction-span-form{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.transaction-errors{
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.transaction-price, .transaction-total{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.transaction-price{
+  border-bottom:1.5px solid #EEF1F7;
+}
+
+.transaction-submit-container{
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.transaction-button{
+  width: 100%;
+  background-color: #21ce99;
+  outline: none;
+  font-size: 14px;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.transaction-bbutton:hover{
+  cursor: pointer;
+}
+
+.transaction-buying-power{
+  font-size: 16px;
+  text-align: center;
+}
+
+.transaction-buying-power-word{
+  font-size: 14px;
+  text-align: center;
+}
+
+.transaction-watchlist-button{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+
+}
+
+.watchlist-button{
+  width: 90%;
+  font-size: 20px;
+  outline-color: #21ce99;
+  color: #21ce99;
+}
+
+.transaction-shares-count{
+  text-align: center;
+  font-size: 16px;
+}
+
+
+
+
+
+
 

@@ -21,7 +21,6 @@ const mstp = (state, ownProps) => {
 }
 
 const mdtp = (dispatch) => {
-  
   return {
     fetchPriceData: (symbol,range) => dispatch(fetchPriceData(symbol, range)),
     createTransaction: (transaction) => dispatch(createTransaction(transaction)),
