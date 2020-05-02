@@ -85,5 +85,10 @@ li {
   padding-top: 10px;
 }
 
+.app-name:hover{
+  cursor: pointer;
+  color: #20ce99
+}
+
 
 

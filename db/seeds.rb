@@ -5,8 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-#  // this.demoEmail = "admin_kai___activated@ggez.com"
-#     // this.demoPassword = "adminkaiyip"
 
 User.destroy_all
 
@@ -14,5 +12,3 @@ User.destroy_all
 kai= User.create!(email: 'admin_status_activated__welcome__back__admin_kai@wedabest.com', password: 'adminkaiyipisbackbaby', first_name: 'Kai', last_name: 'Ho', buying_power: 999999999)
 
 hello= User.create!(email: 'kai@hotmail.com', password: 'password123', first_name: 'Kai', last_name: 'Ho', buying_power: 999999999)
-
-# t1 = Transaction.create!(user_id: kai.id, ticker: "GOOG", purchase_price: 1000, quantity: 10, transaction_type: "Buy");

@@ -43,14 +43,9 @@ class PortfolioChart extends React.Component {
             <button className="chart-buttons">1D</button>
             <button className="chart-buttons">1W</button>
             <button className="chart-buttons">1M</button>
+            <button className="chart-buttons">3M</button>
             <button className="chart-buttons">1Y</button>
             <button className="chart-buttons">5Y</button>
-            <button
-              onClick={() => console.log(this.props.currentUser)}
-            ></button>
-            <button
-              onClick={() => console.log(this.props.currentUser.portfolio_value)}
-            ></button>
           </div>
         </div>
       </div>

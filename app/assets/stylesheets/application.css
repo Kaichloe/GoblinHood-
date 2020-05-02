@@ -38,7 +38,9 @@ button:focus{
 input:focus{
   outline:none;
 }
-/* #root{
-  background-color: #1b1b1b;
-} */
+
+div, p, button, input, span{
+  font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+}
+
 
