@@ -1,3 +1,17 @@
+export const fetchCompany = (ticker) => {
+  return $.ajax({
+    method: 'GET',
+    url: `api/companies/${ticker}`
+  })
+}
+
+export const fetchAllCompanies = () => {
+  return $.ajax({
+    method: 'GET',
+    url: 'api/companies/'
+  })
+}
+
 //for less than 1month
 export const fetchHistoricalPrices = (symbol, range) => {
   return $.ajax({

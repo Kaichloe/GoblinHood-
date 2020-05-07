@@ -8,6 +8,8 @@ class PortfolioChart extends React.Component {
     };
   }
 
+  
+
   render() {
     const data = [
       { date: "2020-02-05", price: 567 },

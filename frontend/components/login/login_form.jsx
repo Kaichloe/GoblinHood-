@@ -83,7 +83,7 @@ class LoginForm extends React.Component {
                   value={this.state.email}
                   onChange={this.update("email")}
                   className="login-input"
-                  id="login-input"
+                  
                 />
 
                 <br />
@@ -94,7 +94,7 @@ class LoginForm extends React.Component {
                   value={this.state.password}
                   onChange={this.update("password")}
                   className="login-input"
-                  id="login-input"
+                  
                 />
                 <ul className="login-errors">
                   {this.props.errors.map((error, i) => (

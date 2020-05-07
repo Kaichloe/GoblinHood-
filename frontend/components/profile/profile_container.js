@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions'
 import Profile from './profile'
+import { fetchAllCompanies, fetchCompany } from '../../actions/company_actions';
 
 const mstp = (state) => {
   return{
@@ -10,7 +11,9 @@ const mstp = (state) => {
 
 const mdtp = dispatch => {
   return {
-    logout: () => dispatch(logout())
+    logout: () => dispatch(logout()),
+    fetchAllCompanies: () => dispatch(fetchAllCompanies()),
+    fetchCompany: (ticker) => dispatch(fetchCompany(ticker))
   }
 }
 

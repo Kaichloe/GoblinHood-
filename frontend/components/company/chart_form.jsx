@@ -203,9 +203,14 @@ class ChartForm extends React.Component {
       quantity: parseInt(this.state.shares),
       transaction_type: this.state.form,
     };
-    // console.log(transactionParams);
+    const currentForm = this.state.form;
+
+    console.log(this.state.form);
     this.props.createTransaction(transactionParams)
+    .then(() => console.log(this.state.form))
     .then(()=> this.setWatching())
+    .then(() => console.log(this.state.form))
+    .then(()=> this.setState({shares: "", form: currentForm}))
     
   }
 
@@ -230,7 +235,7 @@ class ChartForm extends React.Component {
     } else {
       return (
       <div className="transaction-shares">
-        <p className="transaction-shares-count">You have {stockTickerCount} Shares</p>
+        <p className="transaction-shares-count">You own {stockTickerCount} Shares</p>
       </div>
       )
     }
@@ -298,7 +303,7 @@ class ChartForm extends React.Component {
   }
 
   handleMove(e) {
-    if (e.activePayload !== undefined ) {
+    if (e.activePayload !== undefined && e.activePayload !== null) {
       this.setState({ price: e.activePayload[0].payload.close.toFixed(2) });
     }
   }
@@ -540,6 +545,7 @@ class ChartForm extends React.Component {
             <div className="transaction-watchlist-button">
               {this.watchlistButton()}
             </div>
+            {/* <button onClick={()=> console.log(this.state)}></button> */}
           </form>
         </div>
       </>

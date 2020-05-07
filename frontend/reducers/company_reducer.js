@@ -1,7 +1,7 @@
 import { RECEIVE_HISTORICAL_PRICES} from '../actions/company_actions';
 import moment from 'moment';
 
-const companiesReducer = (oldState = [], action) => {
+const companiesReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_HISTORICAL_PRICES:

@@ -3,7 +3,7 @@ import {
   RECEIVE_COMPANY_BASICS,
 } from "../actions/company_actions";
 
-const companyStats_Reducer = (oldState = [], action) => {
+const companyStats_Reducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_COMPANY_BASICS:

@@ -10,18 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_023843) do
+ActiveRecord::Schema.define(version: 2020_05_05_220228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "companies", force: :cascade do |t|
-    t.string "company_name", null: false
-    t.string "ticker_symbol", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_name"], name: "index_companies_on_company_name", unique: true
-    t.index ["ticker_symbol"], name: "index_companies_on_ticker_symbol", unique: true
+    t.string "ticker", null: false
+    t.index ["ticker"], name: "index_companies_on_ticker"
   end
 
   create_table "transactions", force: :cascade do |t|

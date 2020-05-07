@@ -2,17 +2,19 @@
 #
 # Table name: companies
 #
-#  id            :bigint           not null, primary key
-#  company_name  :string           not null
-#  ticker_symbol :string           not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id         :bigint           not null, primary key
+#  name       :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  ticker     :string           not null
 #
 
 class Company < ApplicationRecord
 
-  validates :company_name, :ticker_symbol, presence: true
+  validates :name, :ticker, presence: true
   
+  has_many :watchlists
+  has_many :users
 
   has_many :shareholders,
     through: :tranactions,

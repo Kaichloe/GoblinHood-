@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import StockLinks from "./stock_links";
+import {fetchAllCompanies, fetchCompany} from '../../actions/company_actions';
 
 const mstp = (state) => {
   return {
@@ -12,7 +13,8 @@ const mstp = (state) => {
 
 const mdtp = (dispatch) => {
   return {
-    
+    fetchAllCompanies: ()=> dispatch(fetchAllCompanies()),
+    fetchCompany: (ticker) => dispatch(fetchCompany(ticker))
   };
 };
 

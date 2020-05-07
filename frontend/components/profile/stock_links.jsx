@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import portfolio_chart_container from './portfolio_chart_container';
 
 class StockLinks extends React.Component{
   constructor(props){
     super(props)
+    this.state ={
 
+    }
     this.sharesOwn = this.sharesOwn.bind(this);
     this.watchlistLinks= this.watchlistLinks.bind(this);
     this.portfolioLinks = this.portfolioLinks.bind(this);
@@ -75,6 +76,8 @@ class StockLinks extends React.Component{
         {this.portfolioLinks()}
         <label className="stock-portfolio">Watchlist</label>
         {this.watchlistLinks()}
+        <button onClick={()=> console.log(this.state)}>state</button>
+        <button onClick={()=>this.setState({companies: this.props.fetchCompany('AAPL')})}>hello</button>
       </div>
     );
   }

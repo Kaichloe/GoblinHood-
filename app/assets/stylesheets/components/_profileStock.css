@@ -464,6 +464,16 @@ div, p, button, input, span{
 .transaction-shares-count{
   text-align: center;
   font-size: 16px;
+  font-weight: 600;
+}
+
+.search-results-container{
+  z-index: 5;
+  position: absolute;
+}
+
+.search-links{
+  z-index: 5;
 }
 
 
