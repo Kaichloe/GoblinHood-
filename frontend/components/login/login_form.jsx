@@ -48,6 +48,18 @@ class LoginForm extends React.Component {
     this.props.processForm(user).then(()=> this.props.history.push("/profile"))
   }
 
+  renderError(){
+    if (this.props.errors.length > 0){
+      return (
+        <div>
+          <li>Unable to login with provided credentials</li>
+        </div>
+      )
+    } else {
+      return null
+    }
+  }
+
   update(field) {
     if (field === "email"){
       return e => this.setState({
@@ -97,11 +109,12 @@ class LoginForm extends React.Component {
                   
                 />
                 <ul className="login-errors">
-                  {this.props.errors.map((error, i) => (
+                  {/* {this.props.errors.map((error, i) => (
                     <div>
-                      <li key={`error+${i}`}>{error}</li>
+                      <li key={`error+${error}`}>{error}</li>
                     </div>
-                  ))}
+                  ))} */}
+                  {this.renderError()}
                 </ul>
 
                 <br />

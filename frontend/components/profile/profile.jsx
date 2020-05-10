@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import NewsFormContainer from '../news/news_container';
 import PortfolioChartContainer from './portfolio_chart_container';
 import StockLinksContainer from './stock_links_container';
-import {fetchAllCompanies} from '../../util/company_api_util';
 import Search from '../search/search_form';
 
 class Profile extends React.Component {
@@ -12,10 +11,6 @@ class Profile extends React.Component {
     this.state ={
       companies: []
     }
-  }
-
-  componentDidMount(){
-    fetchAllCompanies().then(companies => this.setState({companies: companies}))
   }
 
   render(){
