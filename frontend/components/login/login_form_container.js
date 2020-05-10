@@ -5,7 +5,7 @@ import { receiveErrors } from '../../actions/session_actions';
 
 const mstp = ({ errors }) => {
   return {
-    errors: Object.values(errors.session),
+    errors: errors.session,
     formType: "Sign In"
   };
 };
