@@ -76,8 +76,8 @@ class StockLinks extends React.Component{
         {this.portfolioLinks()}
         <label className="stock-portfolio">Watchlist</label>
         {this.watchlistLinks()}
-        <button onClick={()=> console.log(this.state)}>state</button>
-        <button onClick={()=>this.setState({companies: this.props.fetchCompany('AAPL')})}>hello</button>
+        {/* <button onClick={()=> console.log(this.state)}>state</button>
+        <button onClick={()=>this.setState({companies: this.props.fetchCompany('AAPL')})}>hello</button> */}
       </div>
     );
   }

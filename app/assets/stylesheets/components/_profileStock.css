@@ -90,6 +90,10 @@
   width: 100%;
 } */
 
+.profile-3{
+  margin-top: 50px;
+}
+
 .stock-links-container{
   display: flex;
   flex-direction: column;
@@ -465,11 +469,6 @@ div, p, button, input, span{
   text-align: center;
   font-size: 16px;
   font-weight: 600;
-}
-
-.search-results-container{
-  z-index: 5;
-  position: absolute;
 }
 
 .search-links{

@@ -49,8 +49,8 @@ class Profile extends React.Component {
         </div>
         <div className="profile-4">
         </div>
-        <button onClick={()=>this.props.fetchAllCompanies()}>TEST</button>
-        <button onClick={()=> console.log(this.state)}>HELLO</button>
+        {/* <button onClick={()=>this.props.fetchAllCompanies()}>TEST</button>
+        <button onClick={()=> console.log(this.state)}>HELLO</button> */}
       </div>
     </div>
     )

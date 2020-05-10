@@ -33,7 +33,7 @@ class Search extends React.Component {
       if (input === company_name || input == company_ticker){
         results.push([companies[i].ticker, companies[i].name]);
       }
-      if (results.length === 7){
+      if (results.length === 10){
         return results;
       }
     }
@@ -56,11 +56,12 @@ class Search extends React.Component {
             className="search-links"
             to={`/profile/stocks/${result[0]}`}
           >
-            <div className="first-column">
-              <p>{result[0]}</p>
-              <p>{result[1]}</p>
+            <div className="stock-result">
+              <div className="result-ticker">{result[0]}</div> 
+              <div className="result-name">{result[1]}</div>
             </div>
           </Link>
+          
         )
       })
     }
@@ -79,6 +80,7 @@ class Search extends React.Component {
         type="text"
         value={this.state.input}
         onChange={this.handleInput}
+        placeholder="Search"
       />
       <div className="search-results-container">
         {this.resultsLinks()}
