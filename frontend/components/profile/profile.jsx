@@ -17,7 +17,11 @@ class Profile extends React.Component {
     return (
       <div className="profile-container">
         <div className="profile-nav-container">
-          <div></div>
+          <div className="nav-left">
+            <li className="app-name">
+              GoblinHood
+            </li>
+          </div>
             {/* <input
               placeholder="Search"
               className="search-bar"type="text"

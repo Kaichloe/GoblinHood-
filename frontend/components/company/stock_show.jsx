@@ -3,6 +3,7 @@ import ChartContainer from './chart_container';
 import NewsFormContainer from '../news/news_container';
 import CompanyInfo from './company_container';
 import { Link } from 'react-router-dom';
+import Search from '../search/search_form';
 
 class StockShow extends React.Component {
   constructor(props) {
@@ -16,11 +17,12 @@ class StockShow extends React.Component {
     return (
       <div className="profile-container">
         <div className="profile-nav-container">
-          <div></div>
-          <input
-            placeholder="Search"
-            className="search-bar" type="text"
-          />
+          <div className="nav-left">
+            <li className="app-name">
+              GoblinHood
+            </li>
+          </div>
+         <Search/>
           <div className="nav-buttons">
             <Link className="home-button" to="/profile">Home</Link>
             <Link className="logout-button" to="/" onClick={this.props.logout}>Logout</Link>
