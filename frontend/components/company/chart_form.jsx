@@ -9,12 +9,12 @@ class ChartForm extends React.Component {
     super(props);
     this.state = {
       time: "1D",
-      oneYearData: {},
-      oneMonthData: {},
-      threeMonthData: {},
-      fiveYearData: {},
-      oneDayData: {},
-      fiveDayData: {},
+      oneYearData: 0,
+      oneMonthData: 0,
+      threeMonthData: 0,
+      fiveYearData: 0,
+      oneDayData: 0,
+      fiveDayData: 0,
       shares: "",
       form: "BUY",
       price: 0,
@@ -42,14 +42,8 @@ class ChartForm extends React.Component {
   // }
 
   componentDidMount() {
-    // this.props
-    //   .fetchPriceData(this.props.symbol, "5y")
-    //   .then((data) => this.setState({ fiveYearData: data }));
-    // this.props
-    //   .fetchPriceData(this.props.symbol, "5dm")
-    //   .then((data) => this.setState({ fiveDayData: data }));
     this.props
-      .fetchPriceData(this.props.symbol, "5d")
+      .fetchPriceData(this.props.symbol, "1D")
         // .then((data)=> console.log(data))
       .then((data) => this.setState({ oneDayData: data }))
       .then((data) =>
@@ -153,22 +147,30 @@ class ChartForm extends React.Component {
     }
   }
 
-  iterator(inputDate, number) {
-    let data = this.state.fiveYearData.priceData;
-    let newData;
-    for (let i = data.length - 1; i > 0; i--) {
-      if (data[i].date === inputDate) {
-        newData = data.slice(i);
-        break;
-      }
+  iterator(timeFrame) {
+    if (this.state.fiveYearData === 0){
+      this.props
+        .fetchPriceData(this.props.symbol, "5y")
+        .then((data) => this.setState({ fiveYearData: data }));
     }
-    switch (number) {
-      case 1:
-        this.setState({ oneMonthData: newData });
-      case 2:
-        this.setState({ threeMonthData: newData });
-      case 3:
-        this.setState({ oneYearData: newData });
+
+    let data = this.state.fiveYearData.priceData;
+    let length = data.length;
+    let newData;
+    
+    switch (timeFrame) {
+      case "oneMonth":
+        newData = data.slice(length - 20)
+        this.setState({ oneMonthData: newData })
+        break;
+      case "threeMonths":
+        newData = data.slice(length - 60)
+        this.setState({ threeMonthData: newData })
+        break;
+      case "oneYear":
+        newData = data.slice(length - 252)
+        this.setState({ oneYearData: newData })
+        break;
       default:
         break;
     }
@@ -205,11 +207,11 @@ class ChartForm extends React.Component {
     };
     const currentForm = this.state.form;
 
-    console.log(this.state.form);
+    // console.log(this.state.form);
     this.props.createTransaction(transactionParams)
-    .then(() => console.log(this.state.form))
+    // .then(() => console.log(this.state.form))
     .then(()=> this.setWatching())
-    .then(() => console.log(this.state.form))
+    // .then(() => console.log(this.state.form))
     .then(()=> this.setState({shares: "", form: currentForm}))
     
   }
@@ -303,65 +305,57 @@ class ChartForm extends React.Component {
   }
 
   handleMove(e) {
-    if (e.activePayload !== undefined && e.activePayload !== null) {
+    if (e.activePayload !== undefined && e.activePayload !== null && e.activePayload[0].payload.close !== null) {
       this.setState({ price: e.activePayload[0].payload.close.toFixed(2) });
     }
   }
 
 
   changeDate(input) {
-  let date = new Date();
-  let year = date.getFullYear();
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let data;
-  this.setState({ time: input });
+    let data;
+    this.setState({ time: input });
 
-  if (input === "1D") {
-    data = this.state.oneDayData.priceData;
-  } else if (input === "1W") {
-    data = this.state.fiveDayData.priceData;
-  } else if (input === "5Y") {
-    data = this.state.fiveYearData.priceData;
-  } else if (input === "1Y") {
-    if (day < 10) {
-      day = [0, day].join("");
+    if (input === "1D") {
+      data = this.state.oneDayData.priceData;
+    } else if (input === "1W") {
+        if(this.state.fiveDayData === 0){
+          this.props
+            .fetchPriceData(this.props.symbol, "5dm")
+            .then((data) => this.setState({ fiveDayData: data }));
+          data = this.state.fiveDayData.priceData;
+        } else {
+          data = this.state.fiveDayData.priceData;
+        }
+    } else if (input === "5Y") {
+      if (this.state.fiveYearData === 0) {
+        this.props
+          .fetchPriceData(this.props.symbol, "5dm")
+          .then((data) => this.setState({ fiveYearData: data }));
+        data = this.state.fiveYearData.priceData;
+      } else {
+        data = this.state.fiveYearData.priceData;
+      }
+    } else if (input === "1Y") {
+      if (this.state.oneYearData === 0){
+        data = this.iterator("oneYear")
+      } else{
+        data = this.oneYearData;
+      }
+    } else if (input === "3M"){
+      if (this.state.threeMonthData === 0 ){
+        data = this.iterator("threeMonths")
+      } else {
+        data = this.state.threeMonthData
+      }
+    } else if (input === "1M"){
+      if (this.state.oneMonthData === 0) {
+        data = this.iterator("oneMonth")
+      } else {
+        data = this.state.oneMonthData
+      }
     }
-    if (month < 10) {
-      month = [0, month].join("");
-    }
-    year = year - 1;
-    let yearDate = [year, month, day].join("-");
-    data = this.iterator(yearDate, 3);
-  } else if (input === "3M") {
-    month = month - 3;
-    if (day < 10) {
-      day = [0, day].join("");
-    }
-    if (month < 0) {
-      month = month + 12;
-      year = year - 1;
-    } else if (month < 10) {
-      month = [0, month].join("");
-    }
-    let threeMonth = [year, month, day].join("-");
-    data = this.iterator(threeMonth, 2);
-  } else if (input === "1M") {
-    month = month - 1;
-    if (day < 10) {
-      day = [0, day].join("");
-    }
-    if (month === 0) {
-      month = month + 12;
-      year = year - 1;
-    } else if (month < 10) {
-      month = [0, month].join("");
-    }
-    let oneMonth = [year, month, day].join("-");
-    data = this.iterator(oneMonth, 1);
   }
-  
-}
+
   render() {
     let data; 
     let time = this.state.time;
@@ -479,6 +473,7 @@ class ChartForm extends React.Component {
             >
               5Y
             </button>
+            <button onClick={()=>console.log(this.state)}></button>
             {/* <button onClick={() => console.log(this.setState({watched: false}))}>TEST</button>
           <button onClick={() => console.log(this.state)}>TEST2</button> */}
           </div>

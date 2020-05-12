@@ -24,7 +24,7 @@ export const fetchHistoricalPrices = (symbol, range) => {
 export const fetchBigHistoricalPrices = (symbol, range) => {
   return $.ajax({
     method: 'GET',
-    url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${range}/?token=sk_182c581f47a940bdbdb2661ea5101724`,
+    url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${range}/?chartCloseOnly=true&token=sk_182c581f47a940bdbdb2661ea5101724`,
   });
 };
 

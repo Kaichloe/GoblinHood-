@@ -179,6 +179,7 @@
 }
 
 .chart-buttons:hover{
+  cursor: pointer;
   color: #20ce99;
 }
 
