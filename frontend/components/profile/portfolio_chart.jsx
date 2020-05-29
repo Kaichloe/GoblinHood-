@@ -12,6 +12,7 @@ class PortfolioChart extends React.Component {
       fiveYearData: {},
       oneDayData: {},
       fiveDayData: {},
+      stockPrices: {},
       price: 0,
       openPrice: 0,
       defaultPrice: 0,
@@ -24,7 +25,9 @@ class PortfolioChart extends React.Component {
   }
 
   componentDidMount(){
-    this.checkPortfolio("1d", )
+    let owned_stocks = Object.keys(this.props.ownedStocks)
+    console.log(owned_stocks);
+    this.props.fetchBigPriceData(owned_stocks).then(data => this.setState({stockPrices : data}))
   }
 
   priceChange(){
@@ -154,6 +157,7 @@ class PortfolioChart extends React.Component {
           >
             5Y
             </button>
+            <button onClick={()=> console.log(this.state)}>test</button>
         </div>
       </div>
     );

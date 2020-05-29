@@ -1,19 +1,24 @@
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions'
 import Profile from './profile'
-import { fetchAllCompanies, fetchCompany } from '../../actions/company_actions';
+import { fetchCompany } from '../../actions/company_actions';
+import { fetchPriceData, fetchBigPriceData, fetchLatestPrice} from '../../actions/company_actions';
 
 const mstp = (state) => {
   return{
-    currentUser: state.entities.users[state.session.id]
+    balance: state.entities.users[state.session.id].buying_power,
+    transactions: state.entities.transactions,
+    currentUser: state.entities.users[state.session.id],
   }
 }
 
 const mdtp = dispatch => {
   return {
     logout: () => dispatch(logout()),
-    fetchAllCompanies: () => dispatch(fetchAllCompanies()),
-    fetchCompany: (ticker) => dispatch(fetchCompany(ticker))
+    fetchCompany: (ticker) => dispatch(fetchCompany(ticker)),
+    fetchLatestPrice: (symbol => dispatch(fetchLatestPrice(symbol))),
+    fetchPriceData: (symbol, range) => dispatch(fetchPriceData(symbol, range)),
+    fetchBigPriceData: (symbols) => dispatch(fetchBigPriceData(symbols)),
   }
 }
 

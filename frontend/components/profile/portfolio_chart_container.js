@@ -14,7 +14,7 @@ const mstp = (state) => {
 const mdtp = (dispatch) => {
   return {
     fetchPriceData: (symbol, range) => dispatch(fetchPriceData(symbol, range)),
-    fetchBigPriceData: (symbol, range) => dispatch(fetchBigPriceData(symbol, range)),
+    fetchBigPriceData: (symbols) => dispatch(fetchBigPriceData(symbols)),
   };
 };
 

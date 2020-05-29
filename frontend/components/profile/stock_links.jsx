@@ -5,15 +5,30 @@ class StockLinks extends React.Component{
   constructor(props){
     super(props)
     this.state ={
-
+      latestPrice:{}
     }
     this.sharesOwn = this.sharesOwn.bind(this);
     this.watchlistLinks= this.watchlistLinks.bind(this);
     this.portfolioLinks = this.portfolioLinks.bind(this);
   }
 
+  componentDidMount() {
+    let owned_stocks = Object.keys(this.props.ownedStocks)
+
+    for (let i = 0; i < owned_stocks.length; i++) {
+      const symbol = owned_stocks[i];
+      let newLatestPrice = this.state.latestPrice;
+      this.props.fetchLatestPrice(symbol).then(res => {
+        newLatestPrice[symbol] = Object.values(res).slice(1);
+        this.setState({
+          latestPrice: newLatestPrice
+        })
+      })
+    }
+  }
+
   sharesOwn(ticker){
-    let owned_stocks = this.props.owned_stocks;
+    let owned_stocks = this.props.ownedStocks;
     let shares = owned_stocks[ticker];
 
     if (shares > 1 ){
@@ -50,8 +65,11 @@ class StockLinks extends React.Component{
   portfolioLinks(){
     let watchlist = this.props.watchlist;
     let portfolio = [];
+    let data = (this.state.latestPrice)
+
     for (let i = 0; i < watchlist.length; i++) {
       if (this.sharesOwn(watchlist[i].ticker) !== undefined) {
+        
         portfolio.push(
           <Link
             key={watchlist[i].ticker}
@@ -61,6 +79,9 @@ class StockLinks extends React.Component{
             <div className="first-column">
               <p>{watchlist[i].ticker}</p>
               <p>{this.sharesOwn(watchlist[i].ticker)}</p>
+            </div>
+            <div className="second-column">
+              <p>${data[watchlist[i].ticker]}</p>
             </div>
           </Link>
         );
@@ -76,8 +97,8 @@ class StockLinks extends React.Component{
         {this.portfolioLinks()}
         <label className="stock-portfolio">Watchlist</label>
         {this.watchlistLinks()}
-        {/* <button onClick={()=> console.log(this.state)}>state</button>
-        <button onClick={()=>this.setState({companies: this.props.fetchCompany('AAPL')})}>hello</button> */}
+        {/* <button onClick={()=> console.log(this.state)}>state</button> */}
+        {/* <button onClick={()=>this.setState({companies: this.props.fetchCompany('AAPL')})}>hello</button> */}
       </div>
     );
   }

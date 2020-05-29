@@ -9,11 +9,30 @@ class Profile extends React.Component {
   constructor(props) {
     super(props)
     this.state ={
-      companies: []
+      stockPrices: {},
+      latestPrice: {}
     }
   }
 
+
+  // componentDidMount(){
+  //   let owned_stocks = Object.keys(this.props.ownedStocks)
+  //   // console.log(owned_stocks);
+  //   // this.props.fetchBigPriceData(owned_stocks).then(data => this.setState({stockPrices : data}))
+  //   for (let i = 0; i < owned_stocks.length; i++) {
+  //     const symbol = owned_stocks[i];
+  //     let newLatestPrice = this.state.latestPrice;
+  //     this.props.fetchLatestPrice(symbol).then(res=> {
+  //       newLatestPrice[symbol]= res;
+  //       this.setState({
+  //         latestPrice: newLatestPrice
+  //       })
+  //     })
+  //   }
+  // }
+
   render(){
+
     return (
       <div className="profile-container">
         <div className="profile-nav-container">
@@ -48,8 +67,8 @@ class Profile extends React.Component {
         </div>
         <div className="profile-4">
         </div>
-        {/* <button onClick={()=>this.props.fetchAllCompanies()}>TEST</button>
-        <button onClick={()=> console.log(this.state)}>HELLO</button> */}
+        {/* <button onClick={()=>this.props.fetchAllCompanies()}>TEST</button> */}
+        {/* <button onClick={()=> console.log(this.state)}>HELLO</button> */}
       </div>
     </div>
     )

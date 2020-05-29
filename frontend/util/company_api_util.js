@@ -20,11 +20,19 @@ export const fetchHistoricalPrices = (symbol, range) => {
   });
 };
 
-// for greater than one month 
-export const fetchBigHistoricalPrices = (symbol, range) => {
+export const fetchLatestPrice = (symbol) => {
   return $.ajax({
     method: 'GET',
-    url: `https://cloud.iexapis.com/stable/stock/${symbol}/chart/${range}/?chartCloseOnly=true&token=sk_182c581f47a940bdbdb2661ea5101724`,
+    url: `https://cloud.iexapis.com/stable/stock/${symbol}/quote/latestPrice?token=sk_182c581f47a940bdbdb2661ea5101724`
+  })
+}
+
+// for greater than one month 
+export const fetchBigHistoricalPrices = (symbols) => {
+  let symbolString = symbols.join(",")
+  return $.ajax({
+    method: 'GET',
+    url: `https://cloud.iexapis.com/stable/stock/market/batch?symbols=${symbolString}&types=chart&range=1d&chartCloseOnly=true&token=sk_182c581f47a940bdbdb2661ea5101724`,
   });
 };
 

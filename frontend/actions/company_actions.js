@@ -6,6 +6,7 @@ export const RECEIVE_COMPANY_KEY_STATS = "RECEIVE_COMPANY_KEY_STATS";
 export const RECEIVE_BIG_HISTORICAL_PRICES = "RECEIVE_BIG_HISTORICAL_PRICES";
 export const RECEIVE_COMPANY = "RECEIVE_COMPANY";
 export const RECEIVE_ALL_COMPANIES = "RECEIVE_ALL_COMPANIES";
+export const RECEIVE_LATEST_PRICE = "RECEIVE_LATEST_PRICE";
 
 const receiveCompany = (company) =>{
   return{
@@ -43,11 +44,24 @@ const receiveCompanyKeyStats = (keyStats) => {
   }
 }
 
-const receiveBigPriceHistory = (priceData) => {
+const receiveBigPriceHistory = (bigPriceData) => {
   return {
     type: RECEIVE_BIG_HISTORICAL_PRICES,
     bigPriceData
   }
+}
+
+const receiveLatestPrice = (latestPriceData) => {
+  return{
+    type: RECEIVE_LATEST_PRICE,
+    latestPriceData
+  }
+}
+
+export const fetchLatestPrice = (ticker) => (dispatch) =>{
+  return (
+    APICompUtil.fetchLatestPrice(ticker).then(res => dispatch(receiveLatestPrice(res)))
+  )
 }
 
 export const fetchCompany = (ticker) => (dispatch) => {
@@ -86,9 +100,9 @@ export const fetchCompanyKeyStats = (symbol) => dispatch => {
   )
 }
 
-export const fetchBigPriceData = (symbol, range) => dispatch => {
+export const fetchBigPriceData = (symbols) => dispatch => {
   return (
-    APICompUtil.fetchBigHistoricalPrices(symbol, range).then(BigPriceData => dispatch(receiveBigPriceHistory(BigPriceData)))
+    APICompUtil.fetchBigHistoricalPrices(symbols).then(BigPriceData => dispatch(receiveBigPriceHistory(BigPriceData)))
   )
 };
 
