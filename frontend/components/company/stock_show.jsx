@@ -12,8 +12,6 @@ class StockShow extends React.Component {
 
   render() {
 
- 
-
     return (
       <div className="profile-container">
         <div className="profile-nav-container">
@@ -24,6 +22,8 @@ class StockShow extends React.Component {
           </div>
          <Search/>
           <div className="nav-buttons">
+            <a target="_blank" href="https://github.com/Kaichloe">Github</a>
+            <a target="_blank" href="https://www.linkedin.com/in/kaiyip-ho-216230191/">LinkedIn</a>
             <Link className="home-button" to="/profile">Home</Link>
             <Link className="logout-button" to="/" onClick={this.props.logout}>Logout</Link>
           </div>

@@ -13,10 +13,10 @@ class StockLinks extends React.Component{
   }
 
   componentDidMount() {
-    let owned_stocks = Object.keys(this.props.ownedStocks)
-
-    for (let i = 0; i < owned_stocks.length; i++) {
-      const symbol = owned_stocks[i];
+    let watchlist = Object.values(this.props.watchlist)
+    // console.log(watchlist)
+    for (let i = 0; i < watchlist.length; i++) {
+      const symbol = watchlist[i].ticker;
       let newLatestPrice = this.state.latestPrice;
       this.props.fetchLatestPrice(symbol).then(res => {
         newLatestPrice[symbol] = Object.values(res).slice(1);
@@ -42,6 +42,8 @@ class StockLinks extends React.Component{
   watchlistLinks(){
     let watchlist = this.props.watchlist
     let watch = [];
+    let data = (this.state.latestPrice);
+
     for (let i = 0; i < watchlist.length; i++) {
       if (this.sharesOwn(watchlist[i].ticker) === undefined){
         watch.push(
@@ -52,7 +54,10 @@ class StockLinks extends React.Component{
           >
             <div className="first-column">
               <p>{watchlist[i].ticker}</p>
-              <p>{this.sharesOwn(watchlist[i].ticker)}</p>
+              <p className="shares-own">{this.sharesOwn(watchlist[i].ticker)}</p>
+            </div>
+            <div className="second-column">
+              <p className="latest-stock-price">${data[watchlist[i].ticker]}</p>
             </div>
           </Link>
         )
@@ -65,7 +70,7 @@ class StockLinks extends React.Component{
   portfolioLinks(){
     let watchlist = this.props.watchlist;
     let portfolio = [];
-    let data = (this.state.latestPrice)
+    let data = (this.state.latestPrice);
 
     for (let i = 0; i < watchlist.length; i++) {
       if (this.sharesOwn(watchlist[i].ticker) !== undefined) {
@@ -78,10 +83,10 @@ class StockLinks extends React.Component{
           >
             <div className="first-column">
               <p>{watchlist[i].ticker}</p>
-              <p>{this.sharesOwn(watchlist[i].ticker)}</p>
+              <p className="shares-own">{this.sharesOwn(watchlist[i].ticker)}</p>
             </div>
             <div className="second-column">
-              <p>${data[watchlist[i].ticker]}</p>
+              <p className="latest-stock-price">${data[watchlist[i].ticker]}</p>
             </div>
           </Link>
         );

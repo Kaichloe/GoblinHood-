@@ -31,6 +31,11 @@ class Profile extends React.Component {
   //   }
   // }
 
+  // darkModeOn(){
+  //   const body = document.body;
+  //   body.classList.toggle("dark-mode");
+  // }
+
   render(){
 
     return (
@@ -47,14 +52,16 @@ class Profile extends React.Component {
             /> */}
             <Search/>
             <div className="nav-buttons">
+              <a target="_blank" href="https://github.com/Kaichloe">Github</a>
+              <a target="_blank" href="https://www.linkedin.com/in/kaiyip-ho-216230191/">LinkedIn</a>
               <Link className="home-button" to="/profile">Home</Link>
-            <Link className="logout-button"to="/" onClick={this.props.logout}>Logout</Link>
+              <Link className="logout-button"to="/" onClick={this.props.logout}>Logout</Link>
             </div>
         </div>
       <div className="profile">
         <div className="profile-1">
         </div>
-        <div className="main-container profile 2">
+        <div className="main-container profile-2">
           <div className="graph-container">
             <PortfolioChartContainer/>
           </div>

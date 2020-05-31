@@ -18,6 +18,20 @@ class NewsForm extends React.Component{
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.symbol !== this.props.match.params.symbol) {
+      const symbol = this.props.symbol;
+      const pageOn = this.props.match.url;
+      const stock = "stock"
+
+      if (pageOn === "/profile") {
+        this.props.fetchNews(stock)
+      } else {
+        this.props.fetchNews(symbol)
+      }
+    }
+  }
+  
   displayNews(){
     if (this.props.news === []){
       return []

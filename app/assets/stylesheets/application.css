@@ -24,6 +24,9 @@ body {
   height: 100vh;
   width: 100%;
   margin: 0;
+  /* background-color: #1b1b1d;
+  /* color: #20ce99; */
+  /* color:antiquewhite; */ 
 }
 
 input, h1, p, div {
@@ -41,6 +44,10 @@ input:focus{
 
 div, p, button, input, span{
   font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
+}
+
+button{
+  background-color: antiquewhite;
 }
 
 

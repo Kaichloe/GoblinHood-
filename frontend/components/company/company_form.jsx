@@ -18,6 +18,17 @@ class CompanyForm extends React.Component {
       .then((res) => this.setState(res));
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.symbol !== this.props.match.params.symbol) {
+      this.props
+        .fetchCompanyBasics(this.props.match.params.symbol)
+        .then((res) => this.setState(res));
+      this.props
+        .fetchCompanyKeyStats(this.props.match.params.symbol)
+        .then((res) => this.setState(res));
+    }
+  }
+
   formatNumber(num) {
     const _suffix = ["K", "M", "B", "T"];
     if (num > 1000) {

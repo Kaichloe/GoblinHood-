@@ -81,7 +81,7 @@ li {
 .app-name{
   font-family: "Maison Neue", "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 23px;
-  font-weight: 350;
+  font-weight: bolder;
   padding-top: 10px;
 }
 
@@ -152,6 +152,14 @@ li {
   text-decoration: none;
   font-weight: 500px;
   font-size: 14px;
+}
+
+.nav-buttons > a {
+  color:black;
+}
+
+.nav-buttons > a:hover{
+  color: #20ce99;
 }
 
 

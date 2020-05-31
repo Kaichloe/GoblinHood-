@@ -11,17 +11,22 @@
   justify-content: space-evenly;
   width: 100%;
   padding-top: 25px;
-  /* color: whitesmoke; */
+  max-width: 2000px;
 }
 
 .nav-buttons{
   display: flex;
-  width: 15%;
-  justify-content: flex-end;
+}
+
+.nav-buttons > a {
+  color:black;
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: bold;
 }
 
 .home-button{
-  margin-right: 20px;
+  /* margin-right: 20px; */
   text-decoration: none;
   /* color: whitesmoke; */
   font-weight: bold;
@@ -61,8 +66,11 @@
   flex-direction: column; 
   justify-content: center;
   width: 100%;
-  /* margin-right: 100px; */
-  margin-top: 50px;
+  margin-right: 100px;
+  margin-top: 75px;
+}
+.profile-2{
+  max-width: 1000px;
 }
 
 /* .profile-3{
@@ -72,7 +80,8 @@
 } */
 
 .profile-3{
-  margin-top: 50px;
+  margin-top: 75px;
+  margin-left: 50px;
 }
 
 .stock-links-container{
@@ -105,15 +114,16 @@
 
 .stock-links{
   display: flex;
-  flex-direction: column;
   font-size: 14px;
   font-family: "DIN Web", "Hiragino Sans GB", STXihei, 华文细黑, "Microsoft YaHei", 微软雅黑, sans-serif;
   text-decoration: none;
+  padding-right: 15px;
   padding-left: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   color:black;
   font-weight: 400;
+  justify-content: space-between;
 }
 
 .stock-links:hover{

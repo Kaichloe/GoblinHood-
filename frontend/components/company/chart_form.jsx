@@ -20,8 +20,9 @@ class ChartForm extends React.Component {
       price: 0,
       defaultPrice: 0,
       openPrice: 0,
-      sharesOwned: '',
-      watched: '',
+      sharesOwned: "",
+      watched: "",
+      companyName: "",
     };
     this.handleWatchlistButton = this.handleWatchlistButton.bind(this);
     this.watchlistButton= this.watchlistButton.bind(this);
@@ -64,7 +65,37 @@ class ChartForm extends React.Component {
       .then((data) =>
         this.setState({ buying_power: parseFloat(this.props.balance) })
       );
+      this.checkWatched()
+      this.props.fetchCompanyBasics(this.props.symbol).then(res => this.setState({companyName: res.basics.companyName}))
+  }
+
+  componentDidUpdate(prevProps){
+    if (prevProps.match.params.symbol !== this.props.match.params.symbol) {
+      this.props
+        .fetchPriceData(this.props.match.params.symbol, "1D")
+        // .then((data)=> console.log(data))
+        .then((data) => this.setState({ oneDayData: data }))
+        .then((data) =>
+          this.setState({
+            price: parseFloat(this.props.defaultPrice.close.toFixed(2)),
+          })
+        )
+        .then((data) =>
+          this.setState({
+            defaultPrice: parseFloat(this.props.defaultPrice.close.toFixed(2)),
+          })
+        )
+        .then((data) =>
+          this.setState({
+            openPrice: parseFloat(this.props.openPrice.open.toFixed(2)),
+          })
+        )
+        .then((data) =>
+          this.setState({ buying_power: parseFloat(this.props.balance) })
+        );
       this.checkWatched();
+      this.props.fetchCompanyBasics(this.props.match.params.symbol).then(res => this.setState({ companyName: res.basics.companyName }))
+    }
   }
 
   checkWatched(){
@@ -415,7 +446,7 @@ class ChartForm extends React.Component {
     return (
       <>
         <div className="StockPage">
-          <h3 className="stockname">{this.props.companyName}</h3>
+          <h3 className="stockname">{this.state.companyName}</h3>
 
           <div id="price" className="stock-price">
             ${this.state.price}
