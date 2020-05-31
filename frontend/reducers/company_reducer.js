@@ -19,7 +19,6 @@ const companiesReducer = (oldState = {}, action) => {
         }
       }
       return data ;
-      // return action.priceData;
     default:
       return oldState;
   }

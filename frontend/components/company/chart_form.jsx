@@ -360,7 +360,7 @@ class ChartForm extends React.Component {
     } else if (input === "5Y") {
       if (this.state.fiveYearData === 0) {
         this.props
-          .fetchPriceData(this.props.symbol, "5dm")
+          .fetchPriceData(this.props.symbol, "5y")
           .then((data) => this.setState({ fiveYearData: data }));
         data = this.state.fiveYearData.priceData;
       } else {
@@ -504,7 +504,7 @@ class ChartForm extends React.Component {
             >
               5Y
             </button>
-            {/* <button onClick={()=>console.log(this.state)}></button> */}
+            <button onClick={()=>console.log(this.state)}></button>
             {/* <button onClick={() => console.log(this.setState({watched: false}))}>TEST</button>
           <button onClick={() => console.log(this.state)}>TEST2</button> */}
           </div>
