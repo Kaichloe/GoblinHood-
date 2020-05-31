@@ -26,7 +26,7 @@ class PortfolioChart extends React.Component {
 
   componentDidMount(){
     let owned_stocks = Object.keys(this.props.ownedStocks)
-    console.log(owned_stocks);
+    // console.log(owned_stocks);
     this.props.fetchBigPriceData(owned_stocks).then(data => this.setState({stockPrices : data}))
   }
 

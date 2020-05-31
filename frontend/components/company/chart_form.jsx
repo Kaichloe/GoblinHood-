@@ -504,7 +504,7 @@ class ChartForm extends React.Component {
             >
               5Y
             </button>
-            <button onClick={()=>console.log(this.state)}></button>
+            {/* <button onClick={()=>console.log(this.state)}></button> */}
             {/* <button onClick={() => console.log(this.setState({watched: false}))}>TEST</button>
           <button onClick={() => console.log(this.state)}>TEST2</button> */}
           </div>
