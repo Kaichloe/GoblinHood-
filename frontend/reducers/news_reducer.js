@@ -4,7 +4,7 @@ const NewsReducer = (oldState=[], action) =>{
   Object.freeze(oldState);
   switch (action.type) {
     case RECEIVE_NEWS:
-      return action.news.articles;
+      return action.news;
     default:
       return oldState;
   };

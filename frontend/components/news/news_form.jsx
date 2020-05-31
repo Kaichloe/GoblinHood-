@@ -9,7 +9,7 @@ class NewsForm extends React.Component{
   componentDidMount(){
     const symbol = this.props.symbol;
     const pageOn = this.props.match.url;
-    const stock = "stock"
+    const stock = ""
     
     if (pageOn === "/profile") {
       this.props.fetchNews(stock)
@@ -41,10 +41,10 @@ class NewsForm extends React.Component{
           <div className="news-box" key={`el+${i}`} >
             <a className="news-link" target="_blank" href={el.url}></a>
             <div className="news-text">   
-              <span className="news-source">{el.source.name}</span>
-              <span className="news-title">{el.title}</span>
+              <span className="news-source">{el.source}</span>
+              <span className="news-title">{el.headline}</span>
             </div>
-            <img className="news-img" src={el.urlToImage}/>
+            <img className="news-img" src={el.image}/>
           </div>
         )
       })

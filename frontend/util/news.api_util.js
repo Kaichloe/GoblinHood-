@@ -4,6 +4,6 @@
 export const fetchNews = (symbol) => {
   return $.ajax({
     method: "GET",
-    url: `https://rocky-badlands-69033.herokuapp.com/https://newsapi.org/v2/everything?q=${symbol}&pageSize=7&apiKey=825e21b97700434ba40c7e1c9bd92627`,
+    url: `https://cloud.iexapis.com/stable/time-series/news/${symbol}?range=1m&limit=7&token=sk_182c581f47a940bdbdb2661ea5101724`,
   });
 }
