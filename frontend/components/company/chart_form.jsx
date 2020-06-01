@@ -66,6 +66,11 @@ class ChartForm extends React.Component {
         this.setState({ buying_power: parseFloat(this.props.balance) })
       );
       this.checkWatched()
+
+      this.props
+          .fetchPriceData(this.props.symbol, "5y")
+          .then((data) => this.setState({ fiveYearData: data }));
+
       this.props.fetchCompanyBasics(this.props.symbol).then(res => this.setState({companyName: res.basics.companyName}))
   }
 
@@ -179,12 +184,7 @@ class ChartForm extends React.Component {
   }
 
   iterator(timeFrame) {
-    if (this.state.fiveYearData === 0){
-      this.props
-        .fetchPriceData(this.props.symbol, "5y")
-        .then((data) => this.setState({ fiveYearData: data }));
-    }
-
+    
     let data = this.state.fiveYearData.priceData;
     let length = data.length;
     let newData;
@@ -358,14 +358,7 @@ class ChartForm extends React.Component {
           data = this.state.fiveDayData.priceData;
         }
     } else if (input === "5Y") {
-      if (this.state.fiveYearData === 0) {
-        this.props
-          .fetchPriceData(this.props.symbol, "5y")
-          .then((data) => this.setState({ fiveYearData: data }));
         data = this.state.fiveYearData.priceData;
-      } else {
-        data = this.state.fiveYearData.priceData;
-      }
     } else if (input === "1Y") {
       if (this.state.oneYearData === 0){
         data = this.iterator("oneYear")
