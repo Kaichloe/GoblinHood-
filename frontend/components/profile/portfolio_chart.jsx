@@ -14,16 +14,16 @@ class PortfolioChart extends React.Component {
       fiveDayData: {},
       stockPrices: {},
       currentBuyingPower: 0,
-      price: 0,
+      // price: 0,
       openPrice: 0,
-      defaultPrice: 0,
+      // defaultPrice: 0,
     };
 
     this.priceChange = this.priceChange.bind(this);
     this.percentChange = this.percentChange.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.handleLeave = this.handleLeave.bind(this);
-    // this.customToolTip = this.customToolTip.bind(this);
+    this.customToolTip = this.customToolTip.bind(this);
   }
 
   componentDidMount() {
@@ -63,7 +63,7 @@ class PortfolioChart extends React.Component {
         }
       });
       let stockFiltered = stockPrices.filter((data) => data !== undefined);
-      stockFiltered.map((stock) => { 
+      stockFiltered.map((stock) => {
         let formattedDate = `${stock.label} ${stock.date}`;
         let totalPrice = stock.close * ownedStocks[ticker];
         Chartdata[formattedDate] = {
@@ -84,7 +84,7 @@ class PortfolioChart extends React.Component {
   }
 
   priceChange() {
-    let change = (this.state.price - this.state.openPrice).toFixed(2);
+    let change = Number((this.state.price - this.state.defaultPrice).toFixed(2).toLocaleString());
 
     if (change > 0) {
       return `+$${change}`;
@@ -95,7 +95,7 @@ class PortfolioChart extends React.Component {
 
   percentChange() {
     let percent = (
-      ((this.state.price - this.state.openPrice) / this.state.openPrice) *
+      ((this.state.price - this.state.defaultPrice) / this.state.defaultPrice) *
       100
     ).toFixed(2);
 
@@ -107,11 +107,7 @@ class PortfolioChart extends React.Component {
   }
 
   customToolTip(e) {
-      return (
-        <div className="graph-tooltip">
-          {e.formattedDate}}
-        </div>
-      );
+    return <div className="graph-tooltip">{e.formattedDate}}</div>;
   }
 
   handleLeave() {
@@ -127,8 +123,16 @@ class PortfolioChart extends React.Component {
     // ) {
     //   this.setState({ price: e.activePayload[0].payload.price.toFixed(2) });
     // }
-    if (e.isTooltipActive !== false) {
-      this.setState({price: parseFloat(e.activePayload[0].payload.price.toFixed(2))})
+    this.setState({
+      price: parseFloat(e.activePayload[0].payload.price.toFixed(2)),
+    });
+    e.isTooltipActive = true;
+    console.log(e);
+  }
+
+  customTooltip(e) {
+    if (e.label !== undefined) {
+      return <div>{e.label}</div>;
     }
   }
 
@@ -165,17 +169,27 @@ class PortfolioChart extends React.Component {
             strokeWidth={2}
             dot={false}
           />
-          <XAxis dataKey="formattedDate" hide={true} />
+          <XAxis
+            dataKey="formattedDate"
+            hide={true}
+            allowDataOverflow={false}
+          />
           <YAxis domain={["dataMin", "dataMax"]} hide={true} />
           <Tooltip
-            contentStyle={{ border: "0", backgroundColor: "transparent" }}
-            // active={true}
-            position={{ y: 1 }}
-            formatter={(value, name, props) => {
-              return [""];
-            }}
-            
-            cursor={{ stroke: "Gainsboro", strokeWidth: 2 }}
+            // contentStyle={{ border: "0", backgroundColor: "transparent" }}
+            // // active={true}
+            // position={{ y: 1 }}
+            // formatter={(value, name, props) => {
+            //   return [""];
+            // }}
+
+            position={{ y: 0 }}
+            offset={-50}
+            isAnimationActive={false}
+            content={this.customToolTip}
+            wrapperStyle={{ top: -10 }}
+            // isAnimationActive={false}
+            // cursor={{ stroke: "Gainsboro", strokeWidth: 2 }}
           />
         </LineChart>
       </ResponsiveContainer>
@@ -183,7 +197,7 @@ class PortfolioChart extends React.Component {
 
     return (
       <div className="StockPage">
-        <h3 className="stockname">${this.state.price}</h3>
+        <h3 className="stockname">${Number(this.state.price).toLocaleString()}</h3>
 
         {/* <div id="price" className="stock-price">
           ${this.state.price}
@@ -241,12 +255,12 @@ class PortfolioChart extends React.Component {
           >
             5Y
           </button>
-          <button onClick={() => console.log(this.state)}>test</button>
+          {/* <button onClick={() => console.log(this.state)}>test</button>
           <button
             onClick={() => console.log(Object.entries(this.state.stockPrices))}
           ></button>
           <button onClick={() => console.log(owned_stocks[ticker])}></button>
-          <button onClick={() => console.log(last)}></button>
+          <button onClick={() => console.log(last)}></button> */}
         </div>
       </div>
     );
