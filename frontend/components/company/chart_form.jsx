@@ -413,7 +413,7 @@ class ChartForm extends React.Component {
     }
 
     const stockChart = (
-      <ResponsiveContainer >
+      <ResponsiveContainer>
         <LineChart
           margin={{ top: 40, right: 30, left: 30, bottom: 50 }}
           data={data}
@@ -428,11 +428,15 @@ class ChartForm extends React.Component {
             strokeWidth={2}
             dot={false}
           />
-          <XAxis dataKey="customDate" hide={true} allowDataOverflow={false} />
+          <XAxis
+            dataKey="customDate"
+            hide={true}
+            allowDataOverflow={false}
+          />
           <YAxis domain={["dataMin", "dataMax"]} hide={true} />
           <Tooltip
             contentStyle={{ border: "0", backgroundColor: "transparent" }}
-            position={{ y: 1}}
+            position={{ y: 1 }}
             formatter={(value, name, props) => {
               return [""];
             }}
@@ -504,7 +508,6 @@ class ChartForm extends React.Component {
             >
               5Y
             </button>
-            <button onClick={()=>console.log(this.state)}></button>
             {/* <button onClick={() => console.log(this.setState({watched: false}))}>TEST</button>
           <button onClick={() => console.log(this.state)}>TEST2</button> */}
           </div>

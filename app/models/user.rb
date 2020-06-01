@@ -61,6 +61,9 @@ class User < ApplicationRecord
         owned_stocks[transaction.ticker] -= transaction.quantity
       end
     end
+
+    owned_stocks.reject! {|k| owned_stocks[k]=== 0}
+    
     return owned_stocks
   end
   

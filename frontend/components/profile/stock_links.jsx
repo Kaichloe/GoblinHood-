@@ -53,7 +53,7 @@ class StockLinks extends React.Component{
             to={`/profile/stocks/${watchlist[i].ticker}`}
           >
             <div className="first-column">
-              <p>{watchlist[i].ticker}</p>
+              <p className="watch-ticker">{watchlist[i].ticker}</p>
               <p className="shares-own">{this.sharesOwn(watchlist[i].ticker)}</p>
             </div>
             <div className="second-column">
@@ -82,8 +82,10 @@ class StockLinks extends React.Component{
             to={`/profile/stocks/${watchlist[i].ticker}`}
           >
             <div className="first-column">
-              <p>{watchlist[i].ticker}</p>
-              <p className="shares-own">{this.sharesOwn(watchlist[i].ticker)}</p>
+              <p className="watch-ticker">{watchlist[i].ticker}</p>
+              <p className="shares-own">
+                {this.sharesOwn(watchlist[i].ticker)}
+              </p>
             </div>
             <div className="second-column">
               <p className="latest-stock-price">${data[watchlist[i].ticker]}</p>

@@ -7,7 +7,8 @@ const mstp = (state) => {
     balance: state.entities.users[state.session.id].buying_power,
     transactions: state.entities.transactions,
     currentUser: state.entities.users[state.session.id],
-    ownedStocks: state.entities.users[state.session.id].owned_stocks
+    ownedStocks: state.entities.users[state.session.id].owned_stocks,
+    initStockValue: state.entities.users[state.session.id].portfolio_value,
   };
 };
 
