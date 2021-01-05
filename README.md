@@ -15,5 +15,9 @@ GoblinHood is a clone of the popular commision-free trading app, RobinHood. I ch
     * News Data: News API
     
 ## Features 
-
-REWORKING 
+  User Authentication 
+  Search Bar
+  Data Visualization 
+  Real World News
+  
+  
