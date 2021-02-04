@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import NewsForm from './news_form';
-import { fetchNews } from '../../actions/news_actions';
+import { fetchNews, fetchStockNews } from '../../actions/news_actions';
 import { withRouter } from 'react-router-dom';
 
 
@@ -13,7 +13,8 @@ const mstp = (state, ownProps) => {
 
 const mdtp = dispatch => {
   return {
-    fetchNews: (symbol)=> dispatch(fetchNews(symbol))
+    fetchNews: (symbol)=> dispatch(fetchNews(symbol)),
+    fetchStockNews: (symbol) => dispatch(fetchStockNews(symbol))
   }
 }
 

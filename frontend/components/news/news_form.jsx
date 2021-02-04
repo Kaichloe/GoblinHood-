@@ -14,7 +14,7 @@ class NewsForm extends React.Component{
     if (pageOn === "/profile") {
       this.props.fetchNews(stock)
     } else {
-      this.props.fetchNews(symbol)
+      this.props.fetchStockNews(symbol)
     }
   }
 
@@ -27,7 +27,7 @@ class NewsForm extends React.Component{
       if (pageOn === "/profile") {
         this.props.fetchNews(stock)
       } else {
-        this.props.fetchNews(symbol)
+        this.props.fetchStockNews(symbol)
       }
     }
   }
