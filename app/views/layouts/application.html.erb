@@ -5,7 +5,10 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta property="og:title" content="GoblinHood"/>
+    <meta property="og:image" content="<%=image_url('feature.png')%>"/>
+    <meta property="og:description" 
+    content= "GoblinHood is a clone of RobinHood built with Ruby, Rails, React, and Redux" />
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %> 
     
