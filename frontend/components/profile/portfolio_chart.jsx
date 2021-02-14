@@ -107,7 +107,7 @@ class PortfolioChart extends React.Component {
   }
 
   customToolTip(e) {
-    return <div className="graph-tooltip">{e.formattedDate}}</div>;
+    return <div className="graph-tooltip">{e.formattedDate}</div>;
   }
 
   handleLeave() {
