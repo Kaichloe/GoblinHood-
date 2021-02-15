@@ -16,12 +16,12 @@ GoblinHood is a clone of the popular commision-free trading app, RobinHood. I ch
     
 ## Features 
 
- ## User Authentication 
+  ## User Authentication 
   
- I used the Ruby BCrypt gem, a hash algorithm to safely encrypt the user's password when logging on and making a new account. I also provided a demo user 
- account for users to try the app before joining.  
+  I used the Ruby BCrypt gem, a hash algorithm to safely encrypt the user's password when logging on and making a new account. I also provided a demo user 
+  account for users to try the app before joining.  
    
- ##Search Bar
+  ## Search Bar
   
   The search bar allows users to search for companies by either the company name or ticker. The user's input queries the database and returns the closest      
   matches.
