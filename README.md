@@ -15,6 +15,7 @@ GoblinHood is a clone of the popular commision-free trading app, RobinHood. I ch
     * News Data: IEX TRading API (NEWS)
     
 ## Features 
+
   *User Authentication 
   
    I used the Ruby BCrypt gem, a hash algorithm to safely encrypt the user's password when logging on and making a new account. I also provided a demo user account    for users to try the app before joining.  
