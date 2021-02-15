@@ -1,7 +1,5 @@
 import { connect } from "react-redux";
 import StockShow from "./stock_show";
-import { fetchPriceData } from "../../actions/company_actions";
-import { createTransaction } from "../../actions/transaction_actions";
 import { withRouter } from "react-router-dom";
 
 const mstp = (state, ownProps) => {
@@ -13,7 +11,6 @@ const mstp = (state, ownProps) => {
 
 const mdtp = (dispatch) => {
   return {
-
   };
 };
 

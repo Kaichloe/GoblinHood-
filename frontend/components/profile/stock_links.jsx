@@ -14,7 +14,6 @@ class StockLinks extends React.Component{
 
   componentDidMount() {
     let watchlist = Object.values(this.props.watchlist)
-    // console.log(watchlist)
     for (let i = 0; i < watchlist.length; i++) {
       const symbol = watchlist[i].ticker;
       let newLatestPrice = this.state.latestPrice;
@@ -104,8 +103,6 @@ class StockLinks extends React.Component{
         {this.portfolioLinks()}
         <label className="stock-portfolio">Watchlist</label>
         {this.watchlistLinks()}
-        {/* <button onClick={()=> console.log(this.state)}>state</button> */}
-        {/* <button onClick={()=>this.setState({companies: this.props.fetchCompany('AAPL')})}>hello</button> */}
       </div>
     );
   }

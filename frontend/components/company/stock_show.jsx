@@ -43,7 +43,6 @@ class StockShow extends React.Component {
             </div>
           </div>
           <div className="profile-3">
-            {/* <StockLinks /> */}
           </div>
           <div className="profile-4">
           </div>

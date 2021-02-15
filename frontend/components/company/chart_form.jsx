@@ -1,7 +1,6 @@
 import React from 'react'
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { withRouter } from 'react-router-dom';
-// import Odometer from 'react-odometerjs';
 
 
 class ChartForm extends React.Component {
@@ -38,14 +37,9 @@ class ChartForm extends React.Component {
     this.percentChange = this.percentChange.bind(this);
   }
 
-  // componentDidUpdate(){
-  //   this.checkWatched();
-  // }
-
   componentDidMount() {
     this.props
       .fetchPriceData(this.props.symbol, "1D")
-        // .then((data)=> console.log(data))
       .then((data) => this.setState({ oneDayData: data }))
       .then((data) =>
         this.setState({
@@ -78,7 +72,6 @@ class ChartForm extends React.Component {
     if (prevProps.match.params.symbol !== this.props.match.params.symbol) {
       this.props
         .fetchPriceData(this.props.match.params.symbol, "1D")
-        // .then((data)=> console.log(data))
         .then((data) => this.setState({ oneDayData: data }))
         .then((data) =>
           this.setState({
@@ -115,13 +108,11 @@ class ChartForm extends React.Component {
   }
 
   setWatching(){
-    // debugger
     if (this.state.form = "BUY" && this.state.watched === false ){
       let watchlist_params = {
         user_id: this.props.currentUserId,
         ticker: this.props.symbol
       }
-      // console.log(watchlist_params)
       this.props.createWatchStock(watchlist_params).then((res)=>this.setState({ watched: true}))
     }
   }
@@ -157,7 +148,6 @@ class ChartForm extends React.Component {
         this.props.createWatchStock(watchlist_params)
         this.setState({watched: true})
       } else if (input === "unwatch") {
-        // console.log(watchlist_params)
         this.props.destroyWatchStock(watchlist_params)
         this.setState({watched: false})
       }
@@ -228,7 +218,6 @@ class ChartForm extends React.Component {
 
   handleTransaction(e) {
     e.preventDefault();
-    // debugger
     const transactionParams = {
       user_id: this.props.currentUserId,
       ticker: this.props.symbol,
@@ -238,11 +227,8 @@ class ChartForm extends React.Component {
     };
     const currentForm = this.state.form;
 
-    // console.log(this.state.form);
     this.props.createTransaction(transactionParams)
-    // .then(() => console.log(this.state.form))
     .then(()=> this.setWatching())
-    // .then(() => console.log(this.state.form))
     .then(()=> this.setState({shares: "", form: currentForm}))
     
   }
@@ -330,8 +316,6 @@ class ChartForm extends React.Component {
 
   handleLeave() {
     let defaultPrice = this.state.defaultPrice;
-    // console.log(defaultPrice)
-    // console.log(this.props.openPrice.open)
     this.setState({ price: defaultPrice });
   }
 
@@ -397,7 +381,6 @@ class ChartForm extends React.Component {
     } else if (time === "1W"){
       data = this.state.fiveDayData.priceData;
     }
-    //red if stock ends lowers than it is
     let color;
     if (data !== undefined && data[0].open > data.slice(-1)[0].close) {
       color = "#ff0000";
@@ -450,7 +433,6 @@ class ChartForm extends React.Component {
           </div>
           <div className="stock-change-container">
             <div className="stock-change">
-              {/* ${(this.state.price - this.state.openPrice).toFixed(2)} */}
               {this.priceChange()}
             </div>
             <div className="stock-change-percent">{this.percentChange()}</div>
@@ -501,8 +483,6 @@ class ChartForm extends React.Component {
             >
               5Y
             </button>
-            {/* <button onClick={() => console.log(this.setState({watched: false}))}>TEST</button>
-          <button onClick={() => console.log(this.state)}>TEST2</button> */}
           </div>
         </div>
         <div className="transaction-container">
@@ -567,7 +547,6 @@ class ChartForm extends React.Component {
             <div className="transaction-watchlist-button">
               {this.watchlistButton()}
             </div>
-            {/* <button onClick={()=> console.log(this.state)}></button> */}
           </form>
         </div>
       </>

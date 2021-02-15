@@ -6,21 +6,12 @@ class PortfolioChart extends React.Component {
     super(props);
     this.state = {
       time: "1D",
-      oneYearData: {},
-      oneMonthData: {},
-      threeMonthData: {},
-      fiveYearData: {},
-      oneDayData: {},
-      fiveDayData: {},
       stockPrices: {},
       currentBuyingPower: 0,
-      // price: 0,
       openPrice: 0,
-      // defaultPrice: 0,
     };
 
     this.priceChange = this.priceChange.bind(this);
-    this.percentChange = this.percentChange.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.handleLeave = this.handleLeave.bind(this);
     this.customToolTip = this.customToolTip.bind(this);
@@ -83,26 +74,15 @@ class PortfolioChart extends React.Component {
     return allData.map((data, i) => Object.assign(data, { i }));
   }
 
+
+
   priceChange() {
     let change = Number((this.state.price - this.state.defaultPrice).toFixed(2).toLocaleString());
 
     if (change > 0) {
       return `+$${change}`;
     } else {
-      return `-$${change}`;
-    }
-  }
-
-  percentChange() {
-    let percent = (
-      ((this.state.price - this.state.defaultPrice) / this.state.defaultPrice) *
-      100
-    ).toFixed(2);
-
-    if (percent > 0) {
-      return `[+${percent}%]`;
-    } else {
-      return `[-${percent}%]`;
+      return `$${change}`;
     }
   }
 
@@ -116,18 +96,10 @@ class PortfolioChart extends React.Component {
   }
 
   handleMove(e) {
-    // if (
-    //   e.activePayload !== undefined &&
-    //   e.activePayload !== null &&
-    //   e.activePayload[0].payload.close !== null
-    // ) {
-    //   this.setState({ price: e.activePayload[0].payload.price.toFixed(2) });
-    // }
     this.setState({
       price: parseFloat(e.activePayload[0].payload.price.toFixed(2)),
     });
     e.isTooltipActive = true;
-    console.log(e);
   }
 
   customTooltip(e) {
@@ -137,21 +109,10 @@ class PortfolioChart extends React.Component {
   }
 
   render() {
-    let ticker = "AAPL";
     let owned_stocks = this.props.ownedStocks;
     let data = this.handlePortfolioValue();
     let last = data.slice(-1)[0];
     let color = "#21ce99";
-    // let color;
-    // if (
-    //   data !== undefined &&
-    //   parseFloat(this.props.balance + this.props.initStockValue).toFixed(2) <
-    //     last.price
-    // ) {
-    //   color = "#ff0000";
-    // } else {
-    //   color = "#21ce99";
-    // }
 
     const profileChart = (
       <ResponsiveContainer>
@@ -176,20 +137,11 @@ class PortfolioChart extends React.Component {
           />
           <YAxis domain={["dataMin", "dataMax"]} hide={true} />
           <Tooltip
-            // contentStyle={{ border: "0", backgroundColor: "transparent" }}
-            // // active={true}
-            // position={{ y: 1 }}
-            // formatter={(value, name, props) => {
-            //   return [""];
-            // }}
-
             position={{ y: 0 }}
             offset={-50}
             isAnimationActive={false}
             content={this.customToolTip}
             wrapperStyle={{ top: -10 }}
-            // isAnimationActive={false}
-            // cursor={{ stroke: "Gainsboro", strokeWidth: 2 }}
           />
         </LineChart>
       </ResponsiveContainer>
@@ -199,69 +151,14 @@ class PortfolioChart extends React.Component {
       <div className="StockPage">
         <h3 className="stockname">${Number(this.state.price).toLocaleString()}</h3>
 
-        {/* <div id="price" className="stock-price">
-          ${this.state.price}
-        </div> */}
         <div className="stock-change-container">
           <div className="stock-change">
-            {/* ${(this.state.price - this.state.openPrice).toFixed(2)} */}
             {this.priceChange()}
           </div>
-          <div className="stock-change-percent">{this.percentChange()}</div>
+
         </div>
 
         <div className="StockChart">{profileChart}</div>
-
-        <div className="chart-buttons-container">
-          <button
-            id="button-1"
-            className="chart-buttons"
-            onClick={() => this.changeDate("1D")}
-          >
-            1D
-          </button>
-          <button
-            id="button-2"
-            className="chart-buttons"
-            onClick={() => this.changeDate("1W")}
-          >
-            1W
-          </button>
-          <button
-            id="button-3"
-            className="chart-buttons"
-            onClick={() => this.changeDate("1M")}
-          >
-            1M
-          </button>
-          <button
-            id="button-3"
-            className="chart-buttons"
-            onClick={() => this.changeDate("3M")}
-          >
-            3M
-          </button>
-          <button
-            id="button-4"
-            className="chart-buttons"
-            onClick={() => this.changeDate("1Y")}
-          >
-            1Y
-          </button>
-          <button
-            id="button-5"
-            className="chart-buttons"
-            onClick={() => this.changeDate("5Y")}
-          >
-            5Y
-          </button>
-          {/* <button onClick={() => console.log(this.state)}>test</button>
-          <button
-            onClick={() => console.log(Object.entries(this.state.stockPrices))}
-          ></button>
-          <button onClick={() => console.log(owned_stocks[ticker])}></button>
-          <button onClick={() => console.log(last)}></button> */}
-        </div>
       </div>
     );
   }
