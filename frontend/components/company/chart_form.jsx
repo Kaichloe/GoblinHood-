@@ -235,12 +235,18 @@ class ChartForm extends React.Component {
 
   renderStockOrFunds(){
     let allStocks = this.props.currentUser.owned_stocks;
+    let allStocksPrice = this.props.currentUser.owned_stocks_value;
     let ticker = this.props.symbol;
     let stockTickerCount = allStocks[ticker];
-
+    let stockTickerPrice = (allStocksPrice[ticker] / stockTickerCount).toFixed(2);
+    let pricePerShare;
     if (stockTickerCount === undefined){
-      stockTickerCount = 0
+      stockTickerCount = 0;
+      pricePerShare="";
+    } else {
+      pricePerShare = `at $${stockTickerPrice} per share`
     }
+
 
     if (this.state.form === "BUY"){
       return (
@@ -254,7 +260,7 @@ class ChartForm extends React.Component {
     } else {
       return (
       <div className="transaction-shares">
-        <p className="transaction-shares-count">You own {stockTickerCount} Shares</p>
+        <p className="transaction-shares-count">You own {stockTickerCount} Shares {pricePerShare}</p>
       </div>
       )
     }

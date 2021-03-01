@@ -1,5 +1,5 @@
 
-json.(user, :id, :first_name, :last_name, :buying_power,:email, :portfolio_value, :owned_stocks, :created_at)
+json.(user, :id, :first_name, :last_name, :buying_power,:email, :portfolio_value, :owned_stocks, :owned_stocks_value,:created_at)
 
 json.transactions user.transactions do |transaction|
     json.(transaction,:user_id, :transaction_type, :ticker, :quantity, :purchase_price, :created_at)

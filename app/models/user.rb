@@ -66,7 +66,22 @@ class User < ApplicationRecord
     
     return owned_stocks
   end
-  
+
+  def owned_stocks_value
+    owned_stocks_value = Hash.new(0)
+    self.transactions.each do |transaction|
+      if transaction.transaction_type == "BUY"
+        owned_stocks_value[transaction.ticker] += (transaction.quantity * transaction.purchase_price)
+      elsif transaction.transaction_type == "SELL"
+        owned_stocks_value[transaction.ticker] -= (transaction.quantity * transaction.purchase_price)
+      end
+    end
+
+    owned_stocks_value.reject! {|k| owned_stocks_value[k] === 0}
+
+    return owned_stocks_value
+  end
+
   private
 
   def ensure_session_token

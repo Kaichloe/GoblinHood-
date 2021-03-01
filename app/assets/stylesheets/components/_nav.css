@@ -83,6 +83,8 @@ li {
   font-size: 23px;
   font-weight: bolder;
   padding-top: 10px;
+  text-decoration: none;
+  color: #040d14;
 }
 
 .app-name:hover{

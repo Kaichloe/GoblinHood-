@@ -16,11 +16,9 @@ class StockShow extends React.Component {
       <div className="profile-container">
         <div className="profile-nav-container">
           <div className="nav-left">
-            <li className="app-name">
-              GoblinHood
-            </li>
+            <Link className="app-name" to="/profile">GoblinHood</Link>
           </div>
-         <Search/>
+          <Search/>
           <div className="nav-buttons">
             <a target="_blank" href="https://github.com/Kaichloe">Github</a>
             <a target="_blank" href="https://www.linkedin.com/in/kaiyip-ho-216230191/">LinkedIn</a>

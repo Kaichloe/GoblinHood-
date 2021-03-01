@@ -12,7 +12,6 @@ export const fetchAllCompanies = () => {
   })
 }
 
-//for less than 1month
 export const fetchHistoricalPrices = (symbol, range) => {
   return $.ajax({
     method: 'GET',
@@ -27,7 +26,6 @@ export const fetchLatestPrice = (symbol) => {
   })
 }
 
-// for greater than one month 
 export const fetchBigHistoricalPrices = (symbols) => {
   let symbolString = symbols.join(",")
   return $.ajax({

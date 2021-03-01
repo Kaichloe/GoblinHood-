@@ -8,7 +8,7 @@ class PortfolioChart extends React.Component {
       time: "1D",
       stockPrices: {},
       currentBuyingPower: 0,
-      openPrice: 0,
+      data: null,
     };
 
     this.priceChange = this.priceChange.bind(this);
@@ -109,9 +109,7 @@ class PortfolioChart extends React.Component {
   }
 
   render() {
-    let owned_stocks = this.props.ownedStocks;
     let data = this.handlePortfolioValue();
-    let last = data.slice(-1)[0];
     let color = "#21ce99";
 
     const profileChart = (
