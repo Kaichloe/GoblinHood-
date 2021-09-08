@@ -51,7 +51,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'binding_of_caller', '~> 0.8.0'
-  gem 'better_errors', '~> 2.5', '>= 2.5.1'
+  gem 'better_errors', '~> 2.8'
   gem 'pry-rails', '~> 0.3.4'
   gem 'guard', '>= 2.2.2', require: false
   gem 'guard-livereload', '~> 2.5', require: false
